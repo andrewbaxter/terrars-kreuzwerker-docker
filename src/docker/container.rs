@@ -1400,6 +1400,8 @@ pub struct ContainerNetworkDataEl {
     #[serde(skip_serializing_if = "Option::is_none")]
     ipv6_gateway: Option<PrimField<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    mac_address: Option<PrimField<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     network_name: Option<PrimField<String>>,
 }
 
@@ -1440,6 +1442,12 @@ impl ContainerNetworkDataEl {
         self
     }
 
+    #[doc= "Set the field `mac_address`.\n"]
+    pub fn set_mac_address(mut self, v: impl Into<PrimField<String>>) -> Self {
+        self.mac_address = Some(v.into());
+        self
+    }
+
     #[doc= "Set the field `network_name`.\n"]
     pub fn set_network_name(mut self, v: impl Into<PrimField<String>>) -> Self {
         self.network_name = Some(v.into());
@@ -1470,6 +1478,7 @@ impl BuildContainerNetworkDataEl {
             ip_address: core::default::Default::default(),
             ip_prefix_length: core::default::Default::default(),
             ipv6_gateway: core::default::Default::default(),
+            mac_address: core::default::Default::default(),
             network_name: core::default::Default::default(),
         }
     }
@@ -1522,6 +1531,11 @@ impl ContainerNetworkDataElRef {
     #[doc= "Get a reference to the value of field `ipv6_gateway` after provisioning.\n"]
     pub fn ipv6_gateway(&self) -> PrimExpr<String> {
         PrimExpr::new(self.shared().clone(), format!("{}.ipv6_gateway", self.base))
+    }
+
+    #[doc= "Get a reference to the value of field `mac_address` after provisioning.\n"]
+    pub fn mac_address(&self) -> PrimExpr<String> {
+        PrimExpr::new(self.shared().clone(), format!("{}.mac_address", self.base))
     }
 
     #[doc= "Get a reference to the value of field `network_name` after provisioning.\n"]

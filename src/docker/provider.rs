@@ -87,7 +87,7 @@ impl Provider for ProviderDocker_ {
     fn extract_provider_type(&self) -> serde_json::Value {
         serde_json::json!({
             "source": "kreuzwerker/docker",
-            "version": "3.0.1",
+            "version": "3.0.2",
         })
     }
 
