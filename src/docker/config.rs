@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 use terrars::{
     Referable as _,
@@ -7,7 +9,7 @@ use terrars::{
 use super::provider::ProviderDocker;
 
 #[derive(Serialize)]
-struct ConfigData {
+struct ConfigData_ {
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     depends_on: std::vec::Vec<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -18,16 +20,22 @@ struct ConfigData {
     for_each: std::option::Option<std::string::String>,
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     provisioner: std::vec::Vec<terrars::Provisioner>,
-    data: terrars::PrimField<std::string::String>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    data: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    data_raw: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     id: std::option::Option<terrars::PrimField<std::string::String>>,
     name: terrars::PrimField<std::string::String>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    labels: std::option::Option<std::vec::Vec<Config_Labels>>,
+    dynamic: ConfigDynamic,
 }
 
 struct Config_ {
     shared: terrars::StackShared,
     tf_id: std::string::String,
-    data: std::cell::RefCell<ConfigData>,
+    data: std::cell::RefCell<ConfigData_>,
 }
 
 #[derive(Clone)]
@@ -127,15 +135,45 @@ impl Config {
         self
     }
 
+    #[doc = "Set the field `data`.\nBase64-url-safe-encoded config data"]
+    pub fn set_data(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.0.data.borrow_mut().data = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `data_raw`.\nRaw (plain text) config data"]
+    pub fn set_data_raw(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.0.data.borrow_mut().data_raw = std::option::Option::Some(v.into());
+        self
+    }
+
     #[doc = "Set the field `id`.\n"]
     pub fn set_id(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.0.data.borrow_mut().id = std::option::Option::Some(v.into());
         self
     }
 
+    #[doc = "Set the field `labels`.\n"]
+    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<Config_Labels>>) -> Self {
+        match v.into() {
+            terrars::BlockAssignable::Literal(v) => {
+                self.0.data.borrow_mut().labels = std::option::Option::Some(v);
+            },
+            terrars::BlockAssignable::Dynamic(d) => {
+                self.0.data.borrow_mut().dynamic.labels = std::option::Option::Some(d);
+            },
+        }
+        self
+    }
+
     #[doc = "Get a reference to the value of field `data` after provisioning.\nBase64-url-safe-encoded config data"]
     pub fn data(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.data", self.extract_ref()))
+    }
+
+    #[doc = "Get a reference to the value of field `data_raw` after provisioning.\nRaw (plain text) config data"]
+    pub fn data_raw(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.data_raw", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `id` after provisioning.\n"]
@@ -182,8 +220,6 @@ impl terrars::Resource_ for Config_ {
 
 pub struct BuildConfig {
     pub tf_id: std::string::String,
-    #[doc = "Base64-url-safe-encoded config data"]
-    pub data: terrars::PrimField<std::string::String>,
     #[doc = "User-defined name of the config"]
     pub name: terrars::PrimField<std::string::String>,
 }
@@ -193,15 +229,18 @@ impl BuildConfig {
         let out = Config(std::rc::Rc::new(Config_ {
             shared: stack.shared.clone(),
             tf_id: self.tf_id,
-            data: std::cell::RefCell::new(ConfigData {
+            data: std::cell::RefCell::new(ConfigData_ {
                 depends_on: core::default::Default::default(),
                 provider: std::option::Option::None,
                 lifecycle: core::default::Default::default(),
                 for_each: std::option::Option::None,
                 provisioner: core::default::Default::default(),
-                data: self.data,
+                data: core::default::Default::default(),
+                data_raw: core::default::Default::default(),
                 id: core::default::Default::default(),
                 name: self.name,
+                labels: core::default::Default::default(),
+                dynamic: core::default::Default::default(),
             }),
         }));
         stack.add_resource(out.0.clone());
@@ -237,6 +276,11 @@ impl ConfigRef {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.data", self.extract_ref()))
     }
 
+    #[doc = "Get a reference to the value of field `data_raw` after provisioning.\nRaw (plain text) config data"]
+    pub fn data_raw(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.data_raw", self.extract_ref()))
+    }
+
     #[doc = "Get a reference to the value of field `id` after provisioning.\n"]
     pub fn id(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.id", self.extract_ref()))
@@ -245,5 +289,78 @@ impl ConfigRef {
     #[doc = "Get a reference to the value of field `name` after provisioning.\nUser-defined name of the config"]
     pub fn name(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.name", self.extract_ref()))
+    }
+}
+
+#[derive(Serialize, Default)]
+struct ConfigDynamic {
+    labels: std::option::Option<terrars::DynamicBlock<Config_Labels>>,
+}
+
+#[derive(Serialize)]
+pub struct Config_Labels {
+    label: terrars::PrimField<std::string::String>,
+    value: terrars::PrimField<std::string::String>,
+}
+
+impl Config_Labels { }
+
+impl terrars::ToListMappable for Config_Labels {
+    type O = terrars::BlockAssignable<Config_Labels>;
+
+    fn do_map(self, base: std::string::String) -> Self::O {
+        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
+            for_each: format!("${{{}}}", base),
+            iterator: "each".into(),
+            content: self,
+        })
+    }
+}
+
+pub struct BuildConfig_Labels {
+    #[doc = "Name of the label"]
+    pub label: terrars::PrimField<std::string::String>,
+    #[doc = "Value of the label"]
+    pub value: terrars::PrimField<std::string::String>,
+}
+
+impl BuildConfig_Labels {
+    pub fn build(self) -> Config_Labels {
+        Config_Labels {
+            label: self.label,
+            value: self.value,
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub struct Config_LabelsRef {
+    shared: terrars::StackShared,
+    base: std::string::String,
+}
+
+impl terrars::Ref for Config_LabelsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Config_LabelsRef {
+        Config_LabelsRef {
+            shared: shared,
+            base: base.to_string(),
+        }
+    }
+}
+
+impl Config_LabelsRef {
+    #[allow(dead_code)]
+    fn shared(&self) -> &terrars::StackShared {
+        &self.shared
+    }
+
+    #[doc = "Get a reference to the value of field `label` after provisioning.\nName of the label"]
+    pub fn label(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.label", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `value` after provisioning.\nValue of the label"]
+    pub fn value(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.value", self.base))
     }
 }

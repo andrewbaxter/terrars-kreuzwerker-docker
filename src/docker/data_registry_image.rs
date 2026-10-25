@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 use terrars::{
     Referable as _,
@@ -7,7 +9,7 @@ use terrars::{
 use super::provider::ProviderDocker;
 
 #[derive(Serialize)]
-struct DataRegistryImageData {
+struct DataRegistryImageData_ {
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     depends_on: std::vec::Vec<std::string::String>,
     #[serde(skip_serializing_if = "terrars::SerdeSkipDefault::is_default")]
@@ -26,7 +28,7 @@ struct DataRegistryImageData {
 struct DataRegistryImage_ {
     shared: terrars::StackShared,
     tf_id: std::string::String,
-    data: std::cell::RefCell<DataRegistryImageData>,
+    data: std::cell::RefCell<DataRegistryImageData_>,
 }
 
 #[derive(Clone)]
@@ -96,7 +98,7 @@ impl DataRegistryImage {
     }
 
     #[doc =
-        "Get a reference to the value of field `name` after provisioning.\nThe name of the Docker image, including any tags. e.g. `alpine:latest`"]
+        "Get a reference to the value of field `name` after provisioning.\nThe name of the Docker image, including any tags. e.g. `alpine:latest`. You can also specify a digest, e.g. `nginx:1.28.0@sha256:eaa7e36decc3421fc04478c586dfea0d931cebe47d5bc0b15d758a32ba51126f`."]
     pub fn name(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.name", self.extract_ref()))
     }
@@ -141,7 +143,8 @@ impl terrars::Datasource_ for DataRegistryImage_ {
 
 pub struct BuildDataRegistryImage {
     pub tf_id: std::string::String,
-    #[doc = "The name of the Docker image, including any tags. e.g. `alpine:latest`"]
+    #[doc =
+        "The name of the Docker image, including any tags. e.g. `alpine:latest`. You can also specify a digest, e.g. `nginx:1.28.0@sha256:eaa7e36decc3421fc04478c586dfea0d931cebe47d5bc0b15d758a32ba51126f`."]
     pub name: terrars::PrimField<std::string::String>,
 }
 
@@ -150,7 +153,7 @@ impl BuildDataRegistryImage {
         let out = DataRegistryImage(std::rc::Rc::new(DataRegistryImage_ {
             shared: stack.shared.clone(),
             tf_id: self.tf_id,
-            data: std::cell::RefCell::new(DataRegistryImageData {
+            data: std::cell::RefCell::new(DataRegistryImageData_ {
                 depends_on: core::default::Default::default(),
                 provider: std::option::Option::None,
                 lifecycle: core::default::Default::default(),
@@ -200,7 +203,7 @@ impl DataRegistryImageRef {
     }
 
     #[doc =
-        "Get a reference to the value of field `name` after provisioning.\nThe name of the Docker image, including any tags. e.g. `alpine:latest`"]
+        "Get a reference to the value of field `name` after provisioning.\nThe name of the Docker image, including any tags. e.g. `alpine:latest`. You can also specify a digest, e.g. `nginx:1.28.0@sha256:eaa7e36decc3421fc04478c586dfea0d931cebe47d5bc0b15d758a32ba51126f`."]
     pub fn name(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.name", self.extract_ref()))
     }

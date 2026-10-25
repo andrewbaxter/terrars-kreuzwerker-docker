@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 use terrars::{
     Referable as _,
@@ -7,7 +9,7 @@ use terrars::{
 use super::provider::ProviderDocker;
 
 #[derive(Serialize)]
-struct VolumeData {
+struct VolumeData_ {
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     depends_on: std::vec::Vec<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -27,14 +29,16 @@ struct VolumeData {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     name: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    labels: std::option::Option<std::vec::Vec<VolumeLabelsEl>>,
+    cluster: std::option::Option<std::vec::Vec<Volume_Cluster>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    labels: std::option::Option<std::vec::Vec<Volume_Labels>>,
     dynamic: VolumeDynamic,
 }
 
 struct Volume_ {
     shared: terrars::StackShared,
     tf_id: std::string::String,
-    data: std::cell::RefCell<VolumeData>,
+    data: std::cell::RefCell<VolumeData_>,
 }
 
 #[derive(Clone)]
@@ -161,8 +165,21 @@ impl Volume {
         self
     }
 
+    #[doc = "Set the field `cluster`.\n"]
+    pub fn set_cluster(self, v: impl std::convert::Into<terrars::BlockAssignable<Volume_Cluster>>) -> Self {
+        match v.into() {
+            terrars::BlockAssignable::Literal(v) => {
+                self.0.data.borrow_mut().cluster = std::option::Option::Some(v);
+            },
+            terrars::BlockAssignable::Dynamic(d) => {
+                self.0.data.borrow_mut().dynamic.cluster = std::option::Option::Some(d);
+            },
+        }
+        self
+    }
+
     #[doc = "Set the field `labels`.\n"]
-    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<VolumeLabelsEl>>) -> Self {
+    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<Volume_Labels>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().labels = std::option::Option::Some(v);
@@ -199,6 +216,11 @@ impl Volume {
         "Get a reference to the value of field `name` after provisioning.\nThe name of the Docker volume (will be generated if not provided)."]
     pub fn name(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.name", self.extract_ref()))
+    }
+
+    #[doc = "Get a reference to the value of field `cluster` after provisioning.\n"]
+    pub fn cluster(&self) -> terrars::ListRef<Volume_ClusterRef> {
+        terrars::ListRef::new(self.shared().clone(), format!("{}.cluster", self.extract_ref()))
     }
 }
 
@@ -242,7 +264,7 @@ impl BuildVolume {
         let out = Volume(std::rc::Rc::new(Volume_ {
             shared: stack.shared.clone(),
             tf_id: self.tf_id,
-            data: std::cell::RefCell::new(VolumeData {
+            data: std::cell::RefCell::new(VolumeData_ {
                 depends_on: core::default::Default::default(),
                 provider: std::option::Option::None,
                 lifecycle: core::default::Default::default(),
@@ -252,6 +274,7 @@ impl BuildVolume {
                 driver_opts: core::default::Default::default(),
                 id: core::default::Default::default(),
                 name: core::default::Default::default(),
+                cluster: core::default::Default::default(),
                 labels: core::default::Default::default(),
                 dynamic: core::default::Default::default(),
             }),
@@ -310,18 +333,105 @@ impl VolumeRef {
     pub fn name(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.name", self.extract_ref()))
     }
+
+    #[doc = "Get a reference to the value of field `cluster` after provisioning.\n"]
+    pub fn cluster(&self) -> terrars::ListRef<Volume_ClusterRef> {
+        terrars::ListRef::new(self.shared().clone(), format!("{}.cluster", self.extract_ref()))
+    }
+}
+
+#[derive(Serialize, Default)]
+struct VolumeDynamic {
+    cluster: std::option::Option<terrars::DynamicBlock<Volume_Cluster>>,
+    labels: std::option::Option<terrars::DynamicBlock<Volume_Labels>>,
 }
 
 #[derive(Serialize)]
-pub struct VolumeLabelsEl {
-    label: terrars::PrimField<std::string::String>,
-    value: terrars::PrimField<std::string::String>,
+pub struct Volume_Cluster {
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    availability: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    group: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    limit_bytes: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    required_bytes: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    scope: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    sharing: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    topology_preferred: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    topology_required: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(rename = "type", skip_serializing_if = "std::option::Option::is_none")]
+    type_: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl VolumeLabelsEl { }
+impl Volume_Cluster {
+    #[doc =
+        "Set the field `availability`.\nAvailability of the volume. Can be `active` (default), `pause`, or `drain`."]
+    pub fn set_availability(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.availability = std::option::Option::Some(v.into());
+        self
+    }
 
-impl terrars::ToListMappable for VolumeLabelsEl {
-    type O = terrars::BlockAssignable<VolumeLabelsEl>;
+    #[doc = "Set the field `group`.\nCluster Volume group"]
+    pub fn set_group(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.group = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `limit_bytes`.\nMinimum size of the Cluster Volume in human readable memory bytes (like 128MiB, 2GiB, etc). Must be in format of KiB, MiB, Gib, Tib or PiB."]
+    pub fn set_limit_bytes(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.limit_bytes = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `required_bytes`.\nMaximum size of the Cluster Volume in human readable memory bytes (like 128MiB, 2GiB, etc). Must be in format of KiB, MiB, Gib, Tib or PiB."]
+    pub fn set_required_bytes(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.required_bytes = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `scope`.\nThe scope of the volume. Can be `single` (default) or `multi`."]
+    pub fn set_scope(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.scope = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `sharing`.\nThe sharing mode. Can be `none` (default), `readonly`, `onewriter` or `all`."]
+    pub fn set_sharing(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.sharing = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `topology_preferred`.\nA topology that the Cluster Volume would be preferred in"]
+    pub fn set_topology_preferred(
+        mut self,
+        v: impl std::convert::Into<terrars::PrimField<std::string::String>>,
+    ) -> Self {
+        self.topology_preferred = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `topology_required`.\nA topology that the Cluster Volume must be accessible from"]
+    pub fn set_topology_required(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.topology_required = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `type_`.\nCluster Volume access type. Can be `mount` or `block` (default)."]
+    pub fn set_type(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.type_ = std::option::Option::Some(v.into());
+        self
+    }
+}
+
+impl terrars::ToListMappable for Volume_Cluster {
+    type O = terrars::BlockAssignable<Volume_Cluster>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -332,37 +442,157 @@ impl terrars::ToListMappable for VolumeLabelsEl {
     }
 }
 
-pub struct BuildVolumeLabelsEl {
-    #[doc = "Name of the label"]
-    pub label: terrars::PrimField<std::string::String>,
-    #[doc = "Value of the label"]
-    pub value: terrars::PrimField<std::string::String>,
-}
+pub struct BuildVolume_Cluster {}
 
-impl BuildVolumeLabelsEl {
-    pub fn build(self) -> VolumeLabelsEl {
-        VolumeLabelsEl {
-            label: self.label,
-            value: self.value,
+impl BuildVolume_Cluster {
+    pub fn build(self) -> Volume_Cluster {
+        Volume_Cluster {
+            availability: core::default::Default::default(),
+            group: core::default::Default::default(),
+            limit_bytes: core::default::Default::default(),
+            required_bytes: core::default::Default::default(),
+            scope: core::default::Default::default(),
+            sharing: core::default::Default::default(),
+            topology_preferred: core::default::Default::default(),
+            topology_required: core::default::Default::default(),
+            type_: core::default::Default::default(),
         }
     }
 }
 
-pub struct VolumeLabelsElRef {
+#[allow(dead_code)]
+pub struct Volume_ClusterRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for VolumeLabelsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> VolumeLabelsElRef {
-        VolumeLabelsElRef {
+impl terrars::Ref for Volume_ClusterRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Volume_ClusterRef {
+        Volume_ClusterRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl VolumeLabelsElRef {
+impl Volume_ClusterRef {
+    #[allow(dead_code)]
+    fn shared(&self) -> &terrars::StackShared {
+        &self.shared
+    }
+
+    #[doc =
+        "Get a reference to the value of field `availability` after provisioning.\nAvailability of the volume. Can be `active` (default), `pause`, or `drain`."]
+    pub fn availability(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.availability", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `group` after provisioning.\nCluster Volume group"]
+    pub fn group(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.group", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `id` after provisioning.\nThe ID of the cluster volume."]
+    pub fn id(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.id", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `limit_bytes` after provisioning.\nMinimum size of the Cluster Volume in human readable memory bytes (like 128MiB, 2GiB, etc). Must be in format of KiB, MiB, Gib, Tib or PiB."]
+    pub fn limit_bytes(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.limit_bytes", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `required_bytes` after provisioning.\nMaximum size of the Cluster Volume in human readable memory bytes (like 128MiB, 2GiB, etc). Must be in format of KiB, MiB, Gib, Tib or PiB."]
+    pub fn required_bytes(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.required_bytes", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `scope` after provisioning.\nThe scope of the volume. Can be `single` (default) or `multi`."]
+    pub fn scope(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.scope", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `sharing` after provisioning.\nThe sharing mode. Can be `none` (default), `readonly`, `onewriter` or `all`."]
+    pub fn sharing(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.sharing", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `topology_preferred` after provisioning.\nA topology that the Cluster Volume would be preferred in"]
+    pub fn topology_preferred(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.topology_preferred", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `topology_required` after provisioning.\nA topology that the Cluster Volume must be accessible from"]
+    pub fn topology_required(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.topology_required", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `type_` after provisioning.\nCluster Volume access type. Can be `mount` or `block` (default)."]
+    pub fn type_(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.type", self.base))
+    }
+}
+
+#[derive(Serialize)]
+pub struct Volume_Labels {
+    label: terrars::PrimField<std::string::String>,
+    value: terrars::PrimField<std::string::String>,
+}
+
+impl Volume_Labels { }
+
+impl terrars::ToListMappable for Volume_Labels {
+    type O = terrars::BlockAssignable<Volume_Labels>;
+
+    fn do_map(self, base: std::string::String) -> Self::O {
+        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
+            for_each: format!("${{{}}}", base),
+            iterator: "each".into(),
+            content: self,
+        })
+    }
+}
+
+pub struct BuildVolume_Labels {
+    #[doc = "Name of the label"]
+    pub label: terrars::PrimField<std::string::String>,
+    #[doc = "Value of the label"]
+    pub value: terrars::PrimField<std::string::String>,
+}
+
+impl BuildVolume_Labels {
+    pub fn build(self) -> Volume_Labels {
+        Volume_Labels {
+            label: self.label,
+            value: self.value,
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub struct Volume_LabelsRef {
+    shared: terrars::StackShared,
+    base: std::string::String,
+}
+
+impl terrars::Ref for Volume_LabelsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Volume_LabelsRef {
+        Volume_LabelsRef {
+            shared: shared,
+            base: base.to_string(),
+        }
+    }
+}
+
+impl Volume_LabelsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -376,9 +606,4 @@ impl VolumeLabelsElRef {
     pub fn value(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.value", self.base))
     }
-}
-
-#[derive(Serialize, Default)]
-struct VolumeDynamic {
-    labels: std::option::Option<terrars::DynamicBlock<VolumeLabelsEl>>,
 }

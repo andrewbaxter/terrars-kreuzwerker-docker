@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 use terrars::{
     Referable as _,
@@ -7,7 +9,7 @@ use terrars::{
 use super::provider::ProviderDocker;
 
 #[derive(Serialize)]
-struct TagData {
+struct TagData_ {
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     depends_on: std::vec::Vec<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -21,13 +23,15 @@ struct TagData {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     id: std::option::Option<terrars::PrimField<std::string::String>>,
     source_image: terrars::PrimField<std::string::String>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    tag_triggers: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
     target_image: terrars::PrimField<std::string::String>,
 }
 
 struct Tag_ {
     shared: terrars::StackShared,
     tf_id: std::string::String,
-    data: std::cell::RefCell<TagData>,
+    data: std::cell::RefCell<TagData_>,
 }
 
 #[derive(Clone)]
@@ -133,6 +137,16 @@ impl Tag {
         self
     }
 
+    #[doc =
+        "Set the field `tag_triggers`.\nList of values which cause the tag to be (re)created. This is useful for triggering a new tag when the source image changes."]
+    pub fn set_tag_triggers(
+        self,
+        v: impl std::convert::Into<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.0.data.borrow_mut().tag_triggers = std::option::Option::Some(v.into());
+        self
+    }
+
     #[doc = "Get a reference to the value of field `id` after provisioning.\n"]
     pub fn id(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.id", self.extract_ref()))
@@ -147,6 +161,12 @@ impl Tag {
         "Get a reference to the value of field `source_image_id` after provisioning.\nImageID of the source image in the format of `sha256:<<ID>>`"]
     pub fn source_image_id(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.source_image_id", self.extract_ref()))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `tag_triggers` after provisioning.\nList of values which cause the tag to be (re)created. This is useful for triggering a new tag when the source image changes."]
+    pub fn tag_triggers(&self) -> terrars::SetRef<terrars::PrimExpr<std::string::String>> {
+        terrars::SetRef::new(self.shared().clone(), format!("{}.tag_triggers", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `target_image` after provisioning.\nName of the target image."]
@@ -199,7 +219,7 @@ impl BuildTag {
         let out = Tag(std::rc::Rc::new(Tag_ {
             shared: stack.shared.clone(),
             tf_id: self.tf_id,
-            data: std::cell::RefCell::new(TagData {
+            data: std::cell::RefCell::new(TagData_ {
                 depends_on: core::default::Default::default(),
                 provider: std::option::Option::None,
                 lifecycle: core::default::Default::default(),
@@ -207,6 +227,7 @@ impl BuildTag {
                 provisioner: core::default::Default::default(),
                 id: core::default::Default::default(),
                 source_image: self.source_image,
+                tag_triggers: core::default::Default::default(),
                 target_image: self.target_image,
             }),
         }));
@@ -252,6 +273,12 @@ impl TagRef {
         "Get a reference to the value of field `source_image_id` after provisioning.\nImageID of the source image in the format of `sha256:<<ID>>`"]
     pub fn source_image_id(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.source_image_id", self.extract_ref()))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `tag_triggers` after provisioning.\nList of values which cause the tag to be (re)created. This is useful for triggering a new tag when the source image changes."]
+    pub fn tag_triggers(&self) -> terrars::SetRef<terrars::PrimExpr<std::string::String>> {
+        terrars::SetRef::new(self.shared().clone(), format!("{}.tag_triggers", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `target_image` after provisioning.\nName of the target image."]

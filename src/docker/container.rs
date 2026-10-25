@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 use terrars::{
     Referable as _,
@@ -7,7 +9,7 @@ use terrars::{
 use super::provider::ProviderDocker;
 
 #[derive(Serialize)]
-struct ContainerData {
+struct ContainerData_ {
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     depends_on: std::vec::Vec<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -21,17 +23,27 @@ struct ContainerData {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     attach: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    cgroup_parent: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
     cgroupns_mode: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     command: std::option::Option<terrars::ListField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     container_read_refresh_timeout_milliseconds: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    cpu_period: std::option::Option<terrars::PrimField<f64>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    cpu_quota: std::option::Option<terrars::PrimField<f64>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
     cpu_set: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     cpu_shares: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    cpus: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
     destroy_grace_seconds: std::option::Option<terrars::PrimField<f64>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    device_cgroup_rules: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     dns: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -68,6 +80,8 @@ struct ContainerData {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     memory: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    memory_reservation: std::option::Option<terrars::PrimField<f64>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
     memory_swap: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     must_run: std::option::Option<terrars::PrimField<bool>>,
@@ -76,6 +90,8 @@ struct ContainerData {
     network_mode: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pid_mode: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    platform: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     privileged: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -121,34 +137,46 @@ struct ContainerData {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     working_dir: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    capabilities: std::option::Option<std::vec::Vec<ContainerCapabilitiesEl>>,
+    capabilities: std::option::Option<std::vec::Vec<Container_Capabilities>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    devices: std::option::Option<std::vec::Vec<ContainerDevicesEl>>,
+    device_read_bps: std::option::Option<std::vec::Vec<Container_DeviceReadBps>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    healthcheck: std::option::Option<std::vec::Vec<ContainerHealthcheckEl>>,
+    device_read_iops: std::option::Option<std::vec::Vec<Container_DeviceReadIops>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    host: std::option::Option<std::vec::Vec<ContainerHostEl>>,
+    device_requests: std::option::Option<std::vec::Vec<Container_DeviceRequests>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    labels: std::option::Option<std::vec::Vec<ContainerLabelsEl>>,
+    device_write_bps: std::option::Option<std::vec::Vec<Container_DeviceWriteBps>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    mounts: std::option::Option<std::vec::Vec<ContainerMountsEl>>,
+    device_write_iops: std::option::Option<std::vec::Vec<Container_DeviceWriteIops>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    networks_advanced: std::option::Option<std::vec::Vec<ContainerNetworksAdvancedEl>>,
+    devices: std::option::Option<std::vec::Vec<Container_Devices>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    ports: std::option::Option<std::vec::Vec<ContainerPortsEl>>,
+    healthcheck: std::option::Option<std::vec::Vec<Container_Healthcheck>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    ulimit: std::option::Option<std::vec::Vec<ContainerUlimitEl>>,
+    host: std::option::Option<std::vec::Vec<Container_Host>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    upload: std::option::Option<std::vec::Vec<ContainerUploadEl>>,
+    labels: std::option::Option<std::vec::Vec<Container_Labels>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    volumes: std::option::Option<std::vec::Vec<ContainerVolumesEl>>,
+    mounts: std::option::Option<std::vec::Vec<Container_Mounts>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    networks_advanced: std::option::Option<std::vec::Vec<Container_NetworksAdvanced>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    ports: std::option::Option<std::vec::Vec<Container_Ports>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    timeouts: std::option::Option<Container_Timeouts>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    ulimit: std::option::Option<std::vec::Vec<Container_Ulimit>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    upload: std::option::Option<std::vec::Vec<Container_Upload>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    volumes: std::option::Option<std::vec::Vec<Container_Volumes>>,
     dynamic: ContainerDynamic,
 }
 
 struct Container_ {
     shared: terrars::StackShared,
     tf_id: std::string::String,
-    data: std::cell::RefCell<ContainerData>,
+    data: std::cell::RefCell<ContainerData_>,
 }
 
 #[derive(Clone)]
@@ -255,6 +283,12 @@ impl Container {
         self
     }
 
+    #[doc = "Set the field `cgroup_parent`.\nOptional parent cgroup for the container"]
+    pub fn set_cgroup_parent(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.0.data.borrow_mut().cgroup_parent = std::option::Option::Some(v.into());
+        self
+    }
+
     #[doc =
         "Set the field `cgroupns_mode`.\nCgroup namespace mode to use for the container. Possible values are: `private`, `host`."]
     pub fn set_cgroupns_mode(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
@@ -263,7 +297,7 @@ impl Container {
     }
 
     #[doc =
-        "Set the field `command`.\nThe command to use to start the container. For example, to run `/usr/bin/myprogram -f baz.conf` set the command to be `[\"/usr/bin/myprogram\",\"-f\",\"baz.con\"]`."]
+        "Set the field `command`.\nThe command to use to start the container. For example, to run `/usr/bin/myprogram -f baz.conf` set the command to be `[\"/usr/bin/myprogram\",\"-f\",\"baz.conf\"]`."]
     pub fn set_command(
         self,
         v: impl std::convert::Into<terrars::ListField<terrars::PrimField<std::string::String>>>,
@@ -283,6 +317,20 @@ impl Container {
     }
 
     #[doc =
+        "Set the field `cpu_period`.\nSpecify the CPU CFS scheduler period (in microseconds), which is used alongside `cpu-quota`. Is ignored if `cpus` is set."]
+    pub fn set_cpu_period(self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
+        self.0.data.borrow_mut().cpu_period = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `cpu_quota`.\nImpose a CPU CFS quota on the container (in microseconds). The number of microseconds per `cpu-period` that the container is limited to before throttled. Is ignored if `cpus` is set."]
+    pub fn set_cpu_quota(self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
+        self.0.data.borrow_mut().cpu_quota = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
         "Set the field `cpu_set`.\nA comma-separated list or hyphen-separated range of CPUs a container can use, e.g. `0-1`."]
     pub fn set_cpu_set(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.0.data.borrow_mut().cpu_set = std::option::Option::Some(v.into());
@@ -296,9 +344,26 @@ impl Container {
     }
 
     #[doc =
+        "Set the field `cpus`.\nSpecify how much of the available CPU resources a container can use. e.g a value of 1.5 means the container is guaranteed at most one and a half of the CPUs. Has precedence over `cpu_period` and `cpu_quota`."]
+    pub fn set_cpus(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.0.data.borrow_mut().cpus = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
         "Set the field `destroy_grace_seconds`.\nIf defined will attempt to stop the container before destroying. Container will be destroyed after `n` seconds or on successful stop."]
     pub fn set_destroy_grace_seconds(self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
         self.0.data.borrow_mut().destroy_grace_seconds = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `device_cgroup_rules`.\nCgroup rules to allow access to classes of devices without binding specific device nodes."]
+    pub fn set_device_cgroup_rules(
+        self,
+        v: impl std::convert::Into<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.0.data.borrow_mut().device_cgroup_rules = std::option::Option::Some(v.into());
         self
     }
 
@@ -338,7 +403,7 @@ impl Container {
     }
 
     #[doc =
-        "Set the field `entrypoint`.\nThe command to use as the Entrypoint for the container. The Entrypoint allows you to configure a container to run as an executable. For example, to run `/usr/bin/myprogram` when starting a container, set the entrypoint to be `\"/usr/bin/myprogra\"]`."]
+        "Set the field `entrypoint`.\nThe command to use as the Entrypoint for the container. The Entrypoint allows you to configure a container to run as an executable. For example, to run `/usr/bin/myprogram` when starting a container, set the entrypoint to be `\"/usr/bin/myprogram\"]`."]
     pub fn set_entrypoint(
         self,
         v: impl std::convert::Into<terrars::ListField<terrars::PrimField<std::string::String>>>,
@@ -357,7 +422,7 @@ impl Container {
     }
 
     #[doc =
-        "Set the field `gpus`.\nGPU devices to add to the container. Currently, only the value `all` is supported. Passing any other value will result in unexpected behavior."]
+        "Set the field `gpus`.\nGPU devices to add to the container. Supported values are `all` or `device=<id[,id...]>`, for example `device=0,2` or `device=GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a`."]
     pub fn set_gpus(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.0.data.borrow_mut().gpus = std::option::Option::Some(v.into());
         self
@@ -433,6 +498,13 @@ impl Container {
     }
 
     #[doc =
+        "Set the field `memory_reservation`.\nThe memory-resveration for the container in MBs. Defaults to 0. Allows you to specify a soft limit smaller than `memory` which is activated when Docker detects contention or low memory on the host machine. If you use `memory-reservation`, it must be set lower than `memory` for it to take precedence. Because it is a soft limit, it doesn't guarantee that the container doesn't exceed the limit."]
+    pub fn set_memory_reservation(self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
+        self.0.data.borrow_mut().memory_reservation = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
         "Set the field `memory_swap`.\nThe total memory limit (memory + swap) for the container in MBs. This setting may compute to `-1` after `terraform apply` if the target host doesn't support memory swap, when that is the case docker will use a soft limitation."]
     pub fn set_memory_swap(self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
         self.0.data.borrow_mut().memory_swap = std::option::Option::Some(v.into());
@@ -440,22 +512,30 @@ impl Container {
     }
 
     #[doc =
-        "Set the field `must_run`.\nIf `true`, then the Docker container will be kept running. If `false`, then as long as the container exists, Terraform assumes it is successful. Defaults to `true`."]
+        "Set the field `must_run`.\nIf `true`, then the Docker container will be kept running. If `false`, Terraform leaves the container alone. This attribute is also used to trigger a restart of a stopped container. If your container is stopped, Terraform will set `must_run` to `false` and this will trigger a change. Defaults to `true`."]
     pub fn set_must_run(self, v: impl std::convert::Into<terrars::PrimField<bool>>) -> Self {
         self.0.data.borrow_mut().must_run = std::option::Option::Some(v.into());
         self
     }
 
-    #[doc = "Set the field `network_mode`.\nNetwork mode of the container."]
+    #[doc =
+        "Set the field `network_mode`.\nNetwork mode of the container. Defaults to `bridge`. If your host OS is any other OS, you need to set this value explicitly, e.g. `nat` when your container will be running on an Windows host. See https://docs.docker.com/engine/network/ for more information."]
     pub fn set_network_mode(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.0.data.borrow_mut().network_mode = std::option::Option::Some(v.into());
         self
     }
 
     #[doc =
-        "Set the field `pid_mode`.\nhe PID (Process) Namespace mode for the container. Either `container:<name|id>` or `host`."]
+        "Set the field `pid_mode`.\nThe PID (Process) Namespace mode for the container. Either `container:<name|id>` or `host`."]
     pub fn set_pid_mode(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.0.data.borrow_mut().pid_mode = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `platform`.\nPlatform in the format `os[/arch[/variant]]` used for image lookup and container runtime, for example `linux/amd64`."]
+    pub fn set_platform(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.0.data.borrow_mut().platform = std::option::Option::Some(v.into());
         self
     }
 
@@ -581,7 +661,7 @@ impl Container {
     }
 
     #[doc =
-        "Set the field `user`.\nUser used for run the first process. Format is `user` or `user:group` which user and group can be passed literraly or by name."]
+        "Set the field `user`.\nUser used for run the first process. Format is `user` or `user:group` which user and group can be passed literally or by name."]
     pub fn set_user(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.0.data.borrow_mut().user = std::option::Option::Some(v.into());
         self
@@ -595,7 +675,7 @@ impl Container {
     }
 
     #[doc =
-        "Set the field `wait`.\nIf `true`, then the Docker container is waited for being healthy state after creation. If `false`, then the container health state is not checked. Defaults to `false`."]
+        "Set the field `wait`.\nIf `true`, then the Docker container is waited for being healthy state after creation. This requires your container to have a healthcheck, otherwise this provider will error. If `false`, then the container health state is not checked. Defaults to `false`."]
     pub fn set_wait(self, v: impl std::convert::Into<terrars::PrimField<bool>>) -> Self {
         self.0.data.borrow_mut().wait = std::option::Option::Some(v.into());
         self
@@ -615,10 +695,7 @@ impl Container {
     }
 
     #[doc = "Set the field `capabilities`.\n"]
-    pub fn set_capabilities(
-        self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ContainerCapabilitiesEl>>,
-    ) -> Self {
+    pub fn set_capabilities(self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Capabilities>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().capabilities = std::option::Option::Some(v);
@@ -630,8 +707,88 @@ impl Container {
         self
     }
 
+    #[doc = "Set the field `device_read_bps`.\n"]
+    pub fn set_device_read_bps(
+        self,
+        v: impl std::convert::Into<terrars::BlockAssignable<Container_DeviceReadBps>>,
+    ) -> Self {
+        match v.into() {
+            terrars::BlockAssignable::Literal(v) => {
+                self.0.data.borrow_mut().device_read_bps = std::option::Option::Some(v);
+            },
+            terrars::BlockAssignable::Dynamic(d) => {
+                self.0.data.borrow_mut().dynamic.device_read_bps = std::option::Option::Some(d);
+            },
+        }
+        self
+    }
+
+    #[doc = "Set the field `device_read_iops`.\n"]
+    pub fn set_device_read_iops(
+        self,
+        v: impl std::convert::Into<terrars::BlockAssignable<Container_DeviceReadIops>>,
+    ) -> Self {
+        match v.into() {
+            terrars::BlockAssignable::Literal(v) => {
+                self.0.data.borrow_mut().device_read_iops = std::option::Option::Some(v);
+            },
+            terrars::BlockAssignable::Dynamic(d) => {
+                self.0.data.borrow_mut().dynamic.device_read_iops = std::option::Option::Some(d);
+            },
+        }
+        self
+    }
+
+    #[doc = "Set the field `device_requests`.\n"]
+    pub fn set_device_requests(
+        self,
+        v: impl std::convert::Into<terrars::BlockAssignable<Container_DeviceRequests>>,
+    ) -> Self {
+        match v.into() {
+            terrars::BlockAssignable::Literal(v) => {
+                self.0.data.borrow_mut().device_requests = std::option::Option::Some(v);
+            },
+            terrars::BlockAssignable::Dynamic(d) => {
+                self.0.data.borrow_mut().dynamic.device_requests = std::option::Option::Some(d);
+            },
+        }
+        self
+    }
+
+    #[doc = "Set the field `device_write_bps`.\n"]
+    pub fn set_device_write_bps(
+        self,
+        v: impl std::convert::Into<terrars::BlockAssignable<Container_DeviceWriteBps>>,
+    ) -> Self {
+        match v.into() {
+            terrars::BlockAssignable::Literal(v) => {
+                self.0.data.borrow_mut().device_write_bps = std::option::Option::Some(v);
+            },
+            terrars::BlockAssignable::Dynamic(d) => {
+                self.0.data.borrow_mut().dynamic.device_write_bps = std::option::Option::Some(d);
+            },
+        }
+        self
+    }
+
+    #[doc = "Set the field `device_write_iops`.\n"]
+    pub fn set_device_write_iops(
+        self,
+        v: impl std::convert::Into<terrars::BlockAssignable<Container_DeviceWriteIops>>,
+    ) -> Self {
+        match v.into() {
+            terrars::BlockAssignable::Literal(v) => {
+                self.0.data.borrow_mut().device_write_iops = std::option::Option::Some(v);
+            },
+            terrars::BlockAssignable::Dynamic(d) => {
+                self.0.data.borrow_mut().dynamic.device_write_iops = std::option::Option::Some(d);
+            },
+        }
+        self
+    }
+
     #[doc = "Set the field `devices`.\n"]
-    pub fn set_devices(self, v: impl std::convert::Into<terrars::BlockAssignable<ContainerDevicesEl>>) -> Self {
+    pub fn set_devices(self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Devices>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().devices = std::option::Option::Some(v);
@@ -644,7 +801,7 @@ impl Container {
     }
 
     #[doc = "Set the field `healthcheck`.\n"]
-    pub fn set_healthcheck(self, v: impl std::convert::Into<terrars::BlockAssignable<ContainerHealthcheckEl>>) -> Self {
+    pub fn set_healthcheck(self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Healthcheck>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().healthcheck = std::option::Option::Some(v);
@@ -657,7 +814,7 @@ impl Container {
     }
 
     #[doc = "Set the field `host`.\n"]
-    pub fn set_host(self, v: impl std::convert::Into<terrars::BlockAssignable<ContainerHostEl>>) -> Self {
+    pub fn set_host(self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Host>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().host = std::option::Option::Some(v);
@@ -670,7 +827,7 @@ impl Container {
     }
 
     #[doc = "Set the field `labels`.\n"]
-    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<ContainerLabelsEl>>) -> Self {
+    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Labels>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().labels = std::option::Option::Some(v);
@@ -683,7 +840,7 @@ impl Container {
     }
 
     #[doc = "Set the field `mounts`.\n"]
-    pub fn set_mounts(self, v: impl std::convert::Into<terrars::BlockAssignable<ContainerMountsEl>>) -> Self {
+    pub fn set_mounts(self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Mounts>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().mounts = std::option::Option::Some(v);
@@ -698,7 +855,7 @@ impl Container {
     #[doc = "Set the field `networks_advanced`.\n"]
     pub fn set_networks_advanced(
         self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ContainerNetworksAdvancedEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Container_NetworksAdvanced>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -712,7 +869,7 @@ impl Container {
     }
 
     #[doc = "Set the field `ports`.\n"]
-    pub fn set_ports(self, v: impl std::convert::Into<terrars::BlockAssignable<ContainerPortsEl>>) -> Self {
+    pub fn set_ports(self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Ports>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().ports = std::option::Option::Some(v);
@@ -724,8 +881,14 @@ impl Container {
         self
     }
 
+    #[doc = "Set the field `timeouts`.\n"]
+    pub fn set_timeouts(self, v: impl std::convert::Into<Container_Timeouts>) -> Self {
+        self.0.data.borrow_mut().timeouts = std::option::Option::Some(v.into());
+        self
+    }
+
     #[doc = "Set the field `ulimit`.\n"]
-    pub fn set_ulimit(self, v: impl std::convert::Into<terrars::BlockAssignable<ContainerUlimitEl>>) -> Self {
+    pub fn set_ulimit(self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Ulimit>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().ulimit = std::option::Option::Some(v);
@@ -738,7 +901,7 @@ impl Container {
     }
 
     #[doc = "Set the field `upload`.\n"]
-    pub fn set_upload(self, v: impl std::convert::Into<terrars::BlockAssignable<ContainerUploadEl>>) -> Self {
+    pub fn set_upload(self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Upload>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().upload = std::option::Option::Some(v);
@@ -751,7 +914,7 @@ impl Container {
     }
 
     #[doc = "Set the field `volumes`.\n"]
-    pub fn set_volumes(self, v: impl std::convert::Into<terrars::BlockAssignable<ContainerVolumesEl>>) -> Self {
+    pub fn set_volumes(self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Volumes>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().volumes = std::option::Option::Some(v);
@@ -776,13 +939,19 @@ impl Container {
     }
 
     #[doc =
+        "Get a reference to the value of field `cgroup_parent` after provisioning.\nOptional parent cgroup for the container"]
+    pub fn cgroup_parent(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.cgroup_parent", self.extract_ref()))
+    }
+
+    #[doc =
         "Get a reference to the value of field `cgroupns_mode` after provisioning.\nCgroup namespace mode to use for the container. Possible values are: `private`, `host`."]
     pub fn cgroupns_mode(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.cgroupns_mode", self.extract_ref()))
     }
 
     #[doc =
-        "Get a reference to the value of field `command` after provisioning.\nThe command to use to start the container. For example, to run `/usr/bin/myprogram -f baz.conf` set the command to be `[\"/usr/bin/myprogram\",\"-f\",\"baz.con\"]`."]
+        "Get a reference to the value of field `command` after provisioning.\nThe command to use to start the container. For example, to run `/usr/bin/myprogram -f baz.conf` set the command to be `[\"/usr/bin/myprogram\",\"-f\",\"baz.conf\"]`."]
     pub fn command(&self) -> terrars::ListRef<terrars::PrimExpr<std::string::String>> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.command", self.extract_ref()))
     }
@@ -803,6 +972,18 @@ impl Container {
     }
 
     #[doc =
+        "Get a reference to the value of field `cpu_period` after provisioning.\nSpecify the CPU CFS scheduler period (in microseconds), which is used alongside `cpu-quota`. Is ignored if `cpus` is set."]
+    pub fn cpu_period(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.cpu_period", self.extract_ref()))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `cpu_quota` after provisioning.\nImpose a CPU CFS quota on the container (in microseconds). The number of microseconds per `cpu-period` that the container is limited to before throttled. Is ignored if `cpus` is set."]
+    pub fn cpu_quota(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.cpu_quota", self.extract_ref()))
+    }
+
+    #[doc =
         "Get a reference to the value of field `cpu_set` after provisioning.\nA comma-separated list or hyphen-separated range of CPUs a container can use, e.g. `0-1`."]
     pub fn cpu_set(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.cpu_set", self.extract_ref()))
@@ -815,9 +996,21 @@ impl Container {
     }
 
     #[doc =
+        "Get a reference to the value of field `cpus` after provisioning.\nSpecify how much of the available CPU resources a container can use. e.g a value of 1.5 means the container is guaranteed at most one and a half of the CPUs. Has precedence over `cpu_period` and `cpu_quota`."]
+    pub fn cpus(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.cpus", self.extract_ref()))
+    }
+
+    #[doc =
         "Get a reference to the value of field `destroy_grace_seconds` after provisioning.\nIf defined will attempt to stop the container before destroying. Container will be destroyed after `n` seconds or on successful stop."]
     pub fn destroy_grace_seconds(&self) -> terrars::PrimExpr<f64> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.destroy_grace_seconds", self.extract_ref()))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `device_cgroup_rules` after provisioning.\nCgroup rules to allow access to classes of devices without binding specific device nodes."]
+    pub fn device_cgroup_rules(&self) -> terrars::SetRef<terrars::PrimExpr<std::string::String>> {
+        terrars::SetRef::new(self.shared().clone(), format!("{}.device_cgroup_rules", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `dns` after provisioning.\nDNS servers to use."]
@@ -843,7 +1036,7 @@ impl Container {
     }
 
     #[doc =
-        "Get a reference to the value of field `entrypoint` after provisioning.\nThe command to use as the Entrypoint for the container. The Entrypoint allows you to configure a container to run as an executable. For example, to run `/usr/bin/myprogram` when starting a container, set the entrypoint to be `\"/usr/bin/myprogra\"]`."]
+        "Get a reference to the value of field `entrypoint` after provisioning.\nThe command to use as the Entrypoint for the container. The Entrypoint allows you to configure a container to run as an executable. For example, to run `/usr/bin/myprogram` when starting a container, set the entrypoint to be `\"/usr/bin/myprogram\"]`."]
     pub fn entrypoint(&self) -> terrars::ListRef<terrars::PrimExpr<std::string::String>> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.entrypoint", self.extract_ref()))
     }
@@ -861,7 +1054,7 @@ impl Container {
     }
 
     #[doc =
-        "Get a reference to the value of field `gpus` after provisioning.\nGPU devices to add to the container. Currently, only the value `all` is supported. Passing any other value will result in unexpected behavior."]
+        "Get a reference to the value of field `gpus` after provisioning.\nGPU devices to add to the container. Supported values are `all` or `device=<id[,id...]>`, for example `device=0,2` or `device=GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a`."]
     pub fn gpus(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.gpus", self.extract_ref()))
     }
@@ -883,7 +1076,7 @@ impl Container {
     }
 
     #[doc =
-        "Get a reference to the value of field `image` after provisioning.\nThe ID of the image to back this container. The easiest way to get this value is to use the `docker_image` resource as is shown in the example."]
+        "Get a reference to the value of field `image` after provisioning.\nThe ID of the image to back this container. The easiest way to get this value is to use the `image_id` attribute of the `docker_image` resource as is shown in the example."]
     pub fn image(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.image", self.extract_ref()))
     }
@@ -931,13 +1124,19 @@ impl Container {
     }
 
     #[doc =
+        "Get a reference to the value of field `memory_reservation` after provisioning.\nThe memory-resveration for the container in MBs. Defaults to 0. Allows you to specify a soft limit smaller than `memory` which is activated when Docker detects contention or low memory on the host machine. If you use `memory-reservation`, it must be set lower than `memory` for it to take precedence. Because it is a soft limit, it doesn't guarantee that the container doesn't exceed the limit."]
+    pub fn memory_reservation(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.memory_reservation", self.extract_ref()))
+    }
+
+    #[doc =
         "Get a reference to the value of field `memory_swap` after provisioning.\nThe total memory limit (memory + swap) for the container in MBs. This setting may compute to `-1` after `terraform apply` if the target host doesn't support memory swap, when that is the case docker will use a soft limitation."]
     pub fn memory_swap(&self) -> terrars::PrimExpr<f64> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.memory_swap", self.extract_ref()))
     }
 
     #[doc =
-        "Get a reference to the value of field `must_run` after provisioning.\nIf `true`, then the Docker container will be kept running. If `false`, then as long as the container exists, Terraform assumes it is successful. Defaults to `true`."]
+        "Get a reference to the value of field `must_run` after provisioning.\nIf `true`, then the Docker container will be kept running. If `false`, Terraform leaves the container alone. This attribute is also used to trigger a restart of a stopped container. If your container is stopped, Terraform will set `must_run` to `false` and this will trigger a change. Defaults to `true`."]
     pub fn must_run(&self) -> terrars::PrimExpr<bool> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.must_run", self.extract_ref()))
     }
@@ -949,19 +1148,26 @@ impl Container {
 
     #[doc =
         "Get a reference to the value of field `network_data` after provisioning.\nThe data of the networks the container is connected to."]
-    pub fn network_data(&self) -> terrars::ListRef<ContainerNetworkDataElRef> {
+    pub fn network_data(&self) -> terrars::ListRef<Container_NetworkDataRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.network_data", self.extract_ref()))
     }
 
-    #[doc = "Get a reference to the value of field `network_mode` after provisioning.\nNetwork mode of the container."]
+    #[doc =
+        "Get a reference to the value of field `network_mode` after provisioning.\nNetwork mode of the container. Defaults to `bridge`. If your host OS is any other OS, you need to set this value explicitly, e.g. `nat` when your container will be running on an Windows host. See https://docs.docker.com/engine/network/ for more information."]
     pub fn network_mode(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.network_mode", self.extract_ref()))
     }
 
     #[doc =
-        "Get a reference to the value of field `pid_mode` after provisioning.\nhe PID (Process) Namespace mode for the container. Either `container:<name|id>` or `host`."]
+        "Get a reference to the value of field `pid_mode` after provisioning.\nThe PID (Process) Namespace mode for the container. Either `container:<name|id>` or `host`."]
     pub fn pid_mode(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.pid_mode", self.extract_ref()))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `platform` after provisioning.\nPlatform in the format `os[/arch[/variant]]` used for image lookup and container runtime, for example `linux/amd64`."]
+    pub fn platform(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.platform", self.extract_ref()))
     }
 
     #[doc =
@@ -1065,7 +1271,7 @@ impl Container {
     }
 
     #[doc =
-        "Get a reference to the value of field `user` after provisioning.\nUser used for run the first process. Format is `user` or `user:group` which user and group can be passed literraly or by name."]
+        "Get a reference to the value of field `user` after provisioning.\nUser used for run the first process. Format is `user` or `user:group` which user and group can be passed literally or by name."]
     pub fn user(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.user", self.extract_ref()))
     }
@@ -1077,7 +1283,7 @@ impl Container {
     }
 
     #[doc =
-        "Get a reference to the value of field `wait` after provisioning.\nIf `true`, then the Docker container is waited for being healthy state after creation. If `false`, then the container health state is not checked. Defaults to `false`."]
+        "Get a reference to the value of field `wait` after provisioning.\nIf `true`, then the Docker container is waited for being healthy state after creation. This requires your container to have a healthcheck, otherwise this provider will error. If `false`, then the container health state is not checked. Defaults to `false`."]
     pub fn wait(&self) -> terrars::PrimExpr<bool> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.wait", self.extract_ref()))
     }
@@ -1095,13 +1301,18 @@ impl Container {
     }
 
     #[doc = "Get a reference to the value of field `healthcheck` after provisioning.\n"]
-    pub fn healthcheck(&self) -> terrars::ListRef<ContainerHealthcheckElRef> {
+    pub fn healthcheck(&self) -> terrars::ListRef<Container_HealthcheckRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.healthcheck", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `ports` after provisioning.\n"]
-    pub fn ports(&self) -> terrars::ListRef<ContainerPortsElRef> {
+    pub fn ports(&self) -> terrars::ListRef<Container_PortsRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.ports", self.extract_ref()))
+    }
+
+    #[doc = "Get a reference to the value of field `timeouts` after provisioning.\n"]
+    pub fn timeouts(&self) -> Container_TimeoutsRef {
+        Container_TimeoutsRef::new(self.shared().clone(), format!("{}.timeouts", self.extract_ref()))
     }
 }
 
@@ -1139,7 +1350,7 @@ impl terrars::Resource_ for Container_ {
 pub struct BuildContainer {
     pub tf_id: std::string::String,
     #[doc =
-        "The ID of the image to back this container. The easiest way to get this value is to use the `docker_image` resource as is shown in the example."]
+        "The ID of the image to back this container. The easiest way to get this value is to use the `image_id` attribute of the `docker_image` resource as is shown in the example."]
     pub image: terrars::PrimField<std::string::String>,
     #[doc = "The name of the container."]
     pub name: terrars::PrimField<std::string::String>,
@@ -1150,19 +1361,24 @@ impl BuildContainer {
         let out = Container(std::rc::Rc::new(Container_ {
             shared: stack.shared.clone(),
             tf_id: self.tf_id,
-            data: std::cell::RefCell::new(ContainerData {
+            data: std::cell::RefCell::new(ContainerData_ {
                 depends_on: core::default::Default::default(),
                 provider: std::option::Option::None,
                 lifecycle: core::default::Default::default(),
                 for_each: std::option::Option::None,
                 provisioner: core::default::Default::default(),
                 attach: core::default::Default::default(),
+                cgroup_parent: core::default::Default::default(),
                 cgroupns_mode: core::default::Default::default(),
                 command: core::default::Default::default(),
                 container_read_refresh_timeout_milliseconds: core::default::Default::default(),
+                cpu_period: core::default::Default::default(),
+                cpu_quota: core::default::Default::default(),
                 cpu_set: core::default::Default::default(),
                 cpu_shares: core::default::Default::default(),
+                cpus: core::default::Default::default(),
                 destroy_grace_seconds: core::default::Default::default(),
+                device_cgroup_rules: core::default::Default::default(),
                 dns: core::default::Default::default(),
                 dns_opts: core::default::Default::default(),
                 dns_search: core::default::Default::default(),
@@ -1181,11 +1397,13 @@ impl BuildContainer {
                 logs: core::default::Default::default(),
                 max_retry_count: core::default::Default::default(),
                 memory: core::default::Default::default(),
+                memory_reservation: core::default::Default::default(),
                 memory_swap: core::default::Default::default(),
                 must_run: core::default::Default::default(),
                 name: self.name,
                 network_mode: core::default::Default::default(),
                 pid_mode: core::default::Default::default(),
+                platform: core::default::Default::default(),
                 privileged: core::default::Default::default(),
                 publish_all_ports: core::default::Default::default(),
                 read_only: core::default::Default::default(),
@@ -1209,6 +1427,11 @@ impl BuildContainer {
                 wait_timeout: core::default::Default::default(),
                 working_dir: core::default::Default::default(),
                 capabilities: core::default::Default::default(),
+                device_read_bps: core::default::Default::default(),
+                device_read_iops: core::default::Default::default(),
+                device_requests: core::default::Default::default(),
+                device_write_bps: core::default::Default::default(),
+                device_write_iops: core::default::Default::default(),
                 devices: core::default::Default::default(),
                 healthcheck: core::default::Default::default(),
                 host: core::default::Default::default(),
@@ -1216,6 +1439,7 @@ impl BuildContainer {
                 mounts: core::default::Default::default(),
                 networks_advanced: core::default::Default::default(),
                 ports: core::default::Default::default(),
+                timeouts: core::default::Default::default(),
                 ulimit: core::default::Default::default(),
                 upload: core::default::Default::default(),
                 volumes: core::default::Default::default(),
@@ -1263,13 +1487,19 @@ impl ContainerRef {
     }
 
     #[doc =
+        "Get a reference to the value of field `cgroup_parent` after provisioning.\nOptional parent cgroup for the container"]
+    pub fn cgroup_parent(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.cgroup_parent", self.extract_ref()))
+    }
+
+    #[doc =
         "Get a reference to the value of field `cgroupns_mode` after provisioning.\nCgroup namespace mode to use for the container. Possible values are: `private`, `host`."]
     pub fn cgroupns_mode(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.cgroupns_mode", self.extract_ref()))
     }
 
     #[doc =
-        "Get a reference to the value of field `command` after provisioning.\nThe command to use to start the container. For example, to run `/usr/bin/myprogram -f baz.conf` set the command to be `[\"/usr/bin/myprogram\",\"-f\",\"baz.con\"]`."]
+        "Get a reference to the value of field `command` after provisioning.\nThe command to use to start the container. For example, to run `/usr/bin/myprogram -f baz.conf` set the command to be `[\"/usr/bin/myprogram\",\"-f\",\"baz.conf\"]`."]
     pub fn command(&self) -> terrars::ListRef<terrars::PrimExpr<std::string::String>> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.command", self.extract_ref()))
     }
@@ -1290,6 +1520,18 @@ impl ContainerRef {
     }
 
     #[doc =
+        "Get a reference to the value of field `cpu_period` after provisioning.\nSpecify the CPU CFS scheduler period (in microseconds), which is used alongside `cpu-quota`. Is ignored if `cpus` is set."]
+    pub fn cpu_period(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.cpu_period", self.extract_ref()))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `cpu_quota` after provisioning.\nImpose a CPU CFS quota on the container (in microseconds). The number of microseconds per `cpu-period` that the container is limited to before throttled. Is ignored if `cpus` is set."]
+    pub fn cpu_quota(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.cpu_quota", self.extract_ref()))
+    }
+
+    #[doc =
         "Get a reference to the value of field `cpu_set` after provisioning.\nA comma-separated list or hyphen-separated range of CPUs a container can use, e.g. `0-1`."]
     pub fn cpu_set(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.cpu_set", self.extract_ref()))
@@ -1302,9 +1544,21 @@ impl ContainerRef {
     }
 
     #[doc =
+        "Get a reference to the value of field `cpus` after provisioning.\nSpecify how much of the available CPU resources a container can use. e.g a value of 1.5 means the container is guaranteed at most one and a half of the CPUs. Has precedence over `cpu_period` and `cpu_quota`."]
+    pub fn cpus(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.cpus", self.extract_ref()))
+    }
+
+    #[doc =
         "Get a reference to the value of field `destroy_grace_seconds` after provisioning.\nIf defined will attempt to stop the container before destroying. Container will be destroyed after `n` seconds or on successful stop."]
     pub fn destroy_grace_seconds(&self) -> terrars::PrimExpr<f64> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.destroy_grace_seconds", self.extract_ref()))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `device_cgroup_rules` after provisioning.\nCgroup rules to allow access to classes of devices without binding specific device nodes."]
+    pub fn device_cgroup_rules(&self) -> terrars::SetRef<terrars::PrimExpr<std::string::String>> {
+        terrars::SetRef::new(self.shared().clone(), format!("{}.device_cgroup_rules", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `dns` after provisioning.\nDNS servers to use."]
@@ -1330,7 +1584,7 @@ impl ContainerRef {
     }
 
     #[doc =
-        "Get a reference to the value of field `entrypoint` after provisioning.\nThe command to use as the Entrypoint for the container. The Entrypoint allows you to configure a container to run as an executable. For example, to run `/usr/bin/myprogram` when starting a container, set the entrypoint to be `\"/usr/bin/myprogra\"]`."]
+        "Get a reference to the value of field `entrypoint` after provisioning.\nThe command to use as the Entrypoint for the container. The Entrypoint allows you to configure a container to run as an executable. For example, to run `/usr/bin/myprogram` when starting a container, set the entrypoint to be `\"/usr/bin/myprogram\"]`."]
     pub fn entrypoint(&self) -> terrars::ListRef<terrars::PrimExpr<std::string::String>> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.entrypoint", self.extract_ref()))
     }
@@ -1348,7 +1602,7 @@ impl ContainerRef {
     }
 
     #[doc =
-        "Get a reference to the value of field `gpus` after provisioning.\nGPU devices to add to the container. Currently, only the value `all` is supported. Passing any other value will result in unexpected behavior."]
+        "Get a reference to the value of field `gpus` after provisioning.\nGPU devices to add to the container. Supported values are `all` or `device=<id[,id...]>`, for example `device=0,2` or `device=GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a`."]
     pub fn gpus(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.gpus", self.extract_ref()))
     }
@@ -1370,7 +1624,7 @@ impl ContainerRef {
     }
 
     #[doc =
-        "Get a reference to the value of field `image` after provisioning.\nThe ID of the image to back this container. The easiest way to get this value is to use the `docker_image` resource as is shown in the example."]
+        "Get a reference to the value of field `image` after provisioning.\nThe ID of the image to back this container. The easiest way to get this value is to use the `image_id` attribute of the `docker_image` resource as is shown in the example."]
     pub fn image(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.image", self.extract_ref()))
     }
@@ -1418,13 +1672,19 @@ impl ContainerRef {
     }
 
     #[doc =
+        "Get a reference to the value of field `memory_reservation` after provisioning.\nThe memory-resveration for the container in MBs. Defaults to 0. Allows you to specify a soft limit smaller than `memory` which is activated when Docker detects contention or low memory on the host machine. If you use `memory-reservation`, it must be set lower than `memory` for it to take precedence. Because it is a soft limit, it doesn't guarantee that the container doesn't exceed the limit."]
+    pub fn memory_reservation(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.memory_reservation", self.extract_ref()))
+    }
+
+    #[doc =
         "Get a reference to the value of field `memory_swap` after provisioning.\nThe total memory limit (memory + swap) for the container in MBs. This setting may compute to `-1` after `terraform apply` if the target host doesn't support memory swap, when that is the case docker will use a soft limitation."]
     pub fn memory_swap(&self) -> terrars::PrimExpr<f64> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.memory_swap", self.extract_ref()))
     }
 
     #[doc =
-        "Get a reference to the value of field `must_run` after provisioning.\nIf `true`, then the Docker container will be kept running. If `false`, then as long as the container exists, Terraform assumes it is successful. Defaults to `true`."]
+        "Get a reference to the value of field `must_run` after provisioning.\nIf `true`, then the Docker container will be kept running. If `false`, Terraform leaves the container alone. This attribute is also used to trigger a restart of a stopped container. If your container is stopped, Terraform will set `must_run` to `false` and this will trigger a change. Defaults to `true`."]
     pub fn must_run(&self) -> terrars::PrimExpr<bool> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.must_run", self.extract_ref()))
     }
@@ -1436,19 +1696,26 @@ impl ContainerRef {
 
     #[doc =
         "Get a reference to the value of field `network_data` after provisioning.\nThe data of the networks the container is connected to."]
-    pub fn network_data(&self) -> terrars::ListRef<ContainerNetworkDataElRef> {
+    pub fn network_data(&self) -> terrars::ListRef<Container_NetworkDataRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.network_data", self.extract_ref()))
     }
 
-    #[doc = "Get a reference to the value of field `network_mode` after provisioning.\nNetwork mode of the container."]
+    #[doc =
+        "Get a reference to the value of field `network_mode` after provisioning.\nNetwork mode of the container. Defaults to `bridge`. If your host OS is any other OS, you need to set this value explicitly, e.g. `nat` when your container will be running on an Windows host. See https://docs.docker.com/engine/network/ for more information."]
     pub fn network_mode(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.network_mode", self.extract_ref()))
     }
 
     #[doc =
-        "Get a reference to the value of field `pid_mode` after provisioning.\nhe PID (Process) Namespace mode for the container. Either `container:<name|id>` or `host`."]
+        "Get a reference to the value of field `pid_mode` after provisioning.\nThe PID (Process) Namespace mode for the container. Either `container:<name|id>` or `host`."]
     pub fn pid_mode(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.pid_mode", self.extract_ref()))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `platform` after provisioning.\nPlatform in the format `os[/arch[/variant]]` used for image lookup and container runtime, for example `linux/amd64`."]
+    pub fn platform(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.platform", self.extract_ref()))
     }
 
     #[doc =
@@ -1552,7 +1819,7 @@ impl ContainerRef {
     }
 
     #[doc =
-        "Get a reference to the value of field `user` after provisioning.\nUser used for run the first process. Format is `user` or `user:group` which user and group can be passed literraly or by name."]
+        "Get a reference to the value of field `user` after provisioning.\nUser used for run the first process. Format is `user` or `user:group` which user and group can be passed literally or by name."]
     pub fn user(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.user", self.extract_ref()))
     }
@@ -1564,7 +1831,7 @@ impl ContainerRef {
     }
 
     #[doc =
-        "Get a reference to the value of field `wait` after provisioning.\nIf `true`, then the Docker container is waited for being healthy state after creation. If `false`, then the container health state is not checked. Defaults to `false`."]
+        "Get a reference to the value of field `wait` after provisioning.\nIf `true`, then the Docker container is waited for being healthy state after creation. This requires your container to have a healthcheck, otherwise this provider will error. If `false`, then the container health state is not checked. Defaults to `false`."]
     pub fn wait(&self) -> terrars::PrimExpr<bool> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.wait", self.extract_ref()))
     }
@@ -1582,18 +1849,43 @@ impl ContainerRef {
     }
 
     #[doc = "Get a reference to the value of field `healthcheck` after provisioning.\n"]
-    pub fn healthcheck(&self) -> terrars::ListRef<ContainerHealthcheckElRef> {
+    pub fn healthcheck(&self) -> terrars::ListRef<Container_HealthcheckRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.healthcheck", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `ports` after provisioning.\n"]
-    pub fn ports(&self) -> terrars::ListRef<ContainerPortsElRef> {
+    pub fn ports(&self) -> terrars::ListRef<Container_PortsRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.ports", self.extract_ref()))
+    }
+
+    #[doc = "Get a reference to the value of field `timeouts` after provisioning.\n"]
+    pub fn timeouts(&self) -> Container_TimeoutsRef {
+        Container_TimeoutsRef::new(self.shared().clone(), format!("{}.timeouts", self.extract_ref()))
     }
 }
 
+#[derive(Serialize, Default)]
+struct ContainerDynamic {
+    capabilities: std::option::Option<terrars::DynamicBlock<Container_Capabilities>>,
+    device_read_bps: std::option::Option<terrars::DynamicBlock<Container_DeviceReadBps>>,
+    device_read_iops: std::option::Option<terrars::DynamicBlock<Container_DeviceReadIops>>,
+    device_requests: std::option::Option<terrars::DynamicBlock<Container_DeviceRequests>>,
+    device_write_bps: std::option::Option<terrars::DynamicBlock<Container_DeviceWriteBps>>,
+    device_write_iops: std::option::Option<terrars::DynamicBlock<Container_DeviceWriteIops>>,
+    devices: std::option::Option<terrars::DynamicBlock<Container_Devices>>,
+    healthcheck: std::option::Option<terrars::DynamicBlock<Container_Healthcheck>>,
+    host: std::option::Option<terrars::DynamicBlock<Container_Host>>,
+    labels: std::option::Option<terrars::DynamicBlock<Container_Labels>>,
+    mounts: std::option::Option<terrars::DynamicBlock<Container_Mounts>>,
+    networks_advanced: std::option::Option<terrars::DynamicBlock<Container_NetworksAdvanced>>,
+    ports: std::option::Option<terrars::DynamicBlock<Container_Ports>>,
+    ulimit: std::option::Option<terrars::DynamicBlock<Container_Ulimit>>,
+    upload: std::option::Option<terrars::DynamicBlock<Container_Upload>>,
+    volumes: std::option::Option<terrars::DynamicBlock<Container_Volumes>>,
+}
+
 #[derive(Serialize)]
-pub struct ContainerNetworkDataEl {
+pub struct Container_NetworkData {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     gateway: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -1612,7 +1904,7 @@ pub struct ContainerNetworkDataEl {
     network_name: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ContainerNetworkDataEl {
+impl Container_NetworkData {
     #[doc = "Set the field `gateway`.\n"]
     pub fn set_gateway(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.gateway = std::option::Option::Some(v.into());
@@ -1665,8 +1957,8 @@ impl ContainerNetworkDataEl {
     }
 }
 
-impl terrars::ToListMappable for ContainerNetworkDataEl {
-    type O = terrars::BlockAssignable<ContainerNetworkDataEl>;
+impl terrars::ToListMappable for Container_NetworkData {
+    type O = terrars::BlockAssignable<Container_NetworkData>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1677,11 +1969,11 @@ impl terrars::ToListMappable for ContainerNetworkDataEl {
     }
 }
 
-pub struct BuildContainerNetworkDataEl {}
+pub struct BuildContainer_NetworkData {}
 
-impl BuildContainerNetworkDataEl {
-    pub fn build(self) -> ContainerNetworkDataEl {
-        ContainerNetworkDataEl {
+impl BuildContainer_NetworkData {
+    pub fn build(self) -> Container_NetworkData {
+        Container_NetworkData {
             gateway: core::default::Default::default(),
             global_ipv6_address: core::default::Default::default(),
             global_ipv6_prefix_length: core::default::Default::default(),
@@ -1694,21 +1986,23 @@ impl BuildContainerNetworkDataEl {
     }
 }
 
-pub struct ContainerNetworkDataElRef {
+#[allow(dead_code)]
+pub struct Container_NetworkDataRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerNetworkDataElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerNetworkDataElRef {
-        ContainerNetworkDataElRef {
+impl terrars::Ref for Container_NetworkDataRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_NetworkDataRef {
+        Container_NetworkDataRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerNetworkDataElRef {
+impl Container_NetworkDataRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1755,14 +2049,14 @@ impl ContainerNetworkDataElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerCapabilitiesEl {
+pub struct Container_Capabilities {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     add: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     drop: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
 }
 
-impl ContainerCapabilitiesEl {
+impl Container_Capabilities {
     #[doc = "Set the field `add`.\nList of linux capabilities to add."]
     pub fn set_add(
         mut self,
@@ -1782,8 +2076,8 @@ impl ContainerCapabilitiesEl {
     }
 }
 
-impl terrars::ToListMappable for ContainerCapabilitiesEl {
-    type O = terrars::BlockAssignable<ContainerCapabilitiesEl>;
+impl terrars::ToListMappable for Container_Capabilities {
+    type O = terrars::BlockAssignable<Container_Capabilities>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1794,32 +2088,34 @@ impl terrars::ToListMappable for ContainerCapabilitiesEl {
     }
 }
 
-pub struct BuildContainerCapabilitiesEl {}
+pub struct BuildContainer_Capabilities {}
 
-impl BuildContainerCapabilitiesEl {
-    pub fn build(self) -> ContainerCapabilitiesEl {
-        ContainerCapabilitiesEl {
+impl BuildContainer_Capabilities {
+    pub fn build(self) -> Container_Capabilities {
+        Container_Capabilities {
             add: core::default::Default::default(),
             drop: core::default::Default::default(),
         }
     }
 }
 
-pub struct ContainerCapabilitiesElRef {
+#[allow(dead_code)]
+pub struct Container_CapabilitiesRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerCapabilitiesElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerCapabilitiesElRef {
-        ContainerCapabilitiesElRef {
+impl terrars::Ref for Container_CapabilitiesRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_CapabilitiesRef {
+        Container_CapabilitiesRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerCapabilitiesElRef {
+impl Container_CapabilitiesRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1836,7 +2132,420 @@ impl ContainerCapabilitiesElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerDevicesEl {
+pub struct Container_DeviceReadBps {
+    path: terrars::PrimField<std::string::String>,
+    rate: terrars::PrimField<f64>,
+}
+
+impl Container_DeviceReadBps { }
+
+impl terrars::ToListMappable for Container_DeviceReadBps {
+    type O = terrars::BlockAssignable<Container_DeviceReadBps>;
+
+    fn do_map(self, base: std::string::String) -> Self::O {
+        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
+            for_each: format!("${{{}}}", base),
+            iterator: "each".into(),
+            content: self,
+        })
+    }
+}
+
+pub struct BuildContainer_DeviceReadBps {
+    #[doc = "The device path on the host, e.g. `/dev/sda`."]
+    pub path: terrars::PrimField<std::string::String>,
+    #[doc = "The read rate limit in bytes per second."]
+    pub rate: terrars::PrimField<f64>,
+}
+
+impl BuildContainer_DeviceReadBps {
+    pub fn build(self) -> Container_DeviceReadBps {
+        Container_DeviceReadBps {
+            path: self.path,
+            rate: self.rate,
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub struct Container_DeviceReadBpsRef {
+    shared: terrars::StackShared,
+    base: std::string::String,
+}
+
+impl terrars::Ref for Container_DeviceReadBpsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_DeviceReadBpsRef {
+        Container_DeviceReadBpsRef {
+            shared: shared,
+            base: base.to_string(),
+        }
+    }
+}
+
+impl Container_DeviceReadBpsRef {
+    #[allow(dead_code)]
+    fn shared(&self) -> &terrars::StackShared {
+        &self.shared
+    }
+
+    #[doc =
+        "Get a reference to the value of field `path` after provisioning.\nThe device path on the host, e.g. `/dev/sda`."]
+    pub fn path(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.path", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `rate` after provisioning.\nThe read rate limit in bytes per second."]
+    pub fn rate(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.rate", self.base))
+    }
+}
+
+#[derive(Serialize)]
+pub struct Container_DeviceReadIops {
+    path: terrars::PrimField<std::string::String>,
+    rate: terrars::PrimField<f64>,
+}
+
+impl Container_DeviceReadIops { }
+
+impl terrars::ToListMappable for Container_DeviceReadIops {
+    type O = terrars::BlockAssignable<Container_DeviceReadIops>;
+
+    fn do_map(self, base: std::string::String) -> Self::O {
+        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
+            for_each: format!("${{{}}}", base),
+            iterator: "each".into(),
+            content: self,
+        })
+    }
+}
+
+pub struct BuildContainer_DeviceReadIops {
+    #[doc = "The device path on the host, e.g. `/dev/sda`."]
+    pub path: terrars::PrimField<std::string::String>,
+    #[doc = "The read IOPS limit."]
+    pub rate: terrars::PrimField<f64>,
+}
+
+impl BuildContainer_DeviceReadIops {
+    pub fn build(self) -> Container_DeviceReadIops {
+        Container_DeviceReadIops {
+            path: self.path,
+            rate: self.rate,
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub struct Container_DeviceReadIopsRef {
+    shared: terrars::StackShared,
+    base: std::string::String,
+}
+
+impl terrars::Ref for Container_DeviceReadIopsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_DeviceReadIopsRef {
+        Container_DeviceReadIopsRef {
+            shared: shared,
+            base: base.to_string(),
+        }
+    }
+}
+
+impl Container_DeviceReadIopsRef {
+    #[allow(dead_code)]
+    fn shared(&self) -> &terrars::StackShared {
+        &self.shared
+    }
+
+    #[doc =
+        "Get a reference to the value of field `path` after provisioning.\nThe device path on the host, e.g. `/dev/sda`."]
+    pub fn path(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.path", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `rate` after provisioning.\nThe read IOPS limit."]
+    pub fn rate(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.rate", self.base))
+    }
+}
+
+#[derive(Serialize)]
+pub struct Container_DeviceRequests {
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    capabilities: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    count: std::option::Option<terrars::PrimField<f64>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    device_ids: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    driver: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    options: std::option::Option<terrars::RecField<terrars::PrimField<std::string::String>>>,
+}
+
+impl Container_DeviceRequests {
+    #[doc =
+        "Set the field `capabilities`.\nList of device capabilities. Only used with `nvidia` driver (e.g., `gpu`, `compute`, `utility`)."]
+    pub fn set_capabilities(
+        mut self,
+        v: impl std::convert::Into<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.capabilities = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `count`.\nNumber of devices to request. Use -1 for all devices. Only used with `nvidia` driver."]
+    pub fn set_count(mut self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
+        self.count = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `device_ids`.\nList of device IDs or CDI device identifiers (e.g., `nvidia.com/gpu=all`)."]
+    pub fn set_device_ids(
+        mut self,
+        v: impl std::convert::Into<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.device_ids = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `driver`.\nThe device driver to use. Common values: `cdi` for CDI devices, `nvidia` for NVIDIA GPU requests."]
+    pub fn set_driver(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.driver = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `options`.\nDriver-specific options."]
+    pub fn set_options(
+        mut self,
+        v: impl std::convert::Into<terrars::RecField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.options = std::option::Option::Some(v.into());
+        self
+    }
+}
+
+impl terrars::ToListMappable for Container_DeviceRequests {
+    type O = terrars::BlockAssignable<Container_DeviceRequests>;
+
+    fn do_map(self, base: std::string::String) -> Self::O {
+        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
+            for_each: format!("${{{}}}", base),
+            iterator: "each".into(),
+            content: self,
+        })
+    }
+}
+
+pub struct BuildContainer_DeviceRequests {}
+
+impl BuildContainer_DeviceRequests {
+    pub fn build(self) -> Container_DeviceRequests {
+        Container_DeviceRequests {
+            capabilities: core::default::Default::default(),
+            count: core::default::Default::default(),
+            device_ids: core::default::Default::default(),
+            driver: core::default::Default::default(),
+            options: core::default::Default::default(),
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub struct Container_DeviceRequestsRef {
+    shared: terrars::StackShared,
+    base: std::string::String,
+}
+
+impl terrars::Ref for Container_DeviceRequestsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_DeviceRequestsRef {
+        Container_DeviceRequestsRef {
+            shared: shared,
+            base: base.to_string(),
+        }
+    }
+}
+
+impl Container_DeviceRequestsRef {
+    #[allow(dead_code)]
+    fn shared(&self) -> &terrars::StackShared {
+        &self.shared
+    }
+
+    #[doc =
+        "Get a reference to the value of field `capabilities` after provisioning.\nList of device capabilities. Only used with `nvidia` driver (e.g., `gpu`, `compute`, `utility`)."]
+    pub fn capabilities(&self) -> terrars::SetRef<terrars::PrimExpr<std::string::String>> {
+        terrars::SetRef::new(self.shared().clone(), format!("{}.capabilities", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `count` after provisioning.\nNumber of devices to request. Use -1 for all devices. Only used with `nvidia` driver."]
+    pub fn count(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.count", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `device_ids` after provisioning.\nList of device IDs or CDI device identifiers (e.g., `nvidia.com/gpu=all`)."]
+    pub fn device_ids(&self) -> terrars::SetRef<terrars::PrimExpr<std::string::String>> {
+        terrars::SetRef::new(self.shared().clone(), format!("{}.device_ids", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `driver` after provisioning.\nThe device driver to use. Common values: `cdi` for CDI devices, `nvidia` for NVIDIA GPU requests."]
+    pub fn driver(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.driver", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `options` after provisioning.\nDriver-specific options."]
+    pub fn options(&self) -> terrars::RecRef<terrars::PrimExpr<std::string::String>> {
+        terrars::RecRef::new(self.shared().clone(), format!("{}.options", self.base))
+    }
+}
+
+#[derive(Serialize)]
+pub struct Container_DeviceWriteBps {
+    path: terrars::PrimField<std::string::String>,
+    rate: terrars::PrimField<f64>,
+}
+
+impl Container_DeviceWriteBps { }
+
+impl terrars::ToListMappable for Container_DeviceWriteBps {
+    type O = terrars::BlockAssignable<Container_DeviceWriteBps>;
+
+    fn do_map(self, base: std::string::String) -> Self::O {
+        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
+            for_each: format!("${{{}}}", base),
+            iterator: "each".into(),
+            content: self,
+        })
+    }
+}
+
+pub struct BuildContainer_DeviceWriteBps {
+    #[doc = "The device path on the host, e.g. `/dev/sda`."]
+    pub path: terrars::PrimField<std::string::String>,
+    #[doc = "The write rate limit in bytes per second."]
+    pub rate: terrars::PrimField<f64>,
+}
+
+impl BuildContainer_DeviceWriteBps {
+    pub fn build(self) -> Container_DeviceWriteBps {
+        Container_DeviceWriteBps {
+            path: self.path,
+            rate: self.rate,
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub struct Container_DeviceWriteBpsRef {
+    shared: terrars::StackShared,
+    base: std::string::String,
+}
+
+impl terrars::Ref for Container_DeviceWriteBpsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_DeviceWriteBpsRef {
+        Container_DeviceWriteBpsRef {
+            shared: shared,
+            base: base.to_string(),
+        }
+    }
+}
+
+impl Container_DeviceWriteBpsRef {
+    #[allow(dead_code)]
+    fn shared(&self) -> &terrars::StackShared {
+        &self.shared
+    }
+
+    #[doc =
+        "Get a reference to the value of field `path` after provisioning.\nThe device path on the host, e.g. `/dev/sda`."]
+    pub fn path(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.path", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `rate` after provisioning.\nThe write rate limit in bytes per second."]
+    pub fn rate(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.rate", self.base))
+    }
+}
+
+#[derive(Serialize)]
+pub struct Container_DeviceWriteIops {
+    path: terrars::PrimField<std::string::String>,
+    rate: terrars::PrimField<f64>,
+}
+
+impl Container_DeviceWriteIops { }
+
+impl terrars::ToListMappable for Container_DeviceWriteIops {
+    type O = terrars::BlockAssignable<Container_DeviceWriteIops>;
+
+    fn do_map(self, base: std::string::String) -> Self::O {
+        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
+            for_each: format!("${{{}}}", base),
+            iterator: "each".into(),
+            content: self,
+        })
+    }
+}
+
+pub struct BuildContainer_DeviceWriteIops {
+    #[doc = "The device path on the host, e.g. `/dev/sda`."]
+    pub path: terrars::PrimField<std::string::String>,
+    #[doc = "The write IOPS limit."]
+    pub rate: terrars::PrimField<f64>,
+}
+
+impl BuildContainer_DeviceWriteIops {
+    pub fn build(self) -> Container_DeviceWriteIops {
+        Container_DeviceWriteIops {
+            path: self.path,
+            rate: self.rate,
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub struct Container_DeviceWriteIopsRef {
+    shared: terrars::StackShared,
+    base: std::string::String,
+}
+
+impl terrars::Ref for Container_DeviceWriteIopsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_DeviceWriteIopsRef {
+        Container_DeviceWriteIopsRef {
+            shared: shared,
+            base: base.to_string(),
+        }
+    }
+}
+
+impl Container_DeviceWriteIopsRef {
+    #[allow(dead_code)]
+    fn shared(&self) -> &terrars::StackShared {
+        &self.shared
+    }
+
+    #[doc =
+        "Get a reference to the value of field `path` after provisioning.\nThe device path on the host, e.g. `/dev/sda`."]
+    pub fn path(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.path", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `rate` after provisioning.\nThe write IOPS limit."]
+    pub fn rate(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.rate", self.base))
+    }
+}
+
+#[derive(Serialize)]
+pub struct Container_Devices {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     container_path: std::option::Option<terrars::PrimField<std::string::String>>,
     host_path: terrars::PrimField<std::string::String>,
@@ -1844,8 +2553,9 @@ pub struct ContainerDevicesEl {
     permissions: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ContainerDevicesEl {
-    #[doc = "Set the field `container_path`.\nThe path in the container where the device will be bound."]
+impl Container_Devices {
+    #[doc =
+        "Set the field `container_path`.\nThe path in the container where the device will be bound. If not set, it defaults to the value of `host_path`."]
     pub fn set_container_path(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.container_path = std::option::Option::Some(v.into());
         self
@@ -1859,8 +2569,8 @@ impl ContainerDevicesEl {
     }
 }
 
-impl terrars::ToListMappable for ContainerDevicesEl {
-    type O = terrars::BlockAssignable<ContainerDevicesEl>;
+impl terrars::ToListMappable for Container_Devices {
+    type O = terrars::BlockAssignable<Container_Devices>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1871,14 +2581,14 @@ impl terrars::ToListMappable for ContainerDevicesEl {
     }
 }
 
-pub struct BuildContainerDevicesEl {
+pub struct BuildContainer_Devices {
     #[doc = "The path on the host where the device is located."]
     pub host_path: terrars::PrimField<std::string::String>,
 }
 
-impl BuildContainerDevicesEl {
-    pub fn build(self) -> ContainerDevicesEl {
-        ContainerDevicesEl {
+impl BuildContainer_Devices {
+    pub fn build(self) -> Container_Devices {
+        Container_Devices {
             container_path: core::default::Default::default(),
             host_path: self.host_path,
             permissions: core::default::Default::default(),
@@ -1886,27 +2596,29 @@ impl BuildContainerDevicesEl {
     }
 }
 
-pub struct ContainerDevicesElRef {
+#[allow(dead_code)]
+pub struct Container_DevicesRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerDevicesElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerDevicesElRef {
-        ContainerDevicesElRef {
+impl terrars::Ref for Container_DevicesRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_DevicesRef {
+        Container_DevicesRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerDevicesElRef {
+impl Container_DevicesRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
 
     #[doc =
-        "Get a reference to the value of field `container_path` after provisioning.\nThe path in the container where the device will be bound."]
+        "Get a reference to the value of field `container_path` after provisioning.\nThe path in the container where the device will be bound. If not set, it defaults to the value of `host_path`."]
     pub fn container_path(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.container_path", self.base))
     }
@@ -1925,19 +2637,22 @@ impl ContainerDevicesElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerHealthcheckEl {
+pub struct Container_Healthcheck {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     interval: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     retries: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    start_interval: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
     start_period: std::option::Option<terrars::PrimField<std::string::String>>,
-    test: terrars::ListField<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    test: std::option::Option<terrars::ListField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     timeout: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ContainerHealthcheckEl {
+impl Container_Healthcheck {
     #[doc = "Set the field `interval`.\nTime between running the check (ms|s|m|h). Defaults to `0s`."]
     pub fn set_interval(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.interval = std::option::Option::Some(v.into());
@@ -1950,10 +2665,26 @@ impl ContainerHealthcheckEl {
         self
     }
 
+    #[doc = "Set the field `start_interval`.\nInterval before the healthcheck starts (ms|s|m|h). Defaults to `0s`."]
+    pub fn set_start_interval(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.start_interval = std::option::Option::Some(v.into());
+        self
+    }
+
     #[doc =
         "Set the field `start_period`.\nStart period for the container to initialize before counting retries towards unstable (ms|s|m|h). Defaults to `0s`."]
     pub fn set_start_period(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.start_period = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `test`.\nCommand to run to check health. For example, to run `curl -f localhost/health` set the command to be `[\"CMD\", \"curl\", \"-f\", \"localhost/health\"]`. It works in the same way, and has the same default values, as the HEALTHCHECK Dockerfile instruction set by the service's Docker image. Your Compose file can override the values set in the Dockerfile."]
+    pub fn set_test(
+        mut self,
+        v: impl std::convert::Into<terrars::ListField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.test = std::option::Option::Some(v.into());
         self
     }
 
@@ -1964,8 +2695,8 @@ impl ContainerHealthcheckEl {
     }
 }
 
-impl terrars::ToListMappable for ContainerHealthcheckEl {
-    type O = terrars::BlockAssignable<ContainerHealthcheckEl>;
+impl terrars::ToListMappable for Container_Healthcheck {
+    type O = terrars::BlockAssignable<Container_Healthcheck>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1976,39 +2707,38 @@ impl terrars::ToListMappable for ContainerHealthcheckEl {
     }
 }
 
-pub struct BuildContainerHealthcheckEl {
-    #[doc =
-        "Command to run to check health. For example, to run `curl -f localhost/health` set the command to be `[\"CMD\", \"curl\", \"-f\", \"localhost/health\"]`."]
-    pub test: terrars::ListField<terrars::PrimField<std::string::String>>,
-}
+pub struct BuildContainer_Healthcheck {}
 
-impl BuildContainerHealthcheckEl {
-    pub fn build(self) -> ContainerHealthcheckEl {
-        ContainerHealthcheckEl {
+impl BuildContainer_Healthcheck {
+    pub fn build(self) -> Container_Healthcheck {
+        Container_Healthcheck {
             interval: core::default::Default::default(),
             retries: core::default::Default::default(),
+            start_interval: core::default::Default::default(),
             start_period: core::default::Default::default(),
-            test: self.test,
+            test: core::default::Default::default(),
             timeout: core::default::Default::default(),
         }
     }
 }
 
-pub struct ContainerHealthcheckElRef {
+#[allow(dead_code)]
+pub struct Container_HealthcheckRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerHealthcheckElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerHealthcheckElRef {
-        ContainerHealthcheckElRef {
+impl terrars::Ref for Container_HealthcheckRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_HealthcheckRef {
+        Container_HealthcheckRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerHealthcheckElRef {
+impl Container_HealthcheckRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2026,13 +2756,19 @@ impl ContainerHealthcheckElRef {
     }
 
     #[doc =
+        "Get a reference to the value of field `start_interval` after provisioning.\nInterval before the healthcheck starts (ms|s|m|h). Defaults to `0s`."]
+    pub fn start_interval(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.start_interval", self.base))
+    }
+
+    #[doc =
         "Get a reference to the value of field `start_period` after provisioning.\nStart period for the container to initialize before counting retries towards unstable (ms|s|m|h). Defaults to `0s`."]
     pub fn start_period(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.start_period", self.base))
     }
 
     #[doc =
-        "Get a reference to the value of field `test` after provisioning.\nCommand to run to check health. For example, to run `curl -f localhost/health` set the command to be `[\"CMD\", \"curl\", \"-f\", \"localhost/health\"]`."]
+        "Get a reference to the value of field `test` after provisioning.\nCommand to run to check health. For example, to run `curl -f localhost/health` set the command to be `[\"CMD\", \"curl\", \"-f\", \"localhost/health\"]`. It works in the same way, and has the same default values, as the HEALTHCHECK Dockerfile instruction set by the service's Docker image. Your Compose file can override the values set in the Dockerfile."]
     pub fn test(&self) -> terrars::ListRef<terrars::PrimExpr<std::string::String>> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.test", self.base))
     }
@@ -2045,15 +2781,15 @@ impl ContainerHealthcheckElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerHostEl {
+pub struct Container_Host {
     host: terrars::PrimField<std::string::String>,
     ip: terrars::PrimField<std::string::String>,
 }
 
-impl ContainerHostEl { }
+impl Container_Host { }
 
-impl terrars::ToListMappable for ContainerHostEl {
-    type O = terrars::BlockAssignable<ContainerHostEl>;
+impl terrars::ToListMappable for Container_Host {
+    type O = terrars::BlockAssignable<Container_Host>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2064,37 +2800,39 @@ impl terrars::ToListMappable for ContainerHostEl {
     }
 }
 
-pub struct BuildContainerHostEl {
+pub struct BuildContainer_Host {
     #[doc = "Hostname to add"]
     pub host: terrars::PrimField<std::string::String>,
     #[doc = "IP address this hostname should resolve to."]
     pub ip: terrars::PrimField<std::string::String>,
 }
 
-impl BuildContainerHostEl {
-    pub fn build(self) -> ContainerHostEl {
-        ContainerHostEl {
+impl BuildContainer_Host {
+    pub fn build(self) -> Container_Host {
+        Container_Host {
             host: self.host,
             ip: self.ip,
         }
     }
 }
 
-pub struct ContainerHostElRef {
+#[allow(dead_code)]
+pub struct Container_HostRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerHostElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerHostElRef {
-        ContainerHostElRef {
+impl terrars::Ref for Container_HostRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_HostRef {
+        Container_HostRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerHostElRef {
+impl Container_HostRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2112,15 +2850,15 @@ impl ContainerHostElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerLabelsEl {
+pub struct Container_Labels {
     label: terrars::PrimField<std::string::String>,
     value: terrars::PrimField<std::string::String>,
 }
 
-impl ContainerLabelsEl { }
+impl Container_Labels { }
 
-impl terrars::ToListMappable for ContainerLabelsEl {
-    type O = terrars::BlockAssignable<ContainerLabelsEl>;
+impl terrars::ToListMappable for Container_Labels {
+    type O = terrars::BlockAssignable<Container_Labels>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2131,37 +2869,39 @@ impl terrars::ToListMappable for ContainerLabelsEl {
     }
 }
 
-pub struct BuildContainerLabelsEl {
+pub struct BuildContainer_Labels {
     #[doc = "Name of the label"]
     pub label: terrars::PrimField<std::string::String>,
     #[doc = "Value of the label"]
     pub value: terrars::PrimField<std::string::String>,
 }
 
-impl BuildContainerLabelsEl {
-    pub fn build(self) -> ContainerLabelsEl {
-        ContainerLabelsEl {
+impl BuildContainer_Labels {
+    pub fn build(self) -> Container_Labels {
+        Container_Labels {
             label: self.label,
             value: self.value,
         }
     }
 }
 
-pub struct ContainerLabelsElRef {
+#[allow(dead_code)]
+pub struct Container_LabelsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerLabelsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerLabelsElRef {
-        ContainerLabelsElRef {
+impl terrars::Ref for Container_LabelsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_LabelsRef {
+        Container_LabelsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerLabelsElRef {
+impl Container_LabelsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2178,12 +2918,12 @@ impl ContainerLabelsElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerMountsElBindOptionsEl {
+pub struct Container_Mounts_BindOptions {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     propagation: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ContainerMountsElBindOptionsEl {
+impl Container_Mounts_BindOptions {
     #[doc = "Set the field `propagation`.\nA propagation mode with the value."]
     pub fn set_propagation(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.propagation = std::option::Option::Some(v.into());
@@ -2191,8 +2931,8 @@ impl ContainerMountsElBindOptionsEl {
     }
 }
 
-impl terrars::ToListMappable for ContainerMountsElBindOptionsEl {
-    type O = terrars::BlockAssignable<ContainerMountsElBindOptionsEl>;
+impl terrars::ToListMappable for Container_Mounts_BindOptions {
+    type O = terrars::BlockAssignable<Container_Mounts_BindOptions>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2203,29 +2943,31 @@ impl terrars::ToListMappable for ContainerMountsElBindOptionsEl {
     }
 }
 
-pub struct BuildContainerMountsElBindOptionsEl {}
+pub struct BuildContainer_Mounts_BindOptions {}
 
-impl BuildContainerMountsElBindOptionsEl {
-    pub fn build(self) -> ContainerMountsElBindOptionsEl {
-        ContainerMountsElBindOptionsEl { propagation: core::default::Default::default() }
+impl BuildContainer_Mounts_BindOptions {
+    pub fn build(self) -> Container_Mounts_BindOptions {
+        Container_Mounts_BindOptions { propagation: core::default::Default::default() }
     }
 }
 
-pub struct ContainerMountsElBindOptionsElRef {
+#[allow(dead_code)]
+pub struct Container_Mounts_BindOptionsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerMountsElBindOptionsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerMountsElBindOptionsElRef {
-        ContainerMountsElBindOptionsElRef {
+impl terrars::Ref for Container_Mounts_BindOptionsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_Mounts_BindOptionsRef {
+        Container_Mounts_BindOptionsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerMountsElBindOptionsElRef {
+impl Container_Mounts_BindOptionsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2238,14 +2980,14 @@ impl ContainerMountsElBindOptionsElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerMountsElTmpfsOptionsEl {
+pub struct Container_Mounts_TmpfsOptions {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     mode: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     size_bytes: std::option::Option<terrars::PrimField<f64>>,
 }
 
-impl ContainerMountsElTmpfsOptionsEl {
+impl Container_Mounts_TmpfsOptions {
     #[doc = "Set the field `mode`.\nThe permission mode for the tmpfs mount in an integer."]
     pub fn set_mode(mut self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
         self.mode = std::option::Option::Some(v.into());
@@ -2259,8 +3001,8 @@ impl ContainerMountsElTmpfsOptionsEl {
     }
 }
 
-impl terrars::ToListMappable for ContainerMountsElTmpfsOptionsEl {
-    type O = terrars::BlockAssignable<ContainerMountsElTmpfsOptionsEl>;
+impl terrars::ToListMappable for Container_Mounts_TmpfsOptions {
+    type O = terrars::BlockAssignable<Container_Mounts_TmpfsOptions>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2271,32 +3013,34 @@ impl terrars::ToListMappable for ContainerMountsElTmpfsOptionsEl {
     }
 }
 
-pub struct BuildContainerMountsElTmpfsOptionsEl {}
+pub struct BuildContainer_Mounts_TmpfsOptions {}
 
-impl BuildContainerMountsElTmpfsOptionsEl {
-    pub fn build(self) -> ContainerMountsElTmpfsOptionsEl {
-        ContainerMountsElTmpfsOptionsEl {
+impl BuildContainer_Mounts_TmpfsOptions {
+    pub fn build(self) -> Container_Mounts_TmpfsOptions {
+        Container_Mounts_TmpfsOptions {
             mode: core::default::Default::default(),
             size_bytes: core::default::Default::default(),
         }
     }
 }
 
-pub struct ContainerMountsElTmpfsOptionsElRef {
+#[allow(dead_code)]
+pub struct Container_Mounts_TmpfsOptionsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerMountsElTmpfsOptionsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerMountsElTmpfsOptionsElRef {
-        ContainerMountsElTmpfsOptionsElRef {
+impl terrars::Ref for Container_Mounts_TmpfsOptionsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_Mounts_TmpfsOptionsRef {
+        Container_Mounts_TmpfsOptionsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerMountsElTmpfsOptionsElRef {
+impl Container_Mounts_TmpfsOptionsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2314,79 +3058,13 @@ impl ContainerMountsElTmpfsOptionsElRef {
     }
 }
 
-#[derive(Serialize)]
-pub struct ContainerMountsElVolumeOptionsElLabelsEl {
-    label: terrars::PrimField<std::string::String>,
-    value: terrars::PrimField<std::string::String>,
-}
-
-impl ContainerMountsElVolumeOptionsElLabelsEl { }
-
-impl terrars::ToListMappable for ContainerMountsElVolumeOptionsElLabelsEl {
-    type O = terrars::BlockAssignable<ContainerMountsElVolumeOptionsElLabelsEl>;
-
-    fn do_map(self, base: std::string::String) -> Self::O {
-        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
-            for_each: format!("${{{}}}", base),
-            iterator: "each".into(),
-            content: self,
-        })
-    }
-}
-
-pub struct BuildContainerMountsElVolumeOptionsElLabelsEl {
-    #[doc = "Name of the label"]
-    pub label: terrars::PrimField<std::string::String>,
-    #[doc = "Value of the label"]
-    pub value: terrars::PrimField<std::string::String>,
-}
-
-impl BuildContainerMountsElVolumeOptionsElLabelsEl {
-    pub fn build(self) -> ContainerMountsElVolumeOptionsElLabelsEl {
-        ContainerMountsElVolumeOptionsElLabelsEl {
-            label: self.label,
-            value: self.value,
-        }
-    }
-}
-
-pub struct ContainerMountsElVolumeOptionsElLabelsElRef {
-    shared: terrars::StackShared,
-    base: std::string::String,
-}
-
-impl terrars::Ref for ContainerMountsElVolumeOptionsElLabelsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerMountsElVolumeOptionsElLabelsElRef {
-        ContainerMountsElVolumeOptionsElLabelsElRef {
-            shared: shared,
-            base: base.to_string(),
-        }
-    }
-}
-
-impl ContainerMountsElVolumeOptionsElLabelsElRef {
-    fn shared(&self) -> &terrars::StackShared {
-        &self.shared
-    }
-
-    #[doc = "Get a reference to the value of field `label` after provisioning.\nName of the label"]
-    pub fn label(&self) -> terrars::PrimExpr<std::string::String> {
-        terrars::PrimExpr::new(self.shared().clone(), format!("{}.label", self.base))
-    }
-
-    #[doc = "Get a reference to the value of field `value` after provisioning.\nValue of the label"]
-    pub fn value(&self) -> terrars::PrimExpr<std::string::String> {
-        terrars::PrimExpr::new(self.shared().clone(), format!("{}.value", self.base))
-    }
-}
-
 #[derive(Serialize, Default)]
-struct ContainerMountsElVolumeOptionsElDynamic {
-    labels: std::option::Option<terrars::DynamicBlock<ContainerMountsElVolumeOptionsElLabelsEl>>,
+struct Container_Mounts_VolumeOptionsDynamic {
+    labels: std::option::Option<terrars::DynamicBlock<Container_Labels>>,
 }
 
 #[derive(Serialize)]
-pub struct ContainerMountsElVolumeOptionsEl {
+pub struct Container_Mounts_VolumeOptions {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     driver_name: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2394,11 +3072,13 @@ pub struct ContainerMountsElVolumeOptionsEl {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     no_copy: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    labels: std::option::Option<std::vec::Vec<ContainerMountsElVolumeOptionsElLabelsEl>>,
-    dynamic: ContainerMountsElVolumeOptionsElDynamic,
+    subpath: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    labels: std::option::Option<std::vec::Vec<Container_Labels>>,
+    dynamic: Container_Mounts_VolumeOptionsDynamic,
 }
 
-impl ContainerMountsElVolumeOptionsEl {
+impl Container_Mounts_VolumeOptions {
     #[doc = "Set the field `driver_name`.\nName of the driver to use to create the volume."]
     pub fn set_driver_name(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.driver_name = std::option::Option::Some(v.into());
@@ -2420,11 +3100,14 @@ impl ContainerMountsElVolumeOptionsEl {
         self
     }
 
+    #[doc = "Set the field `subpath`.\nPath within the volume to mount. Requires docker server version 1.45 or higher."]
+    pub fn set_subpath(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.subpath = std::option::Option::Some(v.into());
+        self
+    }
+
     #[doc = "Set the field `labels`.\n"]
-    pub fn set_labels(
-        mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ContainerMountsElVolumeOptionsElLabelsEl>>,
-    ) -> Self {
+    pub fn set_labels(mut self, v: impl std::convert::Into<terrars::BlockAssignable<Container_Labels>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.labels = std::option::Option::Some(v);
@@ -2437,8 +3120,8 @@ impl ContainerMountsElVolumeOptionsEl {
     }
 }
 
-impl terrars::ToListMappable for ContainerMountsElVolumeOptionsEl {
-    type O = terrars::BlockAssignable<ContainerMountsElVolumeOptionsEl>;
+impl terrars::ToListMappable for Container_Mounts_VolumeOptions {
+    type O = terrars::BlockAssignable<Container_Mounts_VolumeOptions>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2449,35 +3132,38 @@ impl terrars::ToListMappable for ContainerMountsElVolumeOptionsEl {
     }
 }
 
-pub struct BuildContainerMountsElVolumeOptionsEl {}
+pub struct BuildContainer_Mounts_VolumeOptions {}
 
-impl BuildContainerMountsElVolumeOptionsEl {
-    pub fn build(self) -> ContainerMountsElVolumeOptionsEl {
-        ContainerMountsElVolumeOptionsEl {
+impl BuildContainer_Mounts_VolumeOptions {
+    pub fn build(self) -> Container_Mounts_VolumeOptions {
+        Container_Mounts_VolumeOptions {
             driver_name: core::default::Default::default(),
             driver_options: core::default::Default::default(),
             no_copy: core::default::Default::default(),
+            subpath: core::default::Default::default(),
             labels: core::default::Default::default(),
             dynamic: core::default::Default::default(),
         }
     }
 }
 
-pub struct ContainerMountsElVolumeOptionsElRef {
+#[allow(dead_code)]
+pub struct Container_Mounts_VolumeOptionsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerMountsElVolumeOptionsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerMountsElVolumeOptionsElRef {
-        ContainerMountsElVolumeOptionsElRef {
+impl terrars::Ref for Container_Mounts_VolumeOptionsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_Mounts_VolumeOptionsRef {
+        Container_Mounts_VolumeOptionsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerMountsElVolumeOptionsElRef {
+impl Container_Mounts_VolumeOptionsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2499,17 +3185,23 @@ impl ContainerMountsElVolumeOptionsElRef {
     pub fn no_copy(&self) -> terrars::PrimExpr<bool> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.no_copy", self.base))
     }
+
+    #[doc =
+        "Get a reference to the value of field `subpath` after provisioning.\nPath within the volume to mount. Requires docker server version 1.45 or higher."]
+    pub fn subpath(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.subpath", self.base))
+    }
 }
 
 #[derive(Serialize, Default)]
-struct ContainerMountsElDynamic {
-    bind_options: std::option::Option<terrars::DynamicBlock<ContainerMountsElBindOptionsEl>>,
-    tmpfs_options: std::option::Option<terrars::DynamicBlock<ContainerMountsElTmpfsOptionsEl>>,
-    volume_options: std::option::Option<terrars::DynamicBlock<ContainerMountsElVolumeOptionsEl>>,
+struct Container_MountsDynamic {
+    bind_options: std::option::Option<terrars::DynamicBlock<Container_Mounts_BindOptions>>,
+    tmpfs_options: std::option::Option<terrars::DynamicBlock<Container_Mounts_TmpfsOptions>>,
+    volume_options: std::option::Option<terrars::DynamicBlock<Container_Mounts_VolumeOptions>>,
 }
 
 #[derive(Serialize)]
-pub struct ContainerMountsEl {
+pub struct Container_Mounts {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     read_only: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2518,15 +3210,15 @@ pub struct ContainerMountsEl {
     #[serde(rename = "type")]
     type_: terrars::PrimField<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    bind_options: std::option::Option<std::vec::Vec<ContainerMountsElBindOptionsEl>>,
+    bind_options: std::option::Option<std::vec::Vec<Container_Mounts_BindOptions>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    tmpfs_options: std::option::Option<std::vec::Vec<ContainerMountsElTmpfsOptionsEl>>,
+    tmpfs_options: std::option::Option<std::vec::Vec<Container_Mounts_TmpfsOptions>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    volume_options: std::option::Option<std::vec::Vec<ContainerMountsElVolumeOptionsEl>>,
-    dynamic: ContainerMountsElDynamic,
+    volume_options: std::option::Option<std::vec::Vec<Container_Mounts_VolumeOptions>>,
+    dynamic: Container_MountsDynamic,
 }
 
-impl ContainerMountsEl {
+impl Container_Mounts {
     #[doc = "Set the field `read_only`.\nWhether the mount should be read-only."]
     pub fn set_read_only(mut self, v: impl std::convert::Into<terrars::PrimField<bool>>) -> Self {
         self.read_only = std::option::Option::Some(v.into());
@@ -2542,7 +3234,7 @@ impl ContainerMountsEl {
     #[doc = "Set the field `bind_options`.\n"]
     pub fn set_bind_options(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ContainerMountsElBindOptionsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Container_Mounts_BindOptions>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2558,7 +3250,7 @@ impl ContainerMountsEl {
     #[doc = "Set the field `tmpfs_options`.\n"]
     pub fn set_tmpfs_options(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ContainerMountsElTmpfsOptionsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Container_Mounts_TmpfsOptions>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2574,7 +3266,7 @@ impl ContainerMountsEl {
     #[doc = "Set the field `volume_options`.\n"]
     pub fn set_volume_options(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ContainerMountsElVolumeOptionsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Container_Mounts_VolumeOptions>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2588,8 +3280,8 @@ impl ContainerMountsEl {
     }
 }
 
-impl terrars::ToListMappable for ContainerMountsEl {
-    type O = terrars::BlockAssignable<ContainerMountsEl>;
+impl terrars::ToListMappable for Container_Mounts {
+    type O = terrars::BlockAssignable<Container_Mounts>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2600,16 +3292,16 @@ impl terrars::ToListMappable for ContainerMountsEl {
     }
 }
 
-pub struct BuildContainerMountsEl {
+pub struct BuildContainer_Mounts {
     #[doc = "Container path"]
     pub target: terrars::PrimField<std::string::String>,
     #[doc = "The mount type"]
     pub type_: terrars::PrimField<std::string::String>,
 }
 
-impl BuildContainerMountsEl {
-    pub fn build(self) -> ContainerMountsEl {
-        ContainerMountsEl {
+impl BuildContainer_Mounts {
+    pub fn build(self) -> Container_Mounts {
+        Container_Mounts {
             read_only: core::default::Default::default(),
             source: core::default::Default::default(),
             target: self.target,
@@ -2622,21 +3314,23 @@ impl BuildContainerMountsEl {
     }
 }
 
-pub struct ContainerMountsElRef {
+#[allow(dead_code)]
+pub struct Container_MountsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerMountsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerMountsElRef {
-        ContainerMountsElRef {
+impl terrars::Ref for Container_MountsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_MountsRef {
+        Container_MountsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerMountsElRef {
+impl Container_MountsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2664,39 +3358,64 @@ impl ContainerMountsElRef {
     }
 
     #[doc = "Get a reference to the value of field `bind_options` after provisioning.\n"]
-    pub fn bind_options(&self) -> terrars::ListRef<ContainerMountsElBindOptionsElRef> {
+    pub fn bind_options(&self) -> terrars::ListRef<Container_Mounts_BindOptionsRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.bind_options", self.base))
     }
 
     #[doc = "Get a reference to the value of field `tmpfs_options` after provisioning.\n"]
-    pub fn tmpfs_options(&self) -> terrars::ListRef<ContainerMountsElTmpfsOptionsElRef> {
+    pub fn tmpfs_options(&self) -> terrars::ListRef<Container_Mounts_TmpfsOptionsRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.tmpfs_options", self.base))
     }
 
     #[doc = "Get a reference to the value of field `volume_options` after provisioning.\n"]
-    pub fn volume_options(&self) -> terrars::ListRef<ContainerMountsElVolumeOptionsElRef> {
+    pub fn volume_options(&self) -> terrars::ListRef<Container_Mounts_VolumeOptionsRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.volume_options", self.base))
     }
 }
 
 #[derive(Serialize)]
-pub struct ContainerNetworksAdvancedEl {
+pub struct Container_NetworksAdvanced {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     aliases: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    driver_opts: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    gw_priority: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     ipv4_address: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     ipv6_address: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    link_local_ips: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    mac_address: std::option::Option<terrars::PrimField<std::string::String>>,
     name: terrars::PrimField<std::string::String>,
 }
 
-impl ContainerNetworksAdvancedEl {
+impl Container_NetworksAdvanced {
     #[doc = "Set the field `aliases`.\nThe network aliases of the container in the specific network."]
     pub fn set_aliases(
         mut self,
         v: impl std::convert::Into<terrars::SetField<terrars::PrimField<std::string::String>>>,
     ) -> Self {
         self.aliases = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `driver_opts`.\nAn array of driver options for the network endpoint, e.g. `opts1=value`. This is the equivalent to repeating `--driver-opt` for `docker run`."]
+    pub fn set_driver_opts(
+        mut self,
+        v: impl std::convert::Into<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.driver_opts = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `gw_priority`.\nGateway priority for this endpoint. The endpoint with the highest priority will provide the default gateway for the container. This is the equivalent to `--gw-priority` for `docker run`."]
+    pub fn set_gw_priority(mut self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
+        self.gw_priority = std::option::Option::Some(v.into());
         self
     }
 
@@ -2711,10 +3430,26 @@ impl ContainerNetworksAdvancedEl {
         self.ipv6_address = std::option::Option::Some(v.into());
         self
     }
+
+    #[doc =
+        "Set the field `link_local_ips`.\nThe link-local IPs of the container in the specific network. This is the equivalent to repeating `--link-local-ip` for `docker run`."]
+    pub fn set_link_local_ips(
+        mut self,
+        v: impl std::convert::Into<terrars::SetField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.link_local_ips = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `mac_address`.\nThe MAC address of the container in the specific network."]
+    pub fn set_mac_address(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.mac_address = std::option::Option::Some(v.into());
+        self
+    }
 }
 
-impl terrars::ToListMappable for ContainerNetworksAdvancedEl {
-    type O = terrars::BlockAssignable<ContainerNetworksAdvancedEl>;
+impl terrars::ToListMappable for Container_NetworksAdvanced {
+    type O = terrars::BlockAssignable<Container_NetworksAdvanced>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2725,38 +3460,44 @@ impl terrars::ToListMappable for ContainerNetworksAdvancedEl {
     }
 }
 
-pub struct BuildContainerNetworksAdvancedEl {
+pub struct BuildContainer_NetworksAdvanced {
     #[doc =
         "The name or id of the network to use. You can use `name` or `id` attribute from a `docker_network` resource."]
     pub name: terrars::PrimField<std::string::String>,
 }
 
-impl BuildContainerNetworksAdvancedEl {
-    pub fn build(self) -> ContainerNetworksAdvancedEl {
-        ContainerNetworksAdvancedEl {
+impl BuildContainer_NetworksAdvanced {
+    pub fn build(self) -> Container_NetworksAdvanced {
+        Container_NetworksAdvanced {
             aliases: core::default::Default::default(),
+            driver_opts: core::default::Default::default(),
+            gw_priority: core::default::Default::default(),
             ipv4_address: core::default::Default::default(),
             ipv6_address: core::default::Default::default(),
+            link_local_ips: core::default::Default::default(),
+            mac_address: core::default::Default::default(),
             name: self.name,
         }
     }
 }
 
-pub struct ContainerNetworksAdvancedElRef {
+#[allow(dead_code)]
+pub struct Container_NetworksAdvancedRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerNetworksAdvancedElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerNetworksAdvancedElRef {
-        ContainerNetworksAdvancedElRef {
+impl terrars::Ref for Container_NetworksAdvancedRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_NetworksAdvancedRef {
+        Container_NetworksAdvancedRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerNetworksAdvancedElRef {
+impl Container_NetworksAdvancedRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2765,6 +3506,18 @@ impl ContainerNetworksAdvancedElRef {
         "Get a reference to the value of field `aliases` after provisioning.\nThe network aliases of the container in the specific network."]
     pub fn aliases(&self) -> terrars::SetRef<terrars::PrimExpr<std::string::String>> {
         terrars::SetRef::new(self.shared().clone(), format!("{}.aliases", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `driver_opts` after provisioning.\nAn array of driver options for the network endpoint, e.g. `opts1=value`. This is the equivalent to repeating `--driver-opt` for `docker run`."]
+    pub fn driver_opts(&self) -> terrars::SetRef<terrars::PrimExpr<std::string::String>> {
+        terrars::SetRef::new(self.shared().clone(), format!("{}.driver_opts", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `gw_priority` after provisioning.\nGateway priority for this endpoint. The endpoint with the highest priority will provide the default gateway for the container. This is the equivalent to `--gw-priority` for `docker run`."]
+    pub fn gw_priority(&self) -> terrars::PrimExpr<f64> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.gw_priority", self.base))
     }
 
     #[doc =
@@ -2780,6 +3533,18 @@ impl ContainerNetworksAdvancedElRef {
     }
 
     #[doc =
+        "Get a reference to the value of field `link_local_ips` after provisioning.\nThe link-local IPs of the container in the specific network. This is the equivalent to repeating `--link-local-ip` for `docker run`."]
+    pub fn link_local_ips(&self) -> terrars::SetRef<terrars::PrimExpr<std::string::String>> {
+        terrars::SetRef::new(self.shared().clone(), format!("{}.link_local_ips", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `mac_address` after provisioning.\nThe MAC address of the container in the specific network."]
+    pub fn mac_address(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.mac_address", self.base))
+    }
+
+    #[doc =
         "Get a reference to the value of field `name` after provisioning.\nThe name or id of the network to use. You can use `name` or `id` attribute from a `docker_network` resource."]
     pub fn name(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.name", self.base))
@@ -2787,7 +3552,7 @@ impl ContainerNetworksAdvancedElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerPortsEl {
+pub struct Container_Ports {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     external: std::option::Option<terrars::PrimField<f64>>,
     internal: terrars::PrimField<f64>,
@@ -2797,7 +3562,7 @@ pub struct ContainerPortsEl {
     protocol: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ContainerPortsEl {
+impl Container_Ports {
     #[doc =
         "Set the field `external`.\nPort exposed out of the container. If not given a free random port `>= 32768` will be used."]
     pub fn set_external(mut self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
@@ -2818,8 +3583,8 @@ impl ContainerPortsEl {
     }
 }
 
-impl terrars::ToListMappable for ContainerPortsEl {
-    type O = terrars::BlockAssignable<ContainerPortsEl>;
+impl terrars::ToListMappable for Container_Ports {
+    type O = terrars::BlockAssignable<Container_Ports>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2830,14 +3595,14 @@ impl terrars::ToListMappable for ContainerPortsEl {
     }
 }
 
-pub struct BuildContainerPortsEl {
+pub struct BuildContainer_Ports {
     #[doc = "Port within the container."]
     pub internal: terrars::PrimField<f64>,
 }
 
-impl BuildContainerPortsEl {
-    pub fn build(self) -> ContainerPortsEl {
-        ContainerPortsEl {
+impl BuildContainer_Ports {
+    pub fn build(self) -> Container_Ports {
+        Container_Ports {
             external: core::default::Default::default(),
             internal: self.internal,
             ip: core::default::Default::default(),
@@ -2846,21 +3611,23 @@ impl BuildContainerPortsEl {
     }
 }
 
-pub struct ContainerPortsElRef {
+#[allow(dead_code)]
+pub struct Container_PortsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerPortsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerPortsElRef {
-        ContainerPortsElRef {
+impl terrars::Ref for Container_PortsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_PortsRef {
+        Container_PortsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerPortsElRef {
+impl Container_PortsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2890,16 +3657,37 @@ impl ContainerPortsElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerUlimitEl {
-    hard: terrars::PrimField<f64>,
-    name: terrars::PrimField<std::string::String>,
-    soft: terrars::PrimField<f64>,
+pub struct Container_Timeouts {
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    create: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    delete: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    update: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ContainerUlimitEl { }
+impl Container_Timeouts {
+    #[doc = "Set the field `create`.\n"]
+    pub fn set_create(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.create = std::option::Option::Some(v.into());
+        self
+    }
 
-impl terrars::ToListMappable for ContainerUlimitEl {
-    type O = terrars::BlockAssignable<ContainerUlimitEl>;
+    #[doc = "Set the field `delete`.\n"]
+    pub fn set_delete(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.delete = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `update`.\n"]
+    pub fn set_update(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.update = std::option::Option::Some(v.into());
+        self
+    }
+}
+
+impl terrars::ToListMappable for Container_Timeouts {
+    type O = terrars::BlockAssignable<Container_Timeouts>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2910,7 +3698,77 @@ impl terrars::ToListMappable for ContainerUlimitEl {
     }
 }
 
-pub struct BuildContainerUlimitEl {
+pub struct BuildContainer_Timeouts {}
+
+impl BuildContainer_Timeouts {
+    pub fn build(self) -> Container_Timeouts {
+        Container_Timeouts {
+            create: core::default::Default::default(),
+            delete: core::default::Default::default(),
+            update: core::default::Default::default(),
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub struct Container_TimeoutsRef {
+    shared: terrars::StackShared,
+    base: std::string::String,
+}
+
+impl terrars::Ref for Container_TimeoutsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_TimeoutsRef {
+        Container_TimeoutsRef {
+            shared: shared,
+            base: base.to_string(),
+        }
+    }
+}
+
+impl Container_TimeoutsRef {
+    #[allow(dead_code)]
+    fn shared(&self) -> &terrars::StackShared {
+        &self.shared
+    }
+
+    #[doc = "Get a reference to the value of field `create` after provisioning.\n"]
+    pub fn create(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.create", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `delete` after provisioning.\n"]
+    pub fn delete(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.delete", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `update` after provisioning.\n"]
+    pub fn update(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.update", self.base))
+    }
+}
+
+#[derive(Serialize)]
+pub struct Container_Ulimit {
+    hard: terrars::PrimField<f64>,
+    name: terrars::PrimField<std::string::String>,
+    soft: terrars::PrimField<f64>,
+}
+
+impl Container_Ulimit { }
+
+impl terrars::ToListMappable for Container_Ulimit {
+    type O = terrars::BlockAssignable<Container_Ulimit>;
+
+    fn do_map(self, base: std::string::String) -> Self::O {
+        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
+            for_each: format!("${{{}}}", base),
+            iterator: "each".into(),
+            content: self,
+        })
+    }
+}
+
+pub struct BuildContainer_Ulimit {
     #[doc = "The hard limit"]
     pub hard: terrars::PrimField<f64>,
     #[doc = "The name of the ulimit"]
@@ -2919,9 +3777,9 @@ pub struct BuildContainerUlimitEl {
     pub soft: terrars::PrimField<f64>,
 }
 
-impl BuildContainerUlimitEl {
-    pub fn build(self) -> ContainerUlimitEl {
-        ContainerUlimitEl {
+impl BuildContainer_Ulimit {
+    pub fn build(self) -> Container_Ulimit {
+        Container_Ulimit {
             hard: self.hard,
             name: self.name,
             soft: self.soft,
@@ -2929,21 +3787,23 @@ impl BuildContainerUlimitEl {
     }
 }
 
-pub struct ContainerUlimitElRef {
+#[allow(dead_code)]
+pub struct Container_UlimitRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerUlimitElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerUlimitElRef {
-        ContainerUlimitElRef {
+impl terrars::Ref for Container_UlimitRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_UlimitRef {
+        Container_UlimitRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerUlimitElRef {
+impl Container_UlimitRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2965,7 +3825,7 @@ impl ContainerUlimitElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerUploadEl {
+pub struct Container_Upload {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     content: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2974,12 +3834,18 @@ pub struct ContainerUploadEl {
     executable: std::option::Option<terrars::PrimField<bool>>,
     file: terrars::PrimField<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    group: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    owner: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    permissions: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
     source: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     source_hash: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ContainerUploadEl {
+impl Container_Upload {
     #[doc =
         "Set the field `content`.\nLiteral string value to use as the object content, which will be uploaded as UTF-8-encoded text. Conflicts with `content_base64` & `source`"]
     pub fn set_content(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
@@ -3002,6 +3868,27 @@ impl ContainerUploadEl {
     }
 
     #[doc =
+        "Set the field `group`.\nThe group of the file in the container. Names are resolved using the Terraform host's group database; numeric IDs can be used directly."]
+    pub fn set_group(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.group = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `owner`.\nThe owner of the file in the container. Names are resolved using the Terraform host's user database; numeric IDs can be used directly."]
+    pub fn set_owner(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.owner = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `permissions`.\nThe permission mode for the file in the container. Has precedence over `executable`."]
+    pub fn set_permissions(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.permissions = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
         "Set the field `source`.\nA filename that references a file which will be uploaded as the object content. This allows for large file uploads that do not get stored in state. Conflicts with `content` & `content_base64`"]
     pub fn set_source(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.source = std::option::Option::Some(v.into());
@@ -3016,8 +3903,8 @@ impl ContainerUploadEl {
     }
 }
 
-impl terrars::ToListMappable for ContainerUploadEl {
-    type O = terrars::BlockAssignable<ContainerUploadEl>;
+impl terrars::ToListMappable for Container_Upload {
+    type O = terrars::BlockAssignable<Container_Upload>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3028,39 +3915,44 @@ impl terrars::ToListMappable for ContainerUploadEl {
     }
 }
 
-pub struct BuildContainerUploadEl {
+pub struct BuildContainer_Upload {
     #[doc = "Path to the file in the container where is upload goes to"]
     pub file: terrars::PrimField<std::string::String>,
 }
 
-impl BuildContainerUploadEl {
-    pub fn build(self) -> ContainerUploadEl {
-        ContainerUploadEl {
+impl BuildContainer_Upload {
+    pub fn build(self) -> Container_Upload {
+        Container_Upload {
             content: core::default::Default::default(),
             content_base64: core::default::Default::default(),
             executable: core::default::Default::default(),
             file: self.file,
+            group: core::default::Default::default(),
+            owner: core::default::Default::default(),
+            permissions: core::default::Default::default(),
             source: core::default::Default::default(),
             source_hash: core::default::Default::default(),
         }
     }
 }
 
-pub struct ContainerUploadElRef {
+#[allow(dead_code)]
+pub struct Container_UploadRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerUploadElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerUploadElRef {
-        ContainerUploadElRef {
+impl terrars::Ref for Container_UploadRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_UploadRef {
+        Container_UploadRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerUploadElRef {
+impl Container_UploadRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -3090,6 +3982,24 @@ impl ContainerUploadElRef {
     }
 
     #[doc =
+        "Get a reference to the value of field `group` after provisioning.\nThe group of the file in the container. Names are resolved using the Terraform host's group database; numeric IDs can be used directly."]
+    pub fn group(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.group", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `owner` after provisioning.\nThe owner of the file in the container. Names are resolved using the Terraform host's user database; numeric IDs can be used directly."]
+    pub fn owner(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.owner", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `permissions` after provisioning.\nThe permission mode for the file in the container. Has precedence over `executable`."]
+    pub fn permissions(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.permissions", self.base))
+    }
+
+    #[doc =
         "Get a reference to the value of field `source` after provisioning.\nA filename that references a file which will be uploaded as the object content. This allows for large file uploads that do not get stored in state. Conflicts with `content` & `content_base64`"]
     pub fn source(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.source", self.base))
@@ -3103,7 +4013,7 @@ impl ContainerUploadElRef {
 }
 
 #[derive(Serialize)]
-pub struct ContainerVolumesEl {
+pub struct Container_Volumes {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     container_path: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -3113,10 +4023,12 @@ pub struct ContainerVolumesEl {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     read_only: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    selinux_relabel: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
     volume_name: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ContainerVolumesEl {
+impl Container_Volumes {
     #[doc = "Set the field `container_path`.\nThe path in the container where the volume will be mounted."]
     pub fn set_container_path(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.container_path = std::option::Option::Some(v.into());
@@ -3129,7 +4041,8 @@ impl ContainerVolumesEl {
         self
     }
 
-    #[doc = "Set the field `host_path`.\nThe path on the host where the volume is coming from."]
+    #[doc =
+        "Set the field `host_path`.\nThe path on the host where the volume is coming from. If `host_path` is set, it takes precedence over `volume_name`."]
     pub fn set_host_path(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.host_path = std::option::Option::Some(v.into());
         self
@@ -3141,15 +4054,22 @@ impl ContainerVolumesEl {
         self
     }
 
-    #[doc = "Set the field `volume_name`.\nThe name of the docker volume which should be mounted."]
+    #[doc = "Set the field `selinux_relabel`.\nSELinux relabel mode for bind mounts. Supported values are `z` and `Z`."]
+    pub fn set_selinux_relabel(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.selinux_relabel = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `volume_name`.\nThe name of the docker volume which should be mounted. Ignored when `host_path` is set."]
     pub fn set_volume_name(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.volume_name = std::option::Option::Some(v.into());
         self
     }
 }
 
-impl terrars::ToListMappable for ContainerVolumesEl {
-    type O = terrars::BlockAssignable<ContainerVolumesEl>;
+impl terrars::ToListMappable for Container_Volumes {
+    type O = terrars::BlockAssignable<Container_Volumes>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3160,35 +4080,38 @@ impl terrars::ToListMappable for ContainerVolumesEl {
     }
 }
 
-pub struct BuildContainerVolumesEl {}
+pub struct BuildContainer_Volumes {}
 
-impl BuildContainerVolumesEl {
-    pub fn build(self) -> ContainerVolumesEl {
-        ContainerVolumesEl {
+impl BuildContainer_Volumes {
+    pub fn build(self) -> Container_Volumes {
+        Container_Volumes {
             container_path: core::default::Default::default(),
             from_container: core::default::Default::default(),
             host_path: core::default::Default::default(),
             read_only: core::default::Default::default(),
+            selinux_relabel: core::default::Default::default(),
             volume_name: core::default::Default::default(),
         }
     }
 }
 
-pub struct ContainerVolumesElRef {
+#[allow(dead_code)]
+pub struct Container_VolumesRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ContainerVolumesElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ContainerVolumesElRef {
-        ContainerVolumesElRef {
+impl terrars::Ref for Container_VolumesRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Container_VolumesRef {
+        Container_VolumesRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ContainerVolumesElRef {
+impl Container_VolumesRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -3206,7 +4129,7 @@ impl ContainerVolumesElRef {
     }
 
     #[doc =
-        "Get a reference to the value of field `host_path` after provisioning.\nThe path on the host where the volume is coming from."]
+        "Get a reference to the value of field `host_path` after provisioning.\nThe path on the host where the volume is coming from. If `host_path` is set, it takes precedence over `volume_name`."]
     pub fn host_path(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.host_path", self.base))
     }
@@ -3218,23 +4141,14 @@ impl ContainerVolumesElRef {
     }
 
     #[doc =
-        "Get a reference to the value of field `volume_name` after provisioning.\nThe name of the docker volume which should be mounted."]
+        "Get a reference to the value of field `selinux_relabel` after provisioning.\nSELinux relabel mode for bind mounts. Supported values are `z` and `Z`."]
+    pub fn selinux_relabel(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.selinux_relabel", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `volume_name` after provisioning.\nThe name of the docker volume which should be mounted. Ignored when `host_path` is set."]
     pub fn volume_name(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.volume_name", self.base))
     }
-}
-
-#[derive(Serialize, Default)]
-struct ContainerDynamic {
-    capabilities: std::option::Option<terrars::DynamicBlock<ContainerCapabilitiesEl>>,
-    devices: std::option::Option<terrars::DynamicBlock<ContainerDevicesEl>>,
-    healthcheck: std::option::Option<terrars::DynamicBlock<ContainerHealthcheckEl>>,
-    host: std::option::Option<terrars::DynamicBlock<ContainerHostEl>>,
-    labels: std::option::Option<terrars::DynamicBlock<ContainerLabelsEl>>,
-    mounts: std::option::Option<terrars::DynamicBlock<ContainerMountsEl>>,
-    networks_advanced: std::option::Option<terrars::DynamicBlock<ContainerNetworksAdvancedEl>>,
-    ports: std::option::Option<terrars::DynamicBlock<ContainerPortsEl>>,
-    ulimit: std::option::Option<terrars::DynamicBlock<ContainerUlimitEl>>,
-    upload: std::option::Option<terrars::DynamicBlock<ContainerUploadEl>>,
-    volumes: std::option::Option<terrars::DynamicBlock<ContainerVolumesEl>>,
 }

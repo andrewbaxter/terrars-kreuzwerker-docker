@@ -1,6 +1,6 @@
 {
     "provider": "kreuzwerker/docker",
-    "version": "3.0.2",
+    "version": "4.6.0",
     "dest": "src/docker",
 	"feature_gate": "Cargo.toml"
 }

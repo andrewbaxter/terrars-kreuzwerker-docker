@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 use terrars::{
     Referable as _,
@@ -7,7 +9,7 @@ use terrars::{
 use super::provider::ProviderDocker;
 
 #[derive(Serialize)]
-struct ServiceData {
+struct ServiceData_ {
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     depends_on: std::vec::Vec<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -22,28 +24,28 @@ struct ServiceData {
     id: std::option::Option<terrars::PrimField<std::string::String>>,
     name: terrars::PrimField<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    auth: std::option::Option<std::vec::Vec<ServiceAuthEl>>,
+    auth: std::option::Option<std::vec::Vec<Service_Auth>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    converge_config: std::option::Option<std::vec::Vec<ServiceConvergeConfigEl>>,
+    converge_config: std::option::Option<std::vec::Vec<Service_ConvergeConfig>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    endpoint_spec: std::option::Option<std::vec::Vec<ServiceEndpointSpecEl>>,
+    endpoint_spec: std::option::Option<std::vec::Vec<Service_EndpointSpec>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    labels: std::option::Option<std::vec::Vec<ServiceLabelsEl>>,
+    labels: std::option::Option<std::vec::Vec<Service_Labels>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    mode: std::option::Option<std::vec::Vec<ServiceModeEl>>,
+    mode: std::option::Option<std::vec::Vec<Service_Mode>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    rollback_config: std::option::Option<std::vec::Vec<ServiceRollbackConfigEl>>,
+    rollback_config: std::option::Option<std::vec::Vec<Service_RollbackConfig>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    task_spec: std::option::Option<std::vec::Vec<ServiceTaskSpecEl>>,
+    task_spec: std::option::Option<std::vec::Vec<Service_TaskSpec>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    update_config: std::option::Option<std::vec::Vec<ServiceUpdateConfigEl>>,
+    update_config: std::option::Option<std::vec::Vec<Service_UpdateConfig>>,
     dynamic: ServiceDynamic,
 }
 
 struct Service_ {
     shared: terrars::StackShared,
     tf_id: std::string::String,
-    data: std::cell::RefCell<ServiceData>,
+    data: std::cell::RefCell<ServiceData_>,
 }
 
 #[derive(Clone)]
@@ -150,7 +152,7 @@ impl Service {
     }
 
     #[doc = "Set the field `auth`.\n"]
-    pub fn set_auth(self, v: impl std::convert::Into<terrars::BlockAssignable<ServiceAuthEl>>) -> Self {
+    pub fn set_auth(self, v: impl std::convert::Into<terrars::BlockAssignable<Service_Auth>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().auth = std::option::Option::Some(v);
@@ -165,7 +167,7 @@ impl Service {
     #[doc = "Set the field `converge_config`.\n"]
     pub fn set_converge_config(
         self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceConvergeConfigEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_ConvergeConfig>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -179,7 +181,7 @@ impl Service {
     }
 
     #[doc = "Set the field `endpoint_spec`.\n"]
-    pub fn set_endpoint_spec(self, v: impl std::convert::Into<terrars::BlockAssignable<ServiceEndpointSpecEl>>) -> Self {
+    pub fn set_endpoint_spec(self, v: impl std::convert::Into<terrars::BlockAssignable<Service_EndpointSpec>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().endpoint_spec = std::option::Option::Some(v);
@@ -192,7 +194,7 @@ impl Service {
     }
 
     #[doc = "Set the field `labels`.\n"]
-    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<ServiceLabelsEl>>) -> Self {
+    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<Service_Labels>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().labels = std::option::Option::Some(v);
@@ -205,7 +207,7 @@ impl Service {
     }
 
     #[doc = "Set the field `mode`.\n"]
-    pub fn set_mode(self, v: impl std::convert::Into<terrars::BlockAssignable<ServiceModeEl>>) -> Self {
+    pub fn set_mode(self, v: impl std::convert::Into<terrars::BlockAssignable<Service_Mode>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().mode = std::option::Option::Some(v);
@@ -220,7 +222,7 @@ impl Service {
     #[doc = "Set the field `rollback_config`.\n"]
     pub fn set_rollback_config(
         self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceRollbackConfigEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_RollbackConfig>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -234,7 +236,7 @@ impl Service {
     }
 
     #[doc = "Set the field `task_spec`.\n"]
-    pub fn set_task_spec(self, v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecEl>>) -> Self {
+    pub fn set_task_spec(self, v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().task_spec = std::option::Option::Some(v);
@@ -247,7 +249,7 @@ impl Service {
     }
 
     #[doc = "Set the field `update_config`.\n"]
-    pub fn set_update_config(self, v: impl std::convert::Into<terrars::BlockAssignable<ServiceUpdateConfigEl>>) -> Self {
+    pub fn set_update_config(self, v: impl std::convert::Into<terrars::BlockAssignable<Service_UpdateConfig>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().update_config = std::option::Option::Some(v);
@@ -270,37 +272,37 @@ impl Service {
     }
 
     #[doc = "Get a reference to the value of field `auth` after provisioning.\n"]
-    pub fn auth(&self) -> terrars::ListRef<ServiceAuthElRef> {
+    pub fn auth(&self) -> terrars::ListRef<Service_AuthRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.auth", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `converge_config` after provisioning.\n"]
-    pub fn converge_config(&self) -> terrars::ListRef<ServiceConvergeConfigElRef> {
+    pub fn converge_config(&self) -> terrars::ListRef<Service_ConvergeConfigRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.converge_config", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `endpoint_spec` after provisioning.\n"]
-    pub fn endpoint_spec(&self) -> terrars::ListRef<ServiceEndpointSpecElRef> {
+    pub fn endpoint_spec(&self) -> terrars::ListRef<Service_EndpointSpecRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.endpoint_spec", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `mode` after provisioning.\n"]
-    pub fn mode(&self) -> terrars::ListRef<ServiceModeElRef> {
+    pub fn mode(&self) -> terrars::ListRef<Service_ModeRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.mode", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `rollback_config` after provisioning.\n"]
-    pub fn rollback_config(&self) -> terrars::ListRef<ServiceRollbackConfigElRef> {
+    pub fn rollback_config(&self) -> terrars::ListRef<Service_RollbackConfigRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.rollback_config", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `task_spec` after provisioning.\n"]
-    pub fn task_spec(&self) -> terrars::ListRef<ServiceTaskSpecElRef> {
+    pub fn task_spec(&self) -> terrars::ListRef<Service_TaskSpecRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.task_spec", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `update_config` after provisioning.\n"]
-    pub fn update_config(&self) -> terrars::ListRef<ServiceUpdateConfigElRef> {
+    pub fn update_config(&self) -> terrars::ListRef<Service_UpdateConfigRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.update_config", self.extract_ref()))
     }
 }
@@ -347,7 +349,7 @@ impl BuildService {
         let out = Service(std::rc::Rc::new(Service_ {
             shared: stack.shared.clone(),
             tf_id: self.tf_id,
-            data: std::cell::RefCell::new(ServiceData {
+            data: std::cell::RefCell::new(ServiceData_ {
                 depends_on: core::default::Default::default(),
                 provider: std::option::Option::None,
                 lifecycle: core::default::Default::default(),
@@ -405,43 +407,55 @@ impl ServiceRef {
     }
 
     #[doc = "Get a reference to the value of field `auth` after provisioning.\n"]
-    pub fn auth(&self) -> terrars::ListRef<ServiceAuthElRef> {
+    pub fn auth(&self) -> terrars::ListRef<Service_AuthRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.auth", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `converge_config` after provisioning.\n"]
-    pub fn converge_config(&self) -> terrars::ListRef<ServiceConvergeConfigElRef> {
+    pub fn converge_config(&self) -> terrars::ListRef<Service_ConvergeConfigRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.converge_config", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `endpoint_spec` after provisioning.\n"]
-    pub fn endpoint_spec(&self) -> terrars::ListRef<ServiceEndpointSpecElRef> {
+    pub fn endpoint_spec(&self) -> terrars::ListRef<Service_EndpointSpecRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.endpoint_spec", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `mode` after provisioning.\n"]
-    pub fn mode(&self) -> terrars::ListRef<ServiceModeElRef> {
+    pub fn mode(&self) -> terrars::ListRef<Service_ModeRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.mode", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `rollback_config` after provisioning.\n"]
-    pub fn rollback_config(&self) -> terrars::ListRef<ServiceRollbackConfigElRef> {
+    pub fn rollback_config(&self) -> terrars::ListRef<Service_RollbackConfigRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.rollback_config", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `task_spec` after provisioning.\n"]
-    pub fn task_spec(&self) -> terrars::ListRef<ServiceTaskSpecElRef> {
+    pub fn task_spec(&self) -> terrars::ListRef<Service_TaskSpecRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.task_spec", self.extract_ref()))
     }
 
     #[doc = "Get a reference to the value of field `update_config` after provisioning.\n"]
-    pub fn update_config(&self) -> terrars::ListRef<ServiceUpdateConfigElRef> {
+    pub fn update_config(&self) -> terrars::ListRef<Service_UpdateConfigRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.update_config", self.extract_ref()))
     }
 }
 
+#[derive(Serialize, Default)]
+struct ServiceDynamic {
+    auth: std::option::Option<terrars::DynamicBlock<Service_Auth>>,
+    converge_config: std::option::Option<terrars::DynamicBlock<Service_ConvergeConfig>>,
+    endpoint_spec: std::option::Option<terrars::DynamicBlock<Service_EndpointSpec>>,
+    labels: std::option::Option<terrars::DynamicBlock<Service_Labels>>,
+    mode: std::option::Option<terrars::DynamicBlock<Service_Mode>>,
+    rollback_config: std::option::Option<terrars::DynamicBlock<Service_RollbackConfig>>,
+    task_spec: std::option::Option<terrars::DynamicBlock<Service_TaskSpec>>,
+    update_config: std::option::Option<terrars::DynamicBlock<Service_UpdateConfig>>,
+}
+
 #[derive(Serialize)]
-pub struct ServiceAuthEl {
+pub struct Service_Auth {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     password: std::option::Option<terrars::PrimField<std::string::String>>,
     server_address: terrars::PrimField<std::string::String>,
@@ -449,7 +463,7 @@ pub struct ServiceAuthEl {
     username: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ServiceAuthEl {
+impl Service_Auth {
     #[doc = "Set the field `password`.\nThe password"]
     pub fn set_password(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.password = std::option::Option::Some(v.into());
@@ -463,8 +477,8 @@ impl ServiceAuthEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceAuthEl {
-    type O = terrars::BlockAssignable<ServiceAuthEl>;
+impl terrars::ToListMappable for Service_Auth {
+    type O = terrars::BlockAssignable<Service_Auth>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -475,14 +489,14 @@ impl terrars::ToListMappable for ServiceAuthEl {
     }
 }
 
-pub struct BuildServiceAuthEl {
+pub struct BuildService_Auth {
     #[doc = "The address of the server for the authentication"]
     pub server_address: terrars::PrimField<std::string::String>,
 }
 
-impl BuildServiceAuthEl {
-    pub fn build(self) -> ServiceAuthEl {
-        ServiceAuthEl {
+impl BuildService_Auth {
+    pub fn build(self) -> Service_Auth {
+        Service_Auth {
             password: core::default::Default::default(),
             server_address: self.server_address,
             username: core::default::Default::default(),
@@ -490,21 +504,23 @@ impl BuildServiceAuthEl {
     }
 }
 
-pub struct ServiceAuthElRef {
+#[allow(dead_code)]
+pub struct Service_AuthRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceAuthElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceAuthElRef {
-        ServiceAuthElRef {
+impl terrars::Ref for Service_AuthRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_AuthRef {
+        Service_AuthRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceAuthElRef {
+impl Service_AuthRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -527,14 +543,14 @@ impl ServiceAuthElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceConvergeConfigEl {
+pub struct Service_ConvergeConfig {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     delay: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     timeout: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ServiceConvergeConfigEl {
+impl Service_ConvergeConfig {
     #[doc =
         "Set the field `delay`.\nThe interval to check if the desired state is reached `(ms|s)`. Defaults to `7s`."]
     pub fn set_delay(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
@@ -549,8 +565,8 @@ impl ServiceConvergeConfigEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceConvergeConfigEl {
-    type O = terrars::BlockAssignable<ServiceConvergeConfigEl>;
+impl terrars::ToListMappable for Service_ConvergeConfig {
+    type O = terrars::BlockAssignable<Service_ConvergeConfig>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -561,32 +577,34 @@ impl terrars::ToListMappable for ServiceConvergeConfigEl {
     }
 }
 
-pub struct BuildServiceConvergeConfigEl {}
+pub struct BuildService_ConvergeConfig {}
 
-impl BuildServiceConvergeConfigEl {
-    pub fn build(self) -> ServiceConvergeConfigEl {
-        ServiceConvergeConfigEl {
+impl BuildService_ConvergeConfig {
+    pub fn build(self) -> Service_ConvergeConfig {
+        Service_ConvergeConfig {
             delay: core::default::Default::default(),
             timeout: core::default::Default::default(),
         }
     }
 }
 
-pub struct ServiceConvergeConfigElRef {
+#[allow(dead_code)]
+pub struct Service_ConvergeConfigRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceConvergeConfigElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceConvergeConfigElRef {
-        ServiceConvergeConfigElRef {
+impl terrars::Ref for Service_ConvergeConfigRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_ConvergeConfigRef {
+        Service_ConvergeConfigRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceConvergeConfigElRef {
+impl Service_ConvergeConfigRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -605,7 +623,7 @@ impl ServiceConvergeConfigElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceEndpointSpecElPortsEl {
+pub struct Service_EndpointSpec_Ports {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     name: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -617,14 +635,14 @@ pub struct ServiceEndpointSpecElPortsEl {
     target_port: terrars::PrimField<f64>,
 }
 
-impl ServiceEndpointSpecElPortsEl {
+impl Service_EndpointSpec_Ports {
     #[doc = "Set the field `name`.\nA random name for the port"]
     pub fn set_name(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.name = std::option::Option::Some(v.into());
         self
     }
 
-    #[doc = "Set the field `protocol`.\nRrepresents the protocol of a port: `tcp`, `udp` or `sctp`. Defaults to `tcp`."]
+    #[doc = "Set the field `protocol`.\nRepresents the protocol of a port: `tcp`, `udp` or `sctp`. Defaults to `tcp`."]
     pub fn set_protocol(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.protocol = std::option::Option::Some(v.into());
         self
@@ -644,8 +662,8 @@ impl ServiceEndpointSpecElPortsEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceEndpointSpecElPortsEl {
-    type O = terrars::BlockAssignable<ServiceEndpointSpecElPortsEl>;
+impl terrars::ToListMappable for Service_EndpointSpec_Ports {
+    type O = terrars::BlockAssignable<Service_EndpointSpec_Ports>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -656,14 +674,14 @@ impl terrars::ToListMappable for ServiceEndpointSpecElPortsEl {
     }
 }
 
-pub struct BuildServiceEndpointSpecElPortsEl {
+pub struct BuildService_EndpointSpec_Ports {
     #[doc = "The port inside the container"]
     pub target_port: terrars::PrimField<f64>,
 }
 
-impl BuildServiceEndpointSpecElPortsEl {
-    pub fn build(self) -> ServiceEndpointSpecElPortsEl {
-        ServiceEndpointSpecElPortsEl {
+impl BuildService_EndpointSpec_Ports {
+    pub fn build(self) -> Service_EndpointSpec_Ports {
+        Service_EndpointSpec_Ports {
             name: core::default::Default::default(),
             protocol: core::default::Default::default(),
             publish_mode: core::default::Default::default(),
@@ -673,21 +691,23 @@ impl BuildServiceEndpointSpecElPortsEl {
     }
 }
 
-pub struct ServiceEndpointSpecElPortsElRef {
+#[allow(dead_code)]
+pub struct Service_EndpointSpec_PortsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceEndpointSpecElPortsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceEndpointSpecElPortsElRef {
-        ServiceEndpointSpecElPortsElRef {
+impl terrars::Ref for Service_EndpointSpec_PortsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_EndpointSpec_PortsRef {
+        Service_EndpointSpec_PortsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceEndpointSpecElPortsElRef {
+impl Service_EndpointSpec_PortsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -698,7 +718,7 @@ impl ServiceEndpointSpecElPortsElRef {
     }
 
     #[doc =
-        "Get a reference to the value of field `protocol` after provisioning.\nRrepresents the protocol of a port: `tcp`, `udp` or `sctp`. Defaults to `tcp`."]
+        "Get a reference to the value of field `protocol` after provisioning.\nRepresents the protocol of a port: `tcp`, `udp` or `sctp`. Defaults to `tcp`."]
     pub fn protocol(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.protocol", self.base))
     }
@@ -721,20 +741,20 @@ impl ServiceEndpointSpecElPortsElRef {
 }
 
 #[derive(Serialize, Default)]
-struct ServiceEndpointSpecElDynamic {
-    ports: std::option::Option<terrars::DynamicBlock<ServiceEndpointSpecElPortsEl>>,
+struct Service_EndpointSpecDynamic {
+    ports: std::option::Option<terrars::DynamicBlock<Service_EndpointSpec_Ports>>,
 }
 
 #[derive(Serialize)]
-pub struct ServiceEndpointSpecEl {
+pub struct Service_EndpointSpec {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     mode: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    ports: std::option::Option<std::vec::Vec<ServiceEndpointSpecElPortsEl>>,
-    dynamic: ServiceEndpointSpecElDynamic,
+    ports: std::option::Option<std::vec::Vec<Service_EndpointSpec_Ports>>,
+    dynamic: Service_EndpointSpecDynamic,
 }
 
-impl ServiceEndpointSpecEl {
+impl Service_EndpointSpec {
     #[doc = "Set the field `mode`.\nThe mode of resolution to use for internal load balancing between tasks"]
     pub fn set_mode(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.mode = std::option::Option::Some(v.into());
@@ -744,7 +764,7 @@ impl ServiceEndpointSpecEl {
     #[doc = "Set the field `ports`.\n"]
     pub fn set_ports(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceEndpointSpecElPortsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_EndpointSpec_Ports>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -758,8 +778,8 @@ impl ServiceEndpointSpecEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceEndpointSpecEl {
-    type O = terrars::BlockAssignable<ServiceEndpointSpecEl>;
+impl terrars::ToListMappable for Service_EndpointSpec {
+    type O = terrars::BlockAssignable<Service_EndpointSpec>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -770,11 +790,11 @@ impl terrars::ToListMappable for ServiceEndpointSpecEl {
     }
 }
 
-pub struct BuildServiceEndpointSpecEl {}
+pub struct BuildService_EndpointSpec {}
 
-impl BuildServiceEndpointSpecEl {
-    pub fn build(self) -> ServiceEndpointSpecEl {
-        ServiceEndpointSpecEl {
+impl BuildService_EndpointSpec {
+    pub fn build(self) -> Service_EndpointSpec {
+        Service_EndpointSpec {
             mode: core::default::Default::default(),
             ports: core::default::Default::default(),
             dynamic: core::default::Default::default(),
@@ -782,21 +802,23 @@ impl BuildServiceEndpointSpecEl {
     }
 }
 
-pub struct ServiceEndpointSpecElRef {
+#[allow(dead_code)]
+pub struct Service_EndpointSpecRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceEndpointSpecElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceEndpointSpecElRef {
-        ServiceEndpointSpecElRef {
+impl terrars::Ref for Service_EndpointSpecRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_EndpointSpecRef {
+        Service_EndpointSpecRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceEndpointSpecElRef {
+impl Service_EndpointSpecRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -808,21 +830,21 @@ impl ServiceEndpointSpecElRef {
     }
 
     #[doc = "Get a reference to the value of field `ports` after provisioning.\n"]
-    pub fn ports(&self) -> terrars::ListRef<ServiceEndpointSpecElPortsElRef> {
+    pub fn ports(&self) -> terrars::ListRef<Service_EndpointSpec_PortsRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.ports", self.base))
     }
 }
 
 #[derive(Serialize)]
-pub struct ServiceLabelsEl {
+pub struct Service_Labels {
     label: terrars::PrimField<std::string::String>,
     value: terrars::PrimField<std::string::String>,
 }
 
-impl ServiceLabelsEl { }
+impl Service_Labels { }
 
-impl terrars::ToListMappable for ServiceLabelsEl {
-    type O = terrars::BlockAssignable<ServiceLabelsEl>;
+impl terrars::ToListMappable for Service_Labels {
+    type O = terrars::BlockAssignable<Service_Labels>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -833,37 +855,39 @@ impl terrars::ToListMappable for ServiceLabelsEl {
     }
 }
 
-pub struct BuildServiceLabelsEl {
+pub struct BuildService_Labels {
     #[doc = "Name of the label"]
     pub label: terrars::PrimField<std::string::String>,
     #[doc = "Value of the label"]
     pub value: terrars::PrimField<std::string::String>,
 }
 
-impl BuildServiceLabelsEl {
-    pub fn build(self) -> ServiceLabelsEl {
-        ServiceLabelsEl {
+impl BuildService_Labels {
+    pub fn build(self) -> Service_Labels {
+        Service_Labels {
             label: self.label,
             value: self.value,
         }
     }
 }
 
-pub struct ServiceLabelsElRef {
+#[allow(dead_code)]
+pub struct Service_LabelsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceLabelsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceLabelsElRef {
-        ServiceLabelsElRef {
+impl terrars::Ref for Service_LabelsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_LabelsRef {
+        Service_LabelsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceLabelsElRef {
+impl Service_LabelsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -880,12 +904,12 @@ impl ServiceLabelsElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceModeElReplicatedEl {
+pub struct Service_Mode_Replicated {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     replicas: std::option::Option<terrars::PrimField<f64>>,
 }
 
-impl ServiceModeElReplicatedEl {
+impl Service_Mode_Replicated {
     #[doc = "Set the field `replicas`.\nThe amount of replicas of the service. Defaults to `1`"]
     pub fn set_replicas(mut self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
         self.replicas = std::option::Option::Some(v.into());
@@ -893,8 +917,8 @@ impl ServiceModeElReplicatedEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceModeElReplicatedEl {
-    type O = terrars::BlockAssignable<ServiceModeElReplicatedEl>;
+impl terrars::ToListMappable for Service_Mode_Replicated {
+    type O = terrars::BlockAssignable<Service_Mode_Replicated>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -905,29 +929,31 @@ impl terrars::ToListMappable for ServiceModeElReplicatedEl {
     }
 }
 
-pub struct BuildServiceModeElReplicatedEl {}
+pub struct BuildService_Mode_Replicated {}
 
-impl BuildServiceModeElReplicatedEl {
-    pub fn build(self) -> ServiceModeElReplicatedEl {
-        ServiceModeElReplicatedEl { replicas: core::default::Default::default() }
+impl BuildService_Mode_Replicated {
+    pub fn build(self) -> Service_Mode_Replicated {
+        Service_Mode_Replicated { replicas: core::default::Default::default() }
     }
 }
 
-pub struct ServiceModeElReplicatedElRef {
+#[allow(dead_code)]
+pub struct Service_Mode_ReplicatedRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceModeElReplicatedElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceModeElReplicatedElRef {
-        ServiceModeElReplicatedElRef {
+impl terrars::Ref for Service_Mode_ReplicatedRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_Mode_ReplicatedRef {
+        Service_Mode_ReplicatedRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceModeElReplicatedElRef {
+impl Service_Mode_ReplicatedRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -940,20 +966,20 @@ impl ServiceModeElReplicatedElRef {
 }
 
 #[derive(Serialize, Default)]
-struct ServiceModeElDynamic {
-    replicated: std::option::Option<terrars::DynamicBlock<ServiceModeElReplicatedEl>>,
+struct Service_ModeDynamic {
+    replicated: std::option::Option<terrars::DynamicBlock<Service_Mode_Replicated>>,
 }
 
 #[derive(Serialize)]
-pub struct ServiceModeEl {
+pub struct Service_Mode {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     global: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    replicated: std::option::Option<std::vec::Vec<ServiceModeElReplicatedEl>>,
-    dynamic: ServiceModeElDynamic,
+    replicated: std::option::Option<std::vec::Vec<Service_Mode_Replicated>>,
+    dynamic: Service_ModeDynamic,
 }
 
-impl ServiceModeEl {
+impl Service_Mode {
     #[doc = "Set the field `global`.\nThe global service mode. Defaults to `false`"]
     pub fn set_global(mut self, v: impl std::convert::Into<terrars::PrimField<bool>>) -> Self {
         self.global = std::option::Option::Some(v.into());
@@ -963,7 +989,7 @@ impl ServiceModeEl {
     #[doc = "Set the field `replicated`.\n"]
     pub fn set_replicated(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceModeElReplicatedEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_Mode_Replicated>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -977,8 +1003,8 @@ impl ServiceModeEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceModeEl {
-    type O = terrars::BlockAssignable<ServiceModeEl>;
+impl terrars::ToListMappable for Service_Mode {
+    type O = terrars::BlockAssignable<Service_Mode>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -989,11 +1015,11 @@ impl terrars::ToListMappable for ServiceModeEl {
     }
 }
 
-pub struct BuildServiceModeEl {}
+pub struct BuildService_Mode {}
 
-impl BuildServiceModeEl {
-    pub fn build(self) -> ServiceModeEl {
-        ServiceModeEl {
+impl BuildService_Mode {
+    pub fn build(self) -> Service_Mode {
+        Service_Mode {
             global: core::default::Default::default(),
             replicated: core::default::Default::default(),
             dynamic: core::default::Default::default(),
@@ -1001,21 +1027,23 @@ impl BuildServiceModeEl {
     }
 }
 
-pub struct ServiceModeElRef {
+#[allow(dead_code)]
+pub struct Service_ModeRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceModeElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceModeElRef {
-        ServiceModeElRef {
+impl terrars::Ref for Service_ModeRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_ModeRef {
+        Service_ModeRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceModeElRef {
+impl Service_ModeRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1027,13 +1055,13 @@ impl ServiceModeElRef {
     }
 
     #[doc = "Get a reference to the value of field `replicated` after provisioning.\n"]
-    pub fn replicated(&self) -> terrars::ListRef<ServiceModeElReplicatedElRef> {
+    pub fn replicated(&self) -> terrars::ListRef<Service_Mode_ReplicatedRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.replicated", self.base))
     }
 }
 
 #[derive(Serialize)]
-pub struct ServiceRollbackConfigEl {
+pub struct Service_RollbackConfig {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     delay: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -1048,7 +1076,7 @@ pub struct ServiceRollbackConfigEl {
     parallelism: std::option::Option<terrars::PrimField<f64>>,
 }
 
-impl ServiceRollbackConfigEl {
+impl Service_RollbackConfig {
     #[doc = "Set the field `delay`.\nDelay between task rollbacks (ns|us|ms|s|m|h). Defaults to `0s`."]
     pub fn set_delay(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.delay = std::option::Option::Some(v.into());
@@ -1087,8 +1115,8 @@ impl ServiceRollbackConfigEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceRollbackConfigEl {
-    type O = terrars::BlockAssignable<ServiceRollbackConfigEl>;
+impl terrars::ToListMappable for Service_RollbackConfig {
+    type O = terrars::BlockAssignable<Service_RollbackConfig>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1099,11 +1127,11 @@ impl terrars::ToListMappable for ServiceRollbackConfigEl {
     }
 }
 
-pub struct BuildServiceRollbackConfigEl {}
+pub struct BuildService_RollbackConfig {}
 
-impl BuildServiceRollbackConfigEl {
-    pub fn build(self) -> ServiceRollbackConfigEl {
-        ServiceRollbackConfigEl {
+impl BuildService_RollbackConfig {
+    pub fn build(self) -> Service_RollbackConfig {
+        Service_RollbackConfig {
             delay: core::default::Default::default(),
             failure_action: core::default::Default::default(),
             max_failure_ratio: core::default::Default::default(),
@@ -1114,21 +1142,23 @@ impl BuildServiceRollbackConfigEl {
     }
 }
 
-pub struct ServiceRollbackConfigElRef {
+#[allow(dead_code)]
+pub struct Service_RollbackConfigRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceRollbackConfigElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceRollbackConfigElRef {
-        ServiceRollbackConfigElRef {
+impl terrars::Ref for Service_RollbackConfigRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_RollbackConfigRef {
+        Service_RollbackConfigRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceRollbackConfigElRef {
+impl Service_RollbackConfigRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1171,7 +1201,7 @@ impl ServiceRollbackConfigElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElConfigsEl {
+pub struct Service_TaskSpec_ContainerSpec_Configs {
     config_id: terrars::PrimField<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     config_name: std::option::Option<terrars::PrimField<std::string::String>>,
@@ -1184,7 +1214,7 @@ pub struct ServiceTaskSpecElContainerSpecElConfigsEl {
     file_uid: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ServiceTaskSpecElContainerSpecElConfigsEl {
+impl Service_TaskSpec_ContainerSpec_Configs {
     #[doc =
         "Set the field `config_name`.\nName of the config that this references, but this is just provided for lookup/display purposes. The config in the reference will be identified by its ID"]
     pub fn set_config_name(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
@@ -1211,8 +1241,8 @@ impl ServiceTaskSpecElContainerSpecElConfigsEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElConfigsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElConfigsEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Configs {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Configs>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1223,16 +1253,16 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElConfigsEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElConfigsEl {
+pub struct BuildService_TaskSpec_ContainerSpec_Configs {
     #[doc = "ID of the specific config that we're referencing"]
     pub config_id: terrars::PrimField<std::string::String>,
     #[doc = "Represents the final filename in the filesystem"]
     pub file_name: terrars::PrimField<std::string::String>,
 }
 
-impl BuildServiceTaskSpecElContainerSpecElConfigsEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElConfigsEl {
-        ServiceTaskSpecElContainerSpecElConfigsEl {
+impl BuildService_TaskSpec_ContainerSpec_Configs {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Configs {
+        Service_TaskSpec_ContainerSpec_Configs {
             config_id: self.config_id,
             config_name: core::default::Default::default(),
             file_gid: core::default::Default::default(),
@@ -1243,21 +1273,23 @@ impl BuildServiceTaskSpecElContainerSpecElConfigsEl {
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElConfigsElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_ConfigsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElConfigsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElContainerSpecElConfigsElRef {
-        ServiceTaskSpecElContainerSpecElConfigsElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_ConfigsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_ContainerSpec_ConfigsRef {
+        Service_TaskSpec_ContainerSpec_ConfigsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElConfigsElRef {
+impl Service_TaskSpec_ContainerSpec_ConfigsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1300,7 +1332,7 @@ impl ServiceTaskSpecElContainerSpecElConfigsElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElDnsConfigEl {
+pub struct Service_TaskSpec_ContainerSpec_DnsConfig {
     nameservers: terrars::ListField<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     options: std::option::Option<terrars::ListField<terrars::PrimField<std::string::String>>>,
@@ -1308,7 +1340,7 @@ pub struct ServiceTaskSpecElContainerSpecElDnsConfigEl {
     search: std::option::Option<terrars::ListField<terrars::PrimField<std::string::String>>>,
 }
 
-impl ServiceTaskSpecElContainerSpecElDnsConfigEl {
+impl Service_TaskSpec_ContainerSpec_DnsConfig {
     #[doc =
         "Set the field `options`.\nA list of internal resolver variables to be modified (e.g., `debug`, `ndots:3`, etc.)"]
     pub fn set_options(
@@ -1329,8 +1361,8 @@ impl ServiceTaskSpecElContainerSpecElDnsConfigEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElDnsConfigEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElDnsConfigEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_DnsConfig {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_DnsConfig>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1341,14 +1373,14 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElDnsConfigEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElDnsConfigEl {
+pub struct BuildService_TaskSpec_ContainerSpec_DnsConfig {
     #[doc = "The IP addresses of the name servers"]
     pub nameservers: terrars::ListField<terrars::PrimField<std::string::String>>,
 }
 
-impl BuildServiceTaskSpecElContainerSpecElDnsConfigEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElDnsConfigEl {
-        ServiceTaskSpecElContainerSpecElDnsConfigEl {
+impl BuildService_TaskSpec_ContainerSpec_DnsConfig {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_DnsConfig {
+        Service_TaskSpec_ContainerSpec_DnsConfig {
             nameservers: self.nameservers,
             options: core::default::Default::default(),
             search: core::default::Default::default(),
@@ -1356,24 +1388,23 @@ impl BuildServiceTaskSpecElContainerSpecElDnsConfigEl {
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElDnsConfigElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_DnsConfigRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElDnsConfigElRef {
-    fn new(
-        shared: terrars::StackShared,
-        base: std::string::String,
-    ) -> ServiceTaskSpecElContainerSpecElDnsConfigElRef {
-        ServiceTaskSpecElContainerSpecElDnsConfigElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_DnsConfigRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_ContainerSpec_DnsConfigRef {
+        Service_TaskSpec_ContainerSpec_DnsConfigRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElDnsConfigElRef {
+impl Service_TaskSpec_ContainerSpec_DnsConfigRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1397,19 +1428,20 @@ impl ServiceTaskSpecElContainerSpecElDnsConfigElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElHealthcheckEl {
+pub struct Service_TaskSpec_ContainerSpec_Healthcheck {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     interval: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     retries: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     start_period: std::option::Option<terrars::PrimField<std::string::String>>,
-    test: terrars::ListField<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    test: std::option::Option<terrars::ListField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     timeout: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ServiceTaskSpecElContainerSpecElHealthcheckEl {
+impl Service_TaskSpec_ContainerSpec_Healthcheck {
     #[doc = "Set the field `interval`.\nTime between running the check (ms|s|m|h). Defaults to `0s`."]
     pub fn set_interval(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.interval = std::option::Option::Some(v.into());
@@ -1429,6 +1461,15 @@ impl ServiceTaskSpecElContainerSpecElHealthcheckEl {
         self
     }
 
+    #[doc = "Set the field `test`.\nThe test to perform as list"]
+    pub fn set_test(
+        mut self,
+        v: impl std::convert::Into<terrars::ListField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.test = std::option::Option::Some(v.into());
+        self
+    }
+
     #[doc = "Set the field `timeout`.\nMaximum time to allow one check to run (ms|s|m|h). Defaults to `0s`."]
     pub fn set_timeout(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.timeout = std::option::Option::Some(v.into());
@@ -1436,8 +1477,8 @@ impl ServiceTaskSpecElContainerSpecElHealthcheckEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElHealthcheckEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElHealthcheckEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Healthcheck {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Healthcheck>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1448,41 +1489,37 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElHealthcheckEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElHealthcheckEl {
-    #[doc = "The test to perform as list"]
-    pub test: terrars::ListField<terrars::PrimField<std::string::String>>,
-}
+pub struct BuildService_TaskSpec_ContainerSpec_Healthcheck {}
 
-impl BuildServiceTaskSpecElContainerSpecElHealthcheckEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElHealthcheckEl {
-        ServiceTaskSpecElContainerSpecElHealthcheckEl {
+impl BuildService_TaskSpec_ContainerSpec_Healthcheck {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Healthcheck {
+        Service_TaskSpec_ContainerSpec_Healthcheck {
             interval: core::default::Default::default(),
             retries: core::default::Default::default(),
             start_period: core::default::Default::default(),
-            test: self.test,
+            test: core::default::Default::default(),
             timeout: core::default::Default::default(),
         }
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElHealthcheckElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_HealthcheckRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElHealthcheckElRef {
-    fn new(
-        shared: terrars::StackShared,
-        base: std::string::String,
-    ) -> ServiceTaskSpecElContainerSpecElHealthcheckElRef {
-        ServiceTaskSpecElContainerSpecElHealthcheckElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_HealthcheckRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_ContainerSpec_HealthcheckRef {
+        Service_TaskSpec_ContainerSpec_HealthcheckRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElHealthcheckElRef {
+impl Service_TaskSpec_ContainerSpec_HealthcheckRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1518,15 +1555,15 @@ impl ServiceTaskSpecElContainerSpecElHealthcheckElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElHostsEl {
+pub struct Service_TaskSpec_ContainerSpec_Hosts {
     host: terrars::PrimField<std::string::String>,
     ip: terrars::PrimField<std::string::String>,
 }
 
-impl ServiceTaskSpecElContainerSpecElHostsEl { }
+impl Service_TaskSpec_ContainerSpec_Hosts { }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElHostsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElHostsEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Hosts {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Hosts>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1537,37 +1574,39 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElHostsEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElHostsEl {
+pub struct BuildService_TaskSpec_ContainerSpec_Hosts {
     #[doc = "The name of the host"]
     pub host: terrars::PrimField<std::string::String>,
     #[doc = "The ip of the host"]
     pub ip: terrars::PrimField<std::string::String>,
 }
 
-impl BuildServiceTaskSpecElContainerSpecElHostsEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElHostsEl {
-        ServiceTaskSpecElContainerSpecElHostsEl {
+impl BuildService_TaskSpec_ContainerSpec_Hosts {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Hosts {
+        Service_TaskSpec_ContainerSpec_Hosts {
             host: self.host,
             ip: self.ip,
         }
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElHostsElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_HostsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElHostsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElContainerSpecElHostsElRef {
-        ServiceTaskSpecElContainerSpecElHostsElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_HostsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_ContainerSpec_HostsRef {
+        Service_TaskSpec_ContainerSpec_HostsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElHostsElRef {
+impl Service_TaskSpec_ContainerSpec_HostsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1584,78 +1623,12 @@ impl ServiceTaskSpecElContainerSpecElHostsElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElLabelsEl {
-    label: terrars::PrimField<std::string::String>,
-    value: terrars::PrimField<std::string::String>,
-}
-
-impl ServiceTaskSpecElContainerSpecElLabelsEl { }
-
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElLabelsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElLabelsEl>;
-
-    fn do_map(self, base: std::string::String) -> Self::O {
-        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
-            for_each: format!("${{{}}}", base),
-            iterator: "each".into(),
-            content: self,
-        })
-    }
-}
-
-pub struct BuildServiceTaskSpecElContainerSpecElLabelsEl {
-    #[doc = "Name of the label"]
-    pub label: terrars::PrimField<std::string::String>,
-    #[doc = "Value of the label"]
-    pub value: terrars::PrimField<std::string::String>,
-}
-
-impl BuildServiceTaskSpecElContainerSpecElLabelsEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElLabelsEl {
-        ServiceTaskSpecElContainerSpecElLabelsEl {
-            label: self.label,
-            value: self.value,
-        }
-    }
-}
-
-pub struct ServiceTaskSpecElContainerSpecElLabelsElRef {
-    shared: terrars::StackShared,
-    base: std::string::String,
-}
-
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElLabelsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElContainerSpecElLabelsElRef {
-        ServiceTaskSpecElContainerSpecElLabelsElRef {
-            shared: shared,
-            base: base.to_string(),
-        }
-    }
-}
-
-impl ServiceTaskSpecElContainerSpecElLabelsElRef {
-    fn shared(&self) -> &terrars::StackShared {
-        &self.shared
-    }
-
-    #[doc = "Get a reference to the value of field `label` after provisioning.\nName of the label"]
-    pub fn label(&self) -> terrars::PrimExpr<std::string::String> {
-        terrars::PrimExpr::new(self.shared().clone(), format!("{}.label", self.base))
-    }
-
-    #[doc = "Get a reference to the value of field `value` after provisioning.\nValue of the label"]
-    pub fn value(&self) -> terrars::PrimExpr<std::string::String> {
-        terrars::PrimExpr::new(self.shared().clone(), format!("{}.value", self.base))
-    }
-}
-
-#[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElMountsElBindOptionsEl {
+pub struct Service_TaskSpec_ContainerSpec_Mounts_BindOptions {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     propagation: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ServiceTaskSpecElContainerSpecElMountsElBindOptionsEl {
+impl Service_TaskSpec_ContainerSpec_Mounts_BindOptions {
     #[doc =
         "Set the field `propagation`.\nBind propagation refers to whether or not mounts created within a given bind-mount or named volume can be propagated to replicas of that mount. See the [docs](https://docs.docker.com/storage/bind-mounts/#configure-bind-propagation) for details. Defaults to `rprivate`"]
     pub fn set_propagation(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
@@ -1664,8 +1637,8 @@ impl ServiceTaskSpecElContainerSpecElMountsElBindOptionsEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElMountsElBindOptionsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElMountsElBindOptionsEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Mounts_BindOptions {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Mounts_BindOptions>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1676,32 +1649,34 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElMountsElBindOpt
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElMountsElBindOptionsEl {}
+pub struct BuildService_TaskSpec_ContainerSpec_Mounts_BindOptions {}
 
-impl BuildServiceTaskSpecElContainerSpecElMountsElBindOptionsEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElMountsElBindOptionsEl {
-        ServiceTaskSpecElContainerSpecElMountsElBindOptionsEl { propagation: core::default::Default::default() }
+impl BuildService_TaskSpec_ContainerSpec_Mounts_BindOptions {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Mounts_BindOptions {
+        Service_TaskSpec_ContainerSpec_Mounts_BindOptions { propagation: core::default::Default::default() }
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElMountsElBindOptionsElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_Mounts_BindOptionsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElMountsElBindOptionsElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_Mounts_BindOptionsRef {
     fn new(
         shared: terrars::StackShared,
         base: std::string::String,
-    ) -> ServiceTaskSpecElContainerSpecElMountsElBindOptionsElRef {
-        ServiceTaskSpecElContainerSpecElMountsElBindOptionsElRef {
+    ) -> Service_TaskSpec_ContainerSpec_Mounts_BindOptionsRef {
+        Service_TaskSpec_ContainerSpec_Mounts_BindOptionsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElMountsElBindOptionsElRef {
+impl Service_TaskSpec_ContainerSpec_Mounts_BindOptionsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1714,14 +1689,14 @@ impl ServiceTaskSpecElContainerSpecElMountsElBindOptionsElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl {
+pub struct Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptions {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     mode: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     size_bytes: std::option::Option<terrars::PrimField<f64>>,
 }
 
-impl ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl {
+impl Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptions {
     #[doc = "Set the field `mode`.\nThe permission mode for the tmpfs mount in an integer"]
     pub fn set_mode(mut self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
         self.mode = std::option::Option::Some(v.into());
@@ -1735,8 +1710,8 @@ impl ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptions {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptions>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1747,35 +1722,37 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElMountsElTmpfsOp
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl {}
+pub struct BuildService_TaskSpec_ContainerSpec_Mounts_TmpfsOptions {}
 
-impl BuildServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl {
-        ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl {
+impl BuildService_TaskSpec_ContainerSpec_Mounts_TmpfsOptions {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptions {
+        Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptions {
             mode: core::default::Default::default(),
             size_bytes: core::default::Default::default(),
         }
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptionsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptionsRef {
     fn new(
         shared: terrars::StackShared,
         base: std::string::String,
-    ) -> ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsElRef {
-        ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsElRef {
+    ) -> Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptionsRef {
+        Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptionsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsElRef {
+impl Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptionsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1793,84 +1770,13 @@ impl ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsElRef {
     }
 }
 
-#[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl {
-    label: terrars::PrimField<std::string::String>,
-    value: terrars::PrimField<std::string::String>,
-}
-
-impl ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl { }
-
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl>;
-
-    fn do_map(self, base: std::string::String) -> Self::O {
-        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
-            for_each: format!("${{{}}}", base),
-            iterator: "each".into(),
-            content: self,
-        })
-    }
-}
-
-pub struct BuildServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl {
-    #[doc = "Name of the label"]
-    pub label: terrars::PrimField<std::string::String>,
-    #[doc = "Value of the label"]
-    pub value: terrars::PrimField<std::string::String>,
-}
-
-impl BuildServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl {
-        ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl {
-            label: self.label,
-            value: self.value,
-        }
-    }
-}
-
-pub struct ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsElRef {
-    shared: terrars::StackShared,
-    base: std::string::String,
-}
-
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsElRef {
-    fn new(
-        shared: terrars::StackShared,
-        base: std::string::String,
-    ) -> ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsElRef {
-        ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsElRef {
-            shared: shared,
-            base: base.to_string(),
-        }
-    }
-}
-
-impl ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsElRef {
-    fn shared(&self) -> &terrars::StackShared {
-        &self.shared
-    }
-
-    #[doc = "Get a reference to the value of field `label` after provisioning.\nName of the label"]
-    pub fn label(&self) -> terrars::PrimExpr<std::string::String> {
-        terrars::PrimExpr::new(self.shared().clone(), format!("{}.label", self.base))
-    }
-
-    #[doc = "Get a reference to the value of field `value` after provisioning.\nValue of the label"]
-    pub fn value(&self) -> terrars::PrimExpr<std::string::String> {
-        terrars::PrimExpr::new(self.shared().clone(), format!("{}.value", self.base))
-    }
-}
-
 #[derive(Serialize, Default)]
-struct ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElDynamic {
-    labels: std
-    ::option
-    ::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl>>,
+struct Service_TaskSpec_ContainerSpec_Mounts_VolumeOptionsDynamic {
+    labels: std::option::Option<terrars::DynamicBlock<Service_Labels>>,
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {
+pub struct Service_TaskSpec_ContainerSpec_Mounts_VolumeOptions {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     driver_name: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -1878,11 +1784,11 @@ pub struct ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     no_copy: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    labels: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl>>,
-    dynamic: ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElDynamic,
+    labels: std::option::Option<std::vec::Vec<Service_Labels>>,
+    dynamic: Service_TaskSpec_ContainerSpec_Mounts_VolumeOptionsDynamic,
 }
 
-impl ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {
+impl Service_TaskSpec_ContainerSpec_Mounts_VolumeOptions {
     #[doc = "Set the field `driver_name`.\nName of the driver to use to create the volume"]
     pub fn set_driver_name(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.driver_name = std::option::Option::Some(v.into());
@@ -1905,15 +1811,7 @@ impl ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {
     }
 
     #[doc = "Set the field `labels`.\n"]
-    pub fn set_labels(
-        mut self,
-        v:
-            impl
-
-                    std
-                    ::convert
-                    ::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElLabelsEl>>,
-    ) -> Self {
+    pub fn set_labels(mut self, v: impl std::convert::Into<terrars::BlockAssignable<Service_Labels>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.labels = std::option::Option::Some(v);
@@ -1926,8 +1824,8 @@ impl ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Mounts_VolumeOptions {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Mounts_VolumeOptions>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -1938,11 +1836,11 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElMountsElVolumeO
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {}
+pub struct BuildService_TaskSpec_ContainerSpec_Mounts_VolumeOptions {}
 
-impl BuildServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {
-        ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {
+impl BuildService_TaskSpec_ContainerSpec_Mounts_VolumeOptions {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Mounts_VolumeOptions {
+        Service_TaskSpec_ContainerSpec_Mounts_VolumeOptions {
             driver_name: core::default::Default::default(),
             driver_options: core::default::Default::default(),
             no_copy: core::default::Default::default(),
@@ -1952,24 +1850,26 @@ impl BuildServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl {
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_Mounts_VolumeOptionsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_Mounts_VolumeOptionsRef {
     fn new(
         shared: terrars::StackShared,
         base: std::string::String,
-    ) -> ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElRef {
-        ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElRef {
+    ) -> Service_TaskSpec_ContainerSpec_Mounts_VolumeOptionsRef {
+        Service_TaskSpec_ContainerSpec_Mounts_VolumeOptionsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElRef {
+impl Service_TaskSpec_ContainerSpec_Mounts_VolumeOptionsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -1994,18 +1894,14 @@ impl ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElRef {
 }
 
 #[derive(Serialize, Default)]
-struct ServiceTaskSpecElContainerSpecElMountsElDynamic {
-    bind_options: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElMountsElBindOptionsEl>>,
-    tmpfs_options: std
-    ::option
-    ::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl>>,
-    volume_options: std
-    ::option
-    ::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl>>,
+struct Service_TaskSpec_ContainerSpec_MountsDynamic {
+    bind_options: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Mounts_BindOptions>>,
+    tmpfs_options: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptions>>,
+    volume_options: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Mounts_VolumeOptions>>,
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElMountsEl {
+pub struct Service_TaskSpec_ContainerSpec_Mounts {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     read_only: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2014,15 +1910,15 @@ pub struct ServiceTaskSpecElContainerSpecElMountsEl {
     #[serde(rename = "type")]
     type_: terrars::PrimField<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    bind_options: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElMountsElBindOptionsEl>>,
+    bind_options: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Mounts_BindOptions>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    tmpfs_options: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl>>,
+    tmpfs_options: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptions>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    volume_options: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl>>,
-    dynamic: ServiceTaskSpecElContainerSpecElMountsElDynamic,
+    volume_options: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Mounts_VolumeOptions>>,
+    dynamic: Service_TaskSpec_ContainerSpec_MountsDynamic,
 }
 
-impl ServiceTaskSpecElContainerSpecElMountsEl {
+impl Service_TaskSpec_ContainerSpec_Mounts {
     #[doc = "Set the field `read_only`.\nWhether the mount should be read-only"]
     pub fn set_read_only(mut self, v: impl std::convert::Into<terrars::PrimField<bool>>) -> Self {
         self.read_only = std::option::Option::Some(v.into());
@@ -2038,7 +1934,7 @@ impl ServiceTaskSpecElContainerSpecElMountsEl {
     #[doc = "Set the field `bind_options`.\n"]
     pub fn set_bind_options(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElMountsElBindOptionsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Mounts_BindOptions>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2054,7 +1950,7 @@ impl ServiceTaskSpecElContainerSpecElMountsEl {
     #[doc = "Set the field `tmpfs_options`.\n"]
     pub fn set_tmpfs_options(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptions>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2070,12 +1966,7 @@ impl ServiceTaskSpecElContainerSpecElMountsEl {
     #[doc = "Set the field `volume_options`.\n"]
     pub fn set_volume_options(
         mut self,
-        v:
-            impl
-
-                    std
-                    ::convert
-                    ::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Mounts_VolumeOptions>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2089,8 +1980,8 @@ impl ServiceTaskSpecElContainerSpecElMountsEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElMountsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElMountsEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Mounts {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Mounts>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2101,16 +1992,16 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElMountsEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElMountsEl {
+pub struct BuildService_TaskSpec_ContainerSpec_Mounts {
     #[doc = "Container path"]
     pub target: terrars::PrimField<std::string::String>,
     #[doc = "The mount type"]
     pub type_: terrars::PrimField<std::string::String>,
 }
 
-impl BuildServiceTaskSpecElContainerSpecElMountsEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElMountsEl {
-        ServiceTaskSpecElContainerSpecElMountsEl {
+impl BuildService_TaskSpec_ContainerSpec_Mounts {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Mounts {
+        Service_TaskSpec_ContainerSpec_Mounts {
             read_only: core::default::Default::default(),
             source: core::default::Default::default(),
             target: self.target,
@@ -2123,21 +2014,23 @@ impl BuildServiceTaskSpecElContainerSpecElMountsEl {
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElMountsElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_MountsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElMountsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElContainerSpecElMountsElRef {
-        ServiceTaskSpecElContainerSpecElMountsElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_MountsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_ContainerSpec_MountsRef {
+        Service_TaskSpec_ContainerSpec_MountsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElMountsElRef {
+impl Service_TaskSpec_ContainerSpec_MountsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2165,30 +2058,30 @@ impl ServiceTaskSpecElContainerSpecElMountsElRef {
     }
 
     #[doc = "Get a reference to the value of field `bind_options` after provisioning.\n"]
-    pub fn bind_options(&self) -> terrars::ListRef<ServiceTaskSpecElContainerSpecElMountsElBindOptionsElRef> {
+    pub fn bind_options(&self) -> terrars::ListRef<Service_TaskSpec_ContainerSpec_Mounts_BindOptionsRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.bind_options", self.base))
     }
 
     #[doc = "Get a reference to the value of field `tmpfs_options` after provisioning.\n"]
-    pub fn tmpfs_options(&self) -> terrars::ListRef<ServiceTaskSpecElContainerSpecElMountsElTmpfsOptionsElRef> {
+    pub fn tmpfs_options(&self) -> terrars::ListRef<Service_TaskSpec_ContainerSpec_Mounts_TmpfsOptionsRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.tmpfs_options", self.base))
     }
 
     #[doc = "Get a reference to the value of field `volume_options` after provisioning.\n"]
-    pub fn volume_options(&self) -> terrars::ListRef<ServiceTaskSpecElContainerSpecElMountsElVolumeOptionsElRef> {
+    pub fn volume_options(&self) -> terrars::ListRef<Service_TaskSpec_ContainerSpec_Mounts_VolumeOptionsRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.volume_options", self.base))
     }
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl {
+pub struct Service_TaskSpec_ContainerSpec_Privileges_CredentialSpec {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     file: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     registry: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl {
+impl Service_TaskSpec_ContainerSpec_Privileges_CredentialSpec {
     #[doc = "Set the field `file`.\nLoad credential spec from this file"]
     pub fn set_file(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.file = std::option::Option::Some(v.into());
@@ -2202,8 +2095,8 @@ impl ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Privileges_CredentialSpec {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Privileges_CredentialSpec>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2214,35 +2107,37 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElPrivilegesElCre
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl {}
+pub struct BuildService_TaskSpec_ContainerSpec_Privileges_CredentialSpec {}
 
-impl BuildServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl {
-        ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl {
+impl BuildService_TaskSpec_ContainerSpec_Privileges_CredentialSpec {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Privileges_CredentialSpec {
+        Service_TaskSpec_ContainerSpec_Privileges_CredentialSpec {
             file: core::default::Default::default(),
             registry: core::default::Default::default(),
         }
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_Privileges_CredentialSpecRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_Privileges_CredentialSpecRef {
     fn new(
         shared: terrars::StackShared,
         base: std::string::String,
-    ) -> ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecElRef {
-        ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecElRef {
+    ) -> Service_TaskSpec_ContainerSpec_Privileges_CredentialSpecRef {
+        Service_TaskSpec_ContainerSpec_Privileges_CredentialSpecRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecElRef {
+impl Service_TaskSpec_ContainerSpec_Privileges_CredentialSpecRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2260,7 +2155,7 @@ impl ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl {
+pub struct Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContext {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     disable: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2273,7 +2168,7 @@ pub struct ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl {
     user: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl {
+impl Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContext {
     #[doc = "Set the field `disable`.\nDisable SELinux"]
     pub fn set_disable(mut self, v: impl std::convert::Into<terrars::PrimField<bool>>) -> Self {
         self.disable = std::option::Option::Some(v.into());
@@ -2305,8 +2200,8 @@ impl ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContext {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContext>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2317,11 +2212,11 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElPrivilegesElSeL
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl {}
+pub struct BuildService_TaskSpec_ContainerSpec_Privileges_SeLinuxContext {}
 
-impl BuildServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl {
-        ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl {
+impl BuildService_TaskSpec_ContainerSpec_Privileges_SeLinuxContext {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContext {
+        Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContext {
             disable: core::default::Default::default(),
             level: core::default::Default::default(),
             role: core::default::Default::default(),
@@ -2331,24 +2226,26 @@ impl BuildServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl {
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContextRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContextRef {
     fn new(
         shared: terrars::StackShared,
         base: std::string::String,
-    ) -> ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextElRef {
-        ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextElRef {
+    ) -> Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContextRef {
+        Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContextRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextElRef {
+impl Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContextRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2380,25 +2277,25 @@ impl ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextElRef {
 }
 
 #[derive(Serialize, Default)]
-struct ServiceTaskSpecElContainerSpecElPrivilegesElDynamic {
+struct Service_TaskSpec_ContainerSpec_PrivilegesDynamic {
     credential_spec: std
     ::option
-    ::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl>>,
+    ::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Privileges_CredentialSpec>>,
     se_linux_context: std
     ::option
-    ::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl>>,
+    ::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContext>>,
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElPrivilegesEl {
+pub struct Service_TaskSpec_ContainerSpec_Privileges {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    credential_spec: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl>>,
+    credential_spec: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Privileges_CredentialSpec>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    se_linux_context: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl>>,
-    dynamic: ServiceTaskSpecElContainerSpecElPrivilegesElDynamic,
+    se_linux_context: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContext>>,
+    dynamic: Service_TaskSpec_ContainerSpec_PrivilegesDynamic,
 }
 
-impl ServiceTaskSpecElContainerSpecElPrivilegesEl {
+impl Service_TaskSpec_ContainerSpec_Privileges {
     #[doc = "Set the field `credential_spec`.\n"]
     pub fn set_credential_spec(
         mut self,
@@ -2407,7 +2304,7 @@ impl ServiceTaskSpecElContainerSpecElPrivilegesEl {
 
                     std
                     ::convert
-                    ::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecEl>>,
+                    ::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Privileges_CredentialSpec>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2428,7 +2325,7 @@ impl ServiceTaskSpecElContainerSpecElPrivilegesEl {
 
                     std
                     ::convert
-                    ::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextEl>>,
+                    ::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContext>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2442,8 +2339,8 @@ impl ServiceTaskSpecElContainerSpecElPrivilegesEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElPrivilegesEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElPrivilegesEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Privileges {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Privileges>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2454,11 +2351,11 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElPrivilegesEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElPrivilegesEl {}
+pub struct BuildService_TaskSpec_ContainerSpec_Privileges {}
 
-impl BuildServiceTaskSpecElContainerSpecElPrivilegesEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElPrivilegesEl {
-        ServiceTaskSpecElContainerSpecElPrivilegesEl {
+impl BuildService_TaskSpec_ContainerSpec_Privileges {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Privileges {
+        Service_TaskSpec_ContainerSpec_Privileges {
             credential_spec: core::default::Default::default(),
             se_linux_context: core::default::Default::default(),
             dynamic: core::default::Default::default(),
@@ -2466,41 +2363,40 @@ impl BuildServiceTaskSpecElContainerSpecElPrivilegesEl {
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElPrivilegesElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_PrivilegesRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElPrivilegesElRef {
-    fn new(
-        shared: terrars::StackShared,
-        base: std::string::String,
-    ) -> ServiceTaskSpecElContainerSpecElPrivilegesElRef {
-        ServiceTaskSpecElContainerSpecElPrivilegesElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_PrivilegesRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_ContainerSpec_PrivilegesRef {
+        Service_TaskSpec_ContainerSpec_PrivilegesRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElPrivilegesElRef {
+impl Service_TaskSpec_ContainerSpec_PrivilegesRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
 
     #[doc = "Get a reference to the value of field `credential_spec` after provisioning.\n"]
-    pub fn credential_spec(&self) -> terrars::ListRef<ServiceTaskSpecElContainerSpecElPrivilegesElCredentialSpecElRef> {
+    pub fn credential_spec(&self) -> terrars::ListRef<Service_TaskSpec_ContainerSpec_Privileges_CredentialSpecRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.credential_spec", self.base))
     }
 
     #[doc = "Get a reference to the value of field `se_linux_context` after provisioning.\n"]
-    pub fn se_linux_context(&self) -> terrars::ListRef<ServiceTaskSpecElContainerSpecElPrivilegesElSeLinuxContextElRef> {
+    pub fn se_linux_context(&self) -> terrars::ListRef<Service_TaskSpec_ContainerSpec_Privileges_SeLinuxContextRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.se_linux_context", self.base))
     }
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecElSecretsEl {
+pub struct Service_TaskSpec_ContainerSpec_Secrets {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     file_gid: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2513,7 +2409,7 @@ pub struct ServiceTaskSpecElContainerSpecElSecretsEl {
     secret_name: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ServiceTaskSpecElContainerSpecElSecretsEl {
+impl Service_TaskSpec_ContainerSpec_Secrets {
     #[doc = "Set the field `file_gid`.\nRepresents the file GID. Defaults to `0`"]
     pub fn set_file_gid(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.file_gid = std::option::Option::Some(v.into());
@@ -2540,8 +2436,8 @@ impl ServiceTaskSpecElContainerSpecElSecretsEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElSecretsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElSecretsEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec_Secrets {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Secrets>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2552,16 +2448,16 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecElSecretsEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecElSecretsEl {
+pub struct BuildService_TaskSpec_ContainerSpec_Secrets {
     #[doc = "Represents the final filename in the filesystem"]
     pub file_name: terrars::PrimField<std::string::String>,
     #[doc = "ID of the specific secret that we're referencing"]
     pub secret_id: terrars::PrimField<std::string::String>,
 }
 
-impl BuildServiceTaskSpecElContainerSpecElSecretsEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecElSecretsEl {
-        ServiceTaskSpecElContainerSpecElSecretsEl {
+impl BuildService_TaskSpec_ContainerSpec_Secrets {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec_Secrets {
+        Service_TaskSpec_ContainerSpec_Secrets {
             file_gid: core::default::Default::default(),
             file_mode: core::default::Default::default(),
             file_name: self.file_name,
@@ -2572,21 +2468,23 @@ impl BuildServiceTaskSpecElContainerSpecElSecretsEl {
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElSecretsElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpec_SecretsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElSecretsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElContainerSpecElSecretsElRef {
-        ServiceTaskSpecElContainerSpecElSecretsElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpec_SecretsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_ContainerSpec_SecretsRef {
+        Service_TaskSpec_ContainerSpec_SecretsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElSecretsElRef {
+impl Service_TaskSpec_ContainerSpec_SecretsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2629,21 +2527,25 @@ impl ServiceTaskSpecElContainerSpecElSecretsElRef {
 }
 
 #[derive(Serialize, Default)]
-struct ServiceTaskSpecElContainerSpecElDynamic {
-    configs: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElConfigsEl>>,
-    dns_config: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElDnsConfigEl>>,
-    healthcheck: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElHealthcheckEl>>,
-    hosts: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElHostsEl>>,
-    labels: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElLabelsEl>>,
-    mounts: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElMountsEl>>,
-    privileges: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElPrivilegesEl>>,
-    secrets: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecElSecretsEl>>,
+struct Service_TaskSpec_ContainerSpecDynamic {
+    configs: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Configs>>,
+    dns_config: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_DnsConfig>>,
+    healthcheck: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Healthcheck>>,
+    hosts: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Hosts>>,
+    labels: std::option::Option<terrars::DynamicBlock<Service_Labels>>,
+    mounts: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Mounts>>,
+    privileges: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Privileges>>,
+    secrets: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec_Secrets>>,
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElContainerSpecEl {
+pub struct Service_TaskSpec_ContainerSpec {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     args: std::option::Option<terrars::ListField<terrars::PrimField<std::string::String>>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    cap_add: std::option::Option<terrars::ListField<terrars::PrimField<std::string::String>>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    cap_drop: std::option::Option<terrars::ListField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     command: std::option::Option<terrars::ListField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2655,6 +2557,8 @@ pub struct ServiceTaskSpecElContainerSpecEl {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     hostname: std::option::Option<terrars::PrimField<std::string::String>>,
     image: terrars::PrimField<std::string::String>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    init: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     isolation: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2668,31 +2572,49 @@ pub struct ServiceTaskSpecElContainerSpecEl {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     user: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    configs: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElConfigsEl>>,
+    configs: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Configs>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    dns_config: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElDnsConfigEl>>,
+    dns_config: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_DnsConfig>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    healthcheck: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElHealthcheckEl>>,
+    healthcheck: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Healthcheck>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    hosts: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElHostsEl>>,
+    hosts: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Hosts>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    labels: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElLabelsEl>>,
+    labels: std::option::Option<std::vec::Vec<Service_Labels>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    mounts: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElMountsEl>>,
+    mounts: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Mounts>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    privileges: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElPrivilegesEl>>,
+    privileges: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Privileges>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    secrets: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecElSecretsEl>>,
-    dynamic: ServiceTaskSpecElContainerSpecElDynamic,
+    secrets: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec_Secrets>>,
+    dynamic: Service_TaskSpec_ContainerSpecDynamic,
 }
 
-impl ServiceTaskSpecElContainerSpecEl {
+impl Service_TaskSpec_ContainerSpec {
     #[doc = "Set the field `args`.\nArguments to the command"]
     pub fn set_args(
         mut self,
         v: impl std::convert::Into<terrars::ListField<terrars::PrimField<std::string::String>>>,
     ) -> Self {
         self.args = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `cap_add`.\nList of Linux capabilities to add to the container"]
+    pub fn set_cap_add(
+        mut self,
+        v: impl std::convert::Into<terrars::ListField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.cap_add = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `cap_drop`.\nList of Linux capabilities to drop from the container"]
+    pub fn set_cap_drop(
+        mut self,
+        v: impl std::convert::Into<terrars::ListField<terrars::PrimField<std::string::String>>>,
+    ) -> Self {
+        self.cap_drop = std::option::Option::Some(v.into());
         self
     }
 
@@ -2733,6 +2655,13 @@ impl ServiceTaskSpecElContainerSpecEl {
     #[doc = "Set the field `hostname`.\nThe hostname to use for the container, as a valid RFC 1123 hostname"]
     pub fn set_hostname(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.hostname = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `init`.\nConfigured whether an init process should be injected for this container. If unset this will default to the `dockerd` defaults."]
+    pub fn set_init(mut self, v: impl std::convert::Into<terrars::PrimField<bool>>) -> Self {
+        self.init = std::option::Option::Some(v.into());
         self
     }
 
@@ -2780,7 +2709,7 @@ impl ServiceTaskSpecElContainerSpecEl {
     #[doc = "Set the field `configs`.\n"]
     pub fn set_configs(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElConfigsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Configs>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2796,7 +2725,7 @@ impl ServiceTaskSpecElContainerSpecEl {
     #[doc = "Set the field `dns_config`.\n"]
     pub fn set_dns_config(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElDnsConfigEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_DnsConfig>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2812,7 +2741,7 @@ impl ServiceTaskSpecElContainerSpecEl {
     #[doc = "Set the field `healthcheck`.\n"]
     pub fn set_healthcheck(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElHealthcheckEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Healthcheck>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2828,7 +2757,7 @@ impl ServiceTaskSpecElContainerSpecEl {
     #[doc = "Set the field `hosts`.\n"]
     pub fn set_hosts(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElHostsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Hosts>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2842,10 +2771,7 @@ impl ServiceTaskSpecElContainerSpecEl {
     }
 
     #[doc = "Set the field `labels`.\n"]
-    pub fn set_labels(
-        mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElLabelsEl>>,
-    ) -> Self {
+    pub fn set_labels(mut self, v: impl std::convert::Into<terrars::BlockAssignable<Service_Labels>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.labels = std::option::Option::Some(v);
@@ -2860,7 +2786,7 @@ impl ServiceTaskSpecElContainerSpecEl {
     #[doc = "Set the field `mounts`.\n"]
     pub fn set_mounts(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElMountsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Mounts>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2876,7 +2802,7 @@ impl ServiceTaskSpecElContainerSpecEl {
     #[doc = "Set the field `privileges`.\n"]
     pub fn set_privileges(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElPrivilegesEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Privileges>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2892,7 +2818,7 @@ impl ServiceTaskSpecElContainerSpecEl {
     #[doc = "Set the field `secrets`.\n"]
     pub fn set_secrets(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecElSecretsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec_Secrets>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -2906,8 +2832,8 @@ impl ServiceTaskSpecElContainerSpecEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElContainerSpecEl>;
+impl terrars::ToListMappable for Service_TaskSpec_ContainerSpec {
+    type O = terrars::BlockAssignable<Service_TaskSpec_ContainerSpec>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -2918,22 +2844,25 @@ impl terrars::ToListMappable for ServiceTaskSpecElContainerSpecEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElContainerSpecEl {
+pub struct BuildService_TaskSpec_ContainerSpec {
     #[doc =
         "The image name to use for the containers of the service, like `nginx:1.17.6`. Also use the data-source or resource of `docker_image` with the `repo_digest` or `docker_registry_image` with the `name` attribute for this, as shown in the examples."]
     pub image: terrars::PrimField<std::string::String>,
 }
 
-impl BuildServiceTaskSpecElContainerSpecEl {
-    pub fn build(self) -> ServiceTaskSpecElContainerSpecEl {
-        ServiceTaskSpecElContainerSpecEl {
+impl BuildService_TaskSpec_ContainerSpec {
+    pub fn build(self) -> Service_TaskSpec_ContainerSpec {
+        Service_TaskSpec_ContainerSpec {
             args: core::default::Default::default(),
+            cap_add: core::default::Default::default(),
+            cap_drop: core::default::Default::default(),
             command: core::default::Default::default(),
             dir: core::default::Default::default(),
             env: core::default::Default::default(),
             groups: core::default::Default::default(),
             hostname: core::default::Default::default(),
             image: self.image,
+            init: core::default::Default::default(),
             isolation: core::default::Default::default(),
             read_only: core::default::Default::default(),
             stop_grace_period: core::default::Default::default(),
@@ -2953,21 +2882,23 @@ impl BuildServiceTaskSpecElContainerSpecEl {
     }
 }
 
-pub struct ServiceTaskSpecElContainerSpecElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ContainerSpecRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElContainerSpecElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElContainerSpecElRef {
-        ServiceTaskSpecElContainerSpecElRef {
+impl terrars::Ref for Service_TaskSpec_ContainerSpecRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_ContainerSpecRef {
+        Service_TaskSpec_ContainerSpecRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElContainerSpecElRef {
+impl Service_TaskSpec_ContainerSpecRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -2975,6 +2906,18 @@ impl ServiceTaskSpecElContainerSpecElRef {
     #[doc = "Get a reference to the value of field `args` after provisioning.\nArguments to the command"]
     pub fn args(&self) -> terrars::ListRef<terrars::PrimExpr<std::string::String>> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.args", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `cap_add` after provisioning.\nList of Linux capabilities to add to the container"]
+    pub fn cap_add(&self) -> terrars::ListRef<terrars::PrimExpr<std::string::String>> {
+        terrars::ListRef::new(self.shared().clone(), format!("{}.cap_add", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `cap_drop` after provisioning.\nList of Linux capabilities to drop from the container"]
+    pub fn cap_drop(&self) -> terrars::ListRef<terrars::PrimExpr<std::string::String>> {
+        terrars::ListRef::new(self.shared().clone(), format!("{}.cap_drop", self.base))
     }
 
     #[doc =
@@ -3014,6 +2957,12 @@ impl ServiceTaskSpecElContainerSpecElRef {
     }
 
     #[doc =
+        "Get a reference to the value of field `init` after provisioning.\nConfigured whether an init process should be injected for this container. If unset this will default to the `dockerd` defaults."]
+    pub fn init(&self) -> terrars::PrimExpr<bool> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.init", self.base))
+    }
+
+    #[doc =
         "Get a reference to the value of field `isolation` after provisioning.\nIsolation technology of the containers running the service. (Windows only). Defaults to `default`."]
     pub fn isolation(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.isolation", self.base))
@@ -3047,29 +2996,29 @@ impl ServiceTaskSpecElContainerSpecElRef {
     }
 
     #[doc = "Get a reference to the value of field `dns_config` after provisioning.\n"]
-    pub fn dns_config(&self) -> terrars::ListRef<ServiceTaskSpecElContainerSpecElDnsConfigElRef> {
+    pub fn dns_config(&self) -> terrars::ListRef<Service_TaskSpec_ContainerSpec_DnsConfigRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.dns_config", self.base))
     }
 
     #[doc = "Get a reference to the value of field `healthcheck` after provisioning.\n"]
-    pub fn healthcheck(&self) -> terrars::ListRef<ServiceTaskSpecElContainerSpecElHealthcheckElRef> {
+    pub fn healthcheck(&self) -> terrars::ListRef<Service_TaskSpec_ContainerSpec_HealthcheckRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.healthcheck", self.base))
     }
 
     #[doc = "Get a reference to the value of field `privileges` after provisioning.\n"]
-    pub fn privileges(&self) -> terrars::ListRef<ServiceTaskSpecElContainerSpecElPrivilegesElRef> {
+    pub fn privileges(&self) -> terrars::ListRef<Service_TaskSpec_ContainerSpec_PrivilegesRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.privileges", self.base))
     }
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElLogDriverEl {
+pub struct Service_TaskSpec_LogDriver {
     name: terrars::PrimField<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     options: std::option::Option<terrars::RecField<terrars::PrimField<std::string::String>>>,
 }
 
-impl ServiceTaskSpecElLogDriverEl {
+impl Service_TaskSpec_LogDriver {
     #[doc = "Set the field `options`.\nThe options for the logging driver"]
     pub fn set_options(
         mut self,
@@ -3080,8 +3029,8 @@ impl ServiceTaskSpecElLogDriverEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElLogDriverEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElLogDriverEl>;
+impl terrars::ToListMappable for Service_TaskSpec_LogDriver {
+    type O = terrars::BlockAssignable<Service_TaskSpec_LogDriver>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3092,35 +3041,37 @@ impl terrars::ToListMappable for ServiceTaskSpecElLogDriverEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElLogDriverEl {
+pub struct BuildService_TaskSpec_LogDriver {
     #[doc = "The logging driver to use"]
     pub name: terrars::PrimField<std::string::String>,
 }
 
-impl BuildServiceTaskSpecElLogDriverEl {
-    pub fn build(self) -> ServiceTaskSpecElLogDriverEl {
-        ServiceTaskSpecElLogDriverEl {
+impl BuildService_TaskSpec_LogDriver {
+    pub fn build(self) -> Service_TaskSpec_LogDriver {
+        Service_TaskSpec_LogDriver {
             name: self.name,
             options: core::default::Default::default(),
         }
     }
 }
 
-pub struct ServiceTaskSpecElLogDriverElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_LogDriverRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElLogDriverElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElLogDriverElRef {
-        ServiceTaskSpecElLogDriverElRef {
+impl terrars::Ref for Service_TaskSpec_LogDriverRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_LogDriverRef {
+        Service_TaskSpec_LogDriverRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElLogDriverElRef {
+impl Service_TaskSpec_LogDriverRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -3137,15 +3088,18 @@ impl ServiceTaskSpecElLogDriverElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElNetworksAdvancedEl {
+pub struct Service_TaskSpec_NetworksAdvanced {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     aliases: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     driver_opts: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
-    name: terrars::PrimField<std::string::String>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    id: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    name: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ServiceTaskSpecElNetworksAdvancedEl {
+impl Service_TaskSpec_NetworksAdvanced {
     #[doc = "Set the field `aliases`.\nThe network aliases of the container in the specific network."]
     pub fn set_aliases(
         mut self,
@@ -3163,10 +3117,24 @@ impl ServiceTaskSpecElNetworksAdvancedEl {
         self.driver_opts = std::option::Option::Some(v.into());
         self
     }
+
+    #[doc =
+        "Set the field `id`.\nThe id of the docker network to use. Please use `docker_network.id`. Using the name attribute of the docker network will lead to constant replacements."]
+    pub fn set_id(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.id = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `name`.\nDeprecated attribute. The name/id of the docker network. Conflicts with `id` attribute."]
+    pub fn set_name(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.name = std::option::Option::Some(v.into());
+        self
+    }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElNetworksAdvancedEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElNetworksAdvancedEl>;
+impl terrars::ToListMappable for Service_TaskSpec_NetworksAdvanced {
+    type O = terrars::BlockAssignable<Service_TaskSpec_NetworksAdvanced>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3177,36 +3145,36 @@ impl terrars::ToListMappable for ServiceTaskSpecElNetworksAdvancedEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElNetworksAdvancedEl {
-    #[doc = "The name/id of the network."]
-    pub name: terrars::PrimField<std::string::String>,
-}
+pub struct BuildService_TaskSpec_NetworksAdvanced {}
 
-impl BuildServiceTaskSpecElNetworksAdvancedEl {
-    pub fn build(self) -> ServiceTaskSpecElNetworksAdvancedEl {
-        ServiceTaskSpecElNetworksAdvancedEl {
+impl BuildService_TaskSpec_NetworksAdvanced {
+    pub fn build(self) -> Service_TaskSpec_NetworksAdvanced {
+        Service_TaskSpec_NetworksAdvanced {
             aliases: core::default::Default::default(),
             driver_opts: core::default::Default::default(),
-            name: self.name,
+            id: core::default::Default::default(),
+            name: core::default::Default::default(),
         }
     }
 }
 
-pub struct ServiceTaskSpecElNetworksAdvancedElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_NetworksAdvancedRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElNetworksAdvancedElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElNetworksAdvancedElRef {
-        ServiceTaskSpecElNetworksAdvancedElRef {
+impl terrars::Ref for Service_TaskSpec_NetworksAdvancedRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_NetworksAdvancedRef {
+        Service_TaskSpec_NetworksAdvancedRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElNetworksAdvancedElRef {
+impl Service_TaskSpec_NetworksAdvancedRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -3223,22 +3191,29 @@ impl ServiceTaskSpecElNetworksAdvancedElRef {
         terrars::SetRef::new(self.shared().clone(), format!("{}.driver_opts", self.base))
     }
 
-    #[doc = "Get a reference to the value of field `name` after provisioning.\nThe name/id of the network."]
+    #[doc =
+        "Get a reference to the value of field `id` after provisioning.\nThe id of the docker network to use. Please use `docker_network.id`. Using the name attribute of the docker network will lead to constant replacements."]
+    pub fn id(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.id", self.base))
+    }
+
+    #[doc =
+        "Get a reference to the value of field `name` after provisioning.\nDeprecated attribute. The name/id of the docker network. Conflicts with `id` attribute."]
     pub fn name(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.name", self.base))
     }
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElPlacementElPlatformsEl {
+pub struct Service_TaskSpec_Placement_Platforms {
     architecture: terrars::PrimField<std::string::String>,
     os: terrars::PrimField<std::string::String>,
 }
 
-impl ServiceTaskSpecElPlacementElPlatformsEl { }
+impl Service_TaskSpec_Placement_Platforms { }
 
-impl terrars::ToListMappable for ServiceTaskSpecElPlacementElPlatformsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElPlacementElPlatformsEl>;
+impl terrars::ToListMappable for Service_TaskSpec_Placement_Platforms {
+    type O = terrars::BlockAssignable<Service_TaskSpec_Placement_Platforms>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3249,37 +3224,39 @@ impl terrars::ToListMappable for ServiceTaskSpecElPlacementElPlatformsEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElPlacementElPlatformsEl {
+pub struct BuildService_TaskSpec_Placement_Platforms {
     #[doc = "The architecture, e.g. `amd64`"]
     pub architecture: terrars::PrimField<std::string::String>,
     #[doc = "The operation system, e.g. `linux`"]
     pub os: terrars::PrimField<std::string::String>,
 }
 
-impl BuildServiceTaskSpecElPlacementElPlatformsEl {
-    pub fn build(self) -> ServiceTaskSpecElPlacementElPlatformsEl {
-        ServiceTaskSpecElPlacementElPlatformsEl {
+impl BuildService_TaskSpec_Placement_Platforms {
+    pub fn build(self) -> Service_TaskSpec_Placement_Platforms {
+        Service_TaskSpec_Placement_Platforms {
             architecture: self.architecture,
             os: self.os,
         }
     }
 }
 
-pub struct ServiceTaskSpecElPlacementElPlatformsElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_Placement_PlatformsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElPlacementElPlatformsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElPlacementElPlatformsElRef {
-        ServiceTaskSpecElPlacementElPlatformsElRef {
+impl terrars::Ref for Service_TaskSpec_Placement_PlatformsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_Placement_PlatformsRef {
+        Service_TaskSpec_Placement_PlatformsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElPlacementElPlatformsElRef {
+impl Service_TaskSpec_Placement_PlatformsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -3296,12 +3273,12 @@ impl ServiceTaskSpecElPlacementElPlatformsElRef {
 }
 
 #[derive(Serialize, Default)]
-struct ServiceTaskSpecElPlacementElDynamic {
-    platforms: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElPlacementElPlatformsEl>>,
+struct Service_TaskSpec_PlacementDynamic {
+    platforms: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_Placement_Platforms>>,
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElPlacementEl {
+pub struct Service_TaskSpec_Placement {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     constraints: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -3309,11 +3286,11 @@ pub struct ServiceTaskSpecElPlacementEl {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     prefs: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    platforms: std::option::Option<std::vec::Vec<ServiceTaskSpecElPlacementElPlatformsEl>>,
-    dynamic: ServiceTaskSpecElPlacementElDynamic,
+    platforms: std::option::Option<std::vec::Vec<Service_TaskSpec_Placement_Platforms>>,
+    dynamic: Service_TaskSpec_PlacementDynamic,
 }
 
-impl ServiceTaskSpecElPlacementEl {
+impl Service_TaskSpec_Placement {
     #[doc = "Set the field `constraints`.\nAn array of constraints. e.g.: `node.role==manager`"]
     pub fn set_constraints(
         mut self,
@@ -3343,7 +3320,7 @@ impl ServiceTaskSpecElPlacementEl {
     #[doc = "Set the field `platforms`.\n"]
     pub fn set_platforms(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElPlacementElPlatformsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_Placement_Platforms>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -3357,8 +3334,8 @@ impl ServiceTaskSpecElPlacementEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElPlacementEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElPlacementEl>;
+impl terrars::ToListMappable for Service_TaskSpec_Placement {
+    type O = terrars::BlockAssignable<Service_TaskSpec_Placement>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3369,11 +3346,11 @@ impl terrars::ToListMappable for ServiceTaskSpecElPlacementEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElPlacementEl {}
+pub struct BuildService_TaskSpec_Placement {}
 
-impl BuildServiceTaskSpecElPlacementEl {
-    pub fn build(self) -> ServiceTaskSpecElPlacementEl {
-        ServiceTaskSpecElPlacementEl {
+impl BuildService_TaskSpec_Placement {
+    pub fn build(self) -> Service_TaskSpec_Placement {
+        Service_TaskSpec_Placement {
             constraints: core::default::Default::default(),
             max_replicas: core::default::Default::default(),
             prefs: core::default::Default::default(),
@@ -3383,21 +3360,23 @@ impl BuildServiceTaskSpecElPlacementEl {
     }
 }
 
-pub struct ServiceTaskSpecElPlacementElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_PlacementRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElPlacementElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElPlacementElRef {
-        ServiceTaskSpecElPlacementElRef {
+impl terrars::Ref for Service_TaskSpec_PlacementRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_PlacementRef {
+        Service_TaskSpec_PlacementRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElPlacementElRef {
+impl Service_TaskSpec_PlacementRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -3422,15 +3401,15 @@ impl ServiceTaskSpecElPlacementElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElResourcesElLimitsEl {
+pub struct Service_TaskSpec_Resources_Limits {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     memory_bytes: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     nano_cpus: std::option::Option<terrars::PrimField<f64>>,
 }
 
-impl ServiceTaskSpecElResourcesElLimitsEl {
-    #[doc = "Set the field `memory_bytes`.\nThe amounf of memory in bytes the container allocates"]
+impl Service_TaskSpec_Resources_Limits {
+    #[doc = "Set the field `memory_bytes`.\nThe amount of memory in bytes the container allocates"]
     pub fn set_memory_bytes(mut self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
         self.memory_bytes = std::option::Option::Some(v.into());
         self
@@ -3444,8 +3423,8 @@ impl ServiceTaskSpecElResourcesElLimitsEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElResourcesElLimitsEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElResourcesElLimitsEl>;
+impl terrars::ToListMappable for Service_TaskSpec_Resources_Limits {
+    type O = terrars::BlockAssignable<Service_TaskSpec_Resources_Limits>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3456,38 +3435,40 @@ impl terrars::ToListMappable for ServiceTaskSpecElResourcesElLimitsEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElResourcesElLimitsEl {}
+pub struct BuildService_TaskSpec_Resources_Limits {}
 
-impl BuildServiceTaskSpecElResourcesElLimitsEl {
-    pub fn build(self) -> ServiceTaskSpecElResourcesElLimitsEl {
-        ServiceTaskSpecElResourcesElLimitsEl {
+impl BuildService_TaskSpec_Resources_Limits {
+    pub fn build(self) -> Service_TaskSpec_Resources_Limits {
+        Service_TaskSpec_Resources_Limits {
             memory_bytes: core::default::Default::default(),
             nano_cpus: core::default::Default::default(),
         }
     }
 }
 
-pub struct ServiceTaskSpecElResourcesElLimitsElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_Resources_LimitsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElResourcesElLimitsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElResourcesElLimitsElRef {
-        ServiceTaskSpecElResourcesElLimitsElRef {
+impl terrars::Ref for Service_TaskSpec_Resources_LimitsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_Resources_LimitsRef {
+        Service_TaskSpec_Resources_LimitsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElResourcesElLimitsElRef {
+impl Service_TaskSpec_Resources_LimitsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
 
     #[doc =
-        "Get a reference to the value of field `memory_bytes` after provisioning.\nThe amounf of memory in bytes the container allocates"]
+        "Get a reference to the value of field `memory_bytes` after provisioning.\nThe amount of memory in bytes the container allocates"]
     pub fn memory_bytes(&self) -> terrars::PrimExpr<f64> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.memory_bytes", self.base))
     }
@@ -3500,14 +3481,14 @@ impl ServiceTaskSpecElResourcesElLimitsElRef {
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElResourcesElReservationElGenericResourcesEl {
+pub struct Service_TaskSpec_Resources_Reservation_GenericResources {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     discrete_resources_spec: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     named_resources_spec: std::option::Option<terrars::SetField<terrars::PrimField<std::string::String>>>,
 }
 
-impl ServiceTaskSpecElResourcesElReservationElGenericResourcesEl {
+impl Service_TaskSpec_Resources_Reservation_GenericResources {
     #[doc = "Set the field `discrete_resources_spec`.\nThe Integer resources"]
     pub fn set_discrete_resources_spec(
         mut self,
@@ -3527,8 +3508,8 @@ impl ServiceTaskSpecElResourcesElReservationElGenericResourcesEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElResourcesElReservationElGenericResourcesEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElResourcesElReservationElGenericResourcesEl>;
+impl terrars::ToListMappable for Service_TaskSpec_Resources_Reservation_GenericResources {
+    type O = terrars::BlockAssignable<Service_TaskSpec_Resources_Reservation_GenericResources>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3539,35 +3520,37 @@ impl terrars::ToListMappable for ServiceTaskSpecElResourcesElReservationElGeneri
     }
 }
 
-pub struct BuildServiceTaskSpecElResourcesElReservationElGenericResourcesEl {}
+pub struct BuildService_TaskSpec_Resources_Reservation_GenericResources {}
 
-impl BuildServiceTaskSpecElResourcesElReservationElGenericResourcesEl {
-    pub fn build(self) -> ServiceTaskSpecElResourcesElReservationElGenericResourcesEl {
-        ServiceTaskSpecElResourcesElReservationElGenericResourcesEl {
+impl BuildService_TaskSpec_Resources_Reservation_GenericResources {
+    pub fn build(self) -> Service_TaskSpec_Resources_Reservation_GenericResources {
+        Service_TaskSpec_Resources_Reservation_GenericResources {
             discrete_resources_spec: core::default::Default::default(),
             named_resources_spec: core::default::Default::default(),
         }
     }
 }
 
-pub struct ServiceTaskSpecElResourcesElReservationElGenericResourcesElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_Resources_Reservation_GenericResourcesRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElResourcesElReservationElGenericResourcesElRef {
+impl terrars::Ref for Service_TaskSpec_Resources_Reservation_GenericResourcesRef {
     fn new(
         shared: terrars::StackShared,
         base: std::string::String,
-    ) -> ServiceTaskSpecElResourcesElReservationElGenericResourcesElRef {
-        ServiceTaskSpecElResourcesElReservationElGenericResourcesElRef {
+    ) -> Service_TaskSpec_Resources_Reservation_GenericResourcesRef {
+        Service_TaskSpec_Resources_Reservation_GenericResourcesRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElResourcesElReservationElGenericResourcesElRef {
+impl Service_TaskSpec_Resources_Reservation_GenericResourcesRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -3585,25 +3568,25 @@ impl ServiceTaskSpecElResourcesElReservationElGenericResourcesElRef {
 }
 
 #[derive(Serialize, Default)]
-struct ServiceTaskSpecElResourcesElReservationElDynamic {
+struct Service_TaskSpec_Resources_ReservationDynamic {
     generic_resources: std
     ::option
-    ::Option<terrars::DynamicBlock<ServiceTaskSpecElResourcesElReservationElGenericResourcesEl>>,
+    ::Option<terrars::DynamicBlock<Service_TaskSpec_Resources_Reservation_GenericResources>>,
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElResourcesElReservationEl {
+pub struct Service_TaskSpec_Resources_Reservation {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     memory_bytes: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     nano_cpus: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    generic_resources: std::option::Option<std::vec::Vec<ServiceTaskSpecElResourcesElReservationElGenericResourcesEl>>,
-    dynamic: ServiceTaskSpecElResourcesElReservationElDynamic,
+    generic_resources: std::option::Option<std::vec::Vec<Service_TaskSpec_Resources_Reservation_GenericResources>>,
+    dynamic: Service_TaskSpec_Resources_ReservationDynamic,
 }
 
-impl ServiceTaskSpecElResourcesElReservationEl {
-    #[doc = "Set the field `memory_bytes`.\nThe amounf of memory in bytes the container allocates"]
+impl Service_TaskSpec_Resources_Reservation {
+    #[doc = "Set the field `memory_bytes`.\nThe amount of memory in bytes the container allocates"]
     pub fn set_memory_bytes(mut self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
         self.memory_bytes = std::option::Option::Some(v.into());
         self
@@ -3624,7 +3607,7 @@ impl ServiceTaskSpecElResourcesElReservationEl {
 
                     std
                     ::convert
-                    ::Into<terrars::BlockAssignable<ServiceTaskSpecElResourcesElReservationElGenericResourcesEl>>,
+                    ::Into<terrars::BlockAssignable<Service_TaskSpec_Resources_Reservation_GenericResources>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -3638,8 +3621,8 @@ impl ServiceTaskSpecElResourcesElReservationEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElResourcesElReservationEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElResourcesElReservationEl>;
+impl terrars::ToListMappable for Service_TaskSpec_Resources_Reservation {
+    type O = terrars::BlockAssignable<Service_TaskSpec_Resources_Reservation>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3650,11 +3633,11 @@ impl terrars::ToListMappable for ServiceTaskSpecElResourcesElReservationEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElResourcesElReservationEl {}
+pub struct BuildService_TaskSpec_Resources_Reservation {}
 
-impl BuildServiceTaskSpecElResourcesElReservationEl {
-    pub fn build(self) -> ServiceTaskSpecElResourcesElReservationEl {
-        ServiceTaskSpecElResourcesElReservationEl {
+impl BuildService_TaskSpec_Resources_Reservation {
+    pub fn build(self) -> Service_TaskSpec_Resources_Reservation {
+        Service_TaskSpec_Resources_Reservation {
             memory_bytes: core::default::Default::default(),
             nano_cpus: core::default::Default::default(),
             generic_resources: core::default::Default::default(),
@@ -3663,27 +3646,29 @@ impl BuildServiceTaskSpecElResourcesElReservationEl {
     }
 }
 
-pub struct ServiceTaskSpecElResourcesElReservationElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_Resources_ReservationRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElResourcesElReservationElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElResourcesElReservationElRef {
-        ServiceTaskSpecElResourcesElReservationElRef {
+impl terrars::Ref for Service_TaskSpec_Resources_ReservationRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_Resources_ReservationRef {
+        Service_TaskSpec_Resources_ReservationRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElResourcesElReservationElRef {
+impl Service_TaskSpec_Resources_ReservationRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
 
     #[doc =
-        "Get a reference to the value of field `memory_bytes` after provisioning.\nThe amounf of memory in bytes the container allocates"]
+        "Get a reference to the value of field `memory_bytes` after provisioning.\nThe amount of memory in bytes the container allocates"]
     pub fn memory_bytes(&self) -> terrars::PrimExpr<f64> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.memory_bytes", self.base))
     }
@@ -3695,31 +3680,31 @@ impl ServiceTaskSpecElResourcesElReservationElRef {
     }
 
     #[doc = "Get a reference to the value of field `generic_resources` after provisioning.\n"]
-    pub fn generic_resources(&self) -> terrars::ListRef<ServiceTaskSpecElResourcesElReservationElGenericResourcesElRef> {
+    pub fn generic_resources(&self) -> terrars::ListRef<Service_TaskSpec_Resources_Reservation_GenericResourcesRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.generic_resources", self.base))
     }
 }
 
 #[derive(Serialize, Default)]
-struct ServiceTaskSpecElResourcesElDynamic {
-    limits: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElResourcesElLimitsEl>>,
-    reservation: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElResourcesElReservationEl>>,
+struct Service_TaskSpec_ResourcesDynamic {
+    limits: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_Resources_Limits>>,
+    reservation: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_Resources_Reservation>>,
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElResourcesEl {
+pub struct Service_TaskSpec_Resources {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    limits: std::option::Option<std::vec::Vec<ServiceTaskSpecElResourcesElLimitsEl>>,
+    limits: std::option::Option<std::vec::Vec<Service_TaskSpec_Resources_Limits>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    reservation: std::option::Option<std::vec::Vec<ServiceTaskSpecElResourcesElReservationEl>>,
-    dynamic: ServiceTaskSpecElResourcesElDynamic,
+    reservation: std::option::Option<std::vec::Vec<Service_TaskSpec_Resources_Reservation>>,
+    dynamic: Service_TaskSpec_ResourcesDynamic,
 }
 
-impl ServiceTaskSpecElResourcesEl {
+impl Service_TaskSpec_Resources {
     #[doc = "Set the field `limits`.\n"]
     pub fn set_limits(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElResourcesElLimitsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_Resources_Limits>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -3735,7 +3720,7 @@ impl ServiceTaskSpecElResourcesEl {
     #[doc = "Set the field `reservation`.\n"]
     pub fn set_reservation(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElResourcesElReservationEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_Resources_Reservation>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -3749,8 +3734,8 @@ impl ServiceTaskSpecElResourcesEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElResourcesEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElResourcesEl>;
+impl terrars::ToListMappable for Service_TaskSpec_Resources {
+    type O = terrars::BlockAssignable<Service_TaskSpec_Resources>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3761,11 +3746,11 @@ impl terrars::ToListMappable for ServiceTaskSpecElResourcesEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElResourcesEl {}
+pub struct BuildService_TaskSpec_Resources {}
 
-impl BuildServiceTaskSpecElResourcesEl {
-    pub fn build(self) -> ServiceTaskSpecElResourcesEl {
-        ServiceTaskSpecElResourcesEl {
+impl BuildService_TaskSpec_Resources {
+    pub fn build(self) -> Service_TaskSpec_Resources {
+        Service_TaskSpec_Resources {
             limits: core::default::Default::default(),
             reservation: core::default::Default::default(),
             dynamic: core::default::Default::default(),
@@ -3773,38 +3758,40 @@ impl BuildServiceTaskSpecElResourcesEl {
     }
 }
 
-pub struct ServiceTaskSpecElResourcesElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_ResourcesRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElResourcesElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElResourcesElRef {
-        ServiceTaskSpecElResourcesElRef {
+impl terrars::Ref for Service_TaskSpec_ResourcesRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_ResourcesRef {
+        Service_TaskSpec_ResourcesRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElResourcesElRef {
+impl Service_TaskSpec_ResourcesRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
 
     #[doc = "Get a reference to the value of field `limits` after provisioning.\n"]
-    pub fn limits(&self) -> terrars::ListRef<ServiceTaskSpecElResourcesElLimitsElRef> {
+    pub fn limits(&self) -> terrars::ListRef<Service_TaskSpec_Resources_LimitsRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.limits", self.base))
     }
 
     #[doc = "Get a reference to the value of field `reservation` after provisioning.\n"]
-    pub fn reservation(&self) -> terrars::ListRef<ServiceTaskSpecElResourcesElReservationElRef> {
+    pub fn reservation(&self) -> terrars::ListRef<Service_TaskSpec_Resources_ReservationRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.reservation", self.base))
     }
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecElRestartPolicyEl {
+pub struct Service_TaskSpec_RestartPolicy {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     condition: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -3815,7 +3802,7 @@ pub struct ServiceTaskSpecElRestartPolicyEl {
     window: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl ServiceTaskSpecElRestartPolicyEl {
+impl Service_TaskSpec_RestartPolicy {
     #[doc = "Set the field `condition`.\nCondition for restart"]
     pub fn set_condition(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.condition = std::option::Option::Some(v.into());
@@ -3843,8 +3830,8 @@ impl ServiceTaskSpecElRestartPolicyEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecElRestartPolicyEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecElRestartPolicyEl>;
+impl terrars::ToListMappable for Service_TaskSpec_RestartPolicy {
+    type O = terrars::BlockAssignable<Service_TaskSpec_RestartPolicy>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -3855,11 +3842,11 @@ impl terrars::ToListMappable for ServiceTaskSpecElRestartPolicyEl {
     }
 }
 
-pub struct BuildServiceTaskSpecElRestartPolicyEl {}
+pub struct BuildService_TaskSpec_RestartPolicy {}
 
-impl BuildServiceTaskSpecElRestartPolicyEl {
-    pub fn build(self) -> ServiceTaskSpecElRestartPolicyEl {
-        ServiceTaskSpecElRestartPolicyEl {
+impl BuildService_TaskSpec_RestartPolicy {
+    pub fn build(self) -> Service_TaskSpec_RestartPolicy {
+        Service_TaskSpec_RestartPolicy {
             condition: core::default::Default::default(),
             delay: core::default::Default::default(),
             max_attempts: core::default::Default::default(),
@@ -3868,21 +3855,23 @@ impl BuildServiceTaskSpecElRestartPolicyEl {
     }
 }
 
-pub struct ServiceTaskSpecElRestartPolicyElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpec_RestartPolicyRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElRestartPolicyElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElRestartPolicyElRef {
-        ServiceTaskSpecElRestartPolicyElRef {
+impl terrars::Ref for Service_TaskSpec_RestartPolicyRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpec_RestartPolicyRef {
+        Service_TaskSpec_RestartPolicyRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElRestartPolicyElRef {
+impl Service_TaskSpec_RestartPolicyRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -3912,37 +3901,37 @@ impl ServiceTaskSpecElRestartPolicyElRef {
 }
 
 #[derive(Serialize, Default)]
-struct ServiceTaskSpecElDynamic {
-    container_spec: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElContainerSpecEl>>,
-    log_driver: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElLogDriverEl>>,
-    networks_advanced: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElNetworksAdvancedEl>>,
-    placement: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElPlacementEl>>,
-    resources: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElResourcesEl>>,
-    restart_policy: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecElRestartPolicyEl>>,
+struct Service_TaskSpecDynamic {
+    container_spec: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_ContainerSpec>>,
+    log_driver: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_LogDriver>>,
+    networks_advanced: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_NetworksAdvanced>>,
+    placement: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_Placement>>,
+    resources: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_Resources>>,
+    restart_policy: std::option::Option<terrars::DynamicBlock<Service_TaskSpec_RestartPolicy>>,
 }
 
 #[derive(Serialize)]
-pub struct ServiceTaskSpecEl {
+pub struct Service_TaskSpec {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     force_update: std::option::Option<terrars::PrimField<f64>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     runtime: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    container_spec: std::option::Option<std::vec::Vec<ServiceTaskSpecElContainerSpecEl>>,
+    container_spec: std::option::Option<std::vec::Vec<Service_TaskSpec_ContainerSpec>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    log_driver: std::option::Option<std::vec::Vec<ServiceTaskSpecElLogDriverEl>>,
+    log_driver: std::option::Option<std::vec::Vec<Service_TaskSpec_LogDriver>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    networks_advanced: std::option::Option<std::vec::Vec<ServiceTaskSpecElNetworksAdvancedEl>>,
+    networks_advanced: std::option::Option<std::vec::Vec<Service_TaskSpec_NetworksAdvanced>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    placement: std::option::Option<std::vec::Vec<ServiceTaskSpecElPlacementEl>>,
+    placement: std::option::Option<std::vec::Vec<Service_TaskSpec_Placement>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    resources: std::option::Option<std::vec::Vec<ServiceTaskSpecElResourcesEl>>,
+    resources: std::option::Option<std::vec::Vec<Service_TaskSpec_Resources>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    restart_policy: std::option::Option<std::vec::Vec<ServiceTaskSpecElRestartPolicyEl>>,
-    dynamic: ServiceTaskSpecElDynamic,
+    restart_policy: std::option::Option<std::vec::Vec<Service_TaskSpec_RestartPolicy>>,
+    dynamic: Service_TaskSpecDynamic,
 }
 
-impl ServiceTaskSpecEl {
+impl Service_TaskSpec {
     #[doc =
         "Set the field `force_update`.\nA counter that triggers an update even if no relevant parameters have been changed. See the [spec](https://github.com/docker/swarmkit/blob/master/api/specs.proto#L126)."]
     pub fn set_force_update(mut self, v: impl std::convert::Into<terrars::PrimField<f64>>) -> Self {
@@ -3960,7 +3949,7 @@ impl ServiceTaskSpecEl {
     #[doc = "Set the field `container_spec`.\n"]
     pub fn set_container_spec(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElContainerSpecEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_ContainerSpec>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -3976,7 +3965,7 @@ impl ServiceTaskSpecEl {
     #[doc = "Set the field `log_driver`.\n"]
     pub fn set_log_driver(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElLogDriverEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_LogDriver>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -3992,7 +3981,7 @@ impl ServiceTaskSpecEl {
     #[doc = "Set the field `networks_advanced`.\n"]
     pub fn set_networks_advanced(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElNetworksAdvancedEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_NetworksAdvanced>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -4008,7 +3997,7 @@ impl ServiceTaskSpecEl {
     #[doc = "Set the field `placement`.\n"]
     pub fn set_placement(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElPlacementEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_Placement>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -4024,7 +4013,7 @@ impl ServiceTaskSpecEl {
     #[doc = "Set the field `resources`.\n"]
     pub fn set_resources(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElResourcesEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_Resources>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -4040,7 +4029,7 @@ impl ServiceTaskSpecEl {
     #[doc = "Set the field `restart_policy`.\n"]
     pub fn set_restart_policy(
         mut self,
-        v: impl std::convert::Into<terrars::BlockAssignable<ServiceTaskSpecElRestartPolicyEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Service_TaskSpec_RestartPolicy>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -4054,8 +4043,8 @@ impl ServiceTaskSpecEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceTaskSpecEl {
-    type O = terrars::BlockAssignable<ServiceTaskSpecEl>;
+impl terrars::ToListMappable for Service_TaskSpec {
+    type O = terrars::BlockAssignable<Service_TaskSpec>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -4066,11 +4055,11 @@ impl terrars::ToListMappable for ServiceTaskSpecEl {
     }
 }
 
-pub struct BuildServiceTaskSpecEl {}
+pub struct BuildService_TaskSpec {}
 
-impl BuildServiceTaskSpecEl {
-    pub fn build(self) -> ServiceTaskSpecEl {
-        ServiceTaskSpecEl {
+impl BuildService_TaskSpec {
+    pub fn build(self) -> Service_TaskSpec {
+        Service_TaskSpec {
             force_update: core::default::Default::default(),
             runtime: core::default::Default::default(),
             container_spec: core::default::Default::default(),
@@ -4084,21 +4073,23 @@ impl BuildServiceTaskSpecEl {
     }
 }
 
-pub struct ServiceTaskSpecElRef {
+#[allow(dead_code)]
+pub struct Service_TaskSpecRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceTaskSpecElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceTaskSpecElRef {
-        ServiceTaskSpecElRef {
+impl terrars::Ref for Service_TaskSpecRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_TaskSpecRef {
+        Service_TaskSpecRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceTaskSpecElRef {
+impl Service_TaskSpecRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -4116,33 +4107,33 @@ impl ServiceTaskSpecElRef {
     }
 
     #[doc = "Get a reference to the value of field `container_spec` after provisioning.\n"]
-    pub fn container_spec(&self) -> terrars::ListRef<ServiceTaskSpecElContainerSpecElRef> {
+    pub fn container_spec(&self) -> terrars::ListRef<Service_TaskSpec_ContainerSpecRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.container_spec", self.base))
     }
 
     #[doc = "Get a reference to the value of field `log_driver` after provisioning.\n"]
-    pub fn log_driver(&self) -> terrars::ListRef<ServiceTaskSpecElLogDriverElRef> {
+    pub fn log_driver(&self) -> terrars::ListRef<Service_TaskSpec_LogDriverRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.log_driver", self.base))
     }
 
     #[doc = "Get a reference to the value of field `placement` after provisioning.\n"]
-    pub fn placement(&self) -> terrars::ListRef<ServiceTaskSpecElPlacementElRef> {
+    pub fn placement(&self) -> terrars::ListRef<Service_TaskSpec_PlacementRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.placement", self.base))
     }
 
     #[doc = "Get a reference to the value of field `resources` after provisioning.\n"]
-    pub fn resources(&self) -> terrars::ListRef<ServiceTaskSpecElResourcesElRef> {
+    pub fn resources(&self) -> terrars::ListRef<Service_TaskSpec_ResourcesRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.resources", self.base))
     }
 
     #[doc = "Get a reference to the value of field `restart_policy` after provisioning.\n"]
-    pub fn restart_policy(&self) -> terrars::ListRef<ServiceTaskSpecElRestartPolicyElRef> {
+    pub fn restart_policy(&self) -> terrars::ListRef<Service_TaskSpec_RestartPolicyRef> {
         terrars::ListRef::new(self.shared().clone(), format!("{}.restart_policy", self.base))
     }
 }
 
 #[derive(Serialize)]
-pub struct ServiceUpdateConfigEl {
+pub struct Service_UpdateConfig {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     delay: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -4157,7 +4148,7 @@ pub struct ServiceUpdateConfigEl {
     parallelism: std::option::Option<terrars::PrimField<f64>>,
 }
 
-impl ServiceUpdateConfigEl {
+impl Service_UpdateConfig {
     #[doc = "Set the field `delay`.\nDelay between task updates `(ns|us|ms|s|m|h)`. Defaults to `0s`."]
     pub fn set_delay(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.delay = std::option::Option::Some(v.into());
@@ -4197,8 +4188,8 @@ impl ServiceUpdateConfigEl {
     }
 }
 
-impl terrars::ToListMappable for ServiceUpdateConfigEl {
-    type O = terrars::BlockAssignable<ServiceUpdateConfigEl>;
+impl terrars::ToListMappable for Service_UpdateConfig {
+    type O = terrars::BlockAssignable<Service_UpdateConfig>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -4209,11 +4200,11 @@ impl terrars::ToListMappable for ServiceUpdateConfigEl {
     }
 }
 
-pub struct BuildServiceUpdateConfigEl {}
+pub struct BuildService_UpdateConfig {}
 
-impl BuildServiceUpdateConfigEl {
-    pub fn build(self) -> ServiceUpdateConfigEl {
-        ServiceUpdateConfigEl {
+impl BuildService_UpdateConfig {
+    pub fn build(self) -> Service_UpdateConfig {
+        Service_UpdateConfig {
             delay: core::default::Default::default(),
             failure_action: core::default::Default::default(),
             max_failure_ratio: core::default::Default::default(),
@@ -4224,21 +4215,23 @@ impl BuildServiceUpdateConfigEl {
     }
 }
 
-pub struct ServiceUpdateConfigElRef {
+#[allow(dead_code)]
+pub struct Service_UpdateConfigRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for ServiceUpdateConfigElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> ServiceUpdateConfigElRef {
-        ServiceUpdateConfigElRef {
+impl terrars::Ref for Service_UpdateConfigRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Service_UpdateConfigRef {
+        Service_UpdateConfigRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl ServiceUpdateConfigElRef {
+impl Service_UpdateConfigRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -4278,16 +4271,4 @@ impl ServiceUpdateConfigElRef {
     pub fn parallelism(&self) -> terrars::PrimExpr<f64> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.parallelism", self.base))
     }
-}
-
-#[derive(Serialize, Default)]
-struct ServiceDynamic {
-    auth: std::option::Option<terrars::DynamicBlock<ServiceAuthEl>>,
-    converge_config: std::option::Option<terrars::DynamicBlock<ServiceConvergeConfigEl>>,
-    endpoint_spec: std::option::Option<terrars::DynamicBlock<ServiceEndpointSpecEl>>,
-    labels: std::option::Option<terrars::DynamicBlock<ServiceLabelsEl>>,
-    mode: std::option::Option<terrars::DynamicBlock<ServiceModeEl>>,
-    rollback_config: std::option::Option<terrars::DynamicBlock<ServiceRollbackConfigEl>>,
-    task_spec: std::option::Option<terrars::DynamicBlock<ServiceTaskSpecEl>>,
-    update_config: std::option::Option<terrars::DynamicBlock<ServiceUpdateConfigEl>>,
 }

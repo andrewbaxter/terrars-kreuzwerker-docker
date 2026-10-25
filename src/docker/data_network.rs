@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 use terrars::{
     Referable as _,
@@ -7,7 +9,7 @@ use terrars::{
 use super::provider::ProviderDocker;
 
 #[derive(Serialize)]
-struct DataNetworkData {
+struct DataNetworkData_ {
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     depends_on: std::vec::Vec<std::string::String>,
     #[serde(skip_serializing_if = "terrars::SerdeSkipDefault::is_default")]
@@ -22,7 +24,7 @@ struct DataNetworkData {
 struct DataNetwork_ {
     shared: terrars::StackShared,
     tf_id: std::string::String,
-    data: std::cell::RefCell<DataNetworkData>,
+    data: std::cell::RefCell<DataNetworkData_>,
 }
 
 #[derive(Clone)]
@@ -68,6 +70,12 @@ impl DataNetwork {
     }
 
     #[doc =
+        "Get a reference to the value of field `containers` after provisioning.\nContainers attached to the network."]
+    pub fn containers(&self) -> terrars::ListRef<DataNetwork_ContainersRef> {
+        terrars::ListRef::new(self.shared().clone(), format!("{}.containers", self.extract_ref()))
+    }
+
+    #[doc =
         "Get a reference to the value of field `driver` after provisioning.\nThe driver of the Docker network. Possible values are `bridge`, `host`, `overlay`, `macvlan`. See [network docs](https://docs.docker.com/network/#network-drivers) for more details."]
     pub fn driver(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.driver", self.extract_ref()))
@@ -84,7 +92,7 @@ impl DataNetwork {
     }
 
     #[doc = "Get a reference to the value of field `ipam_config` after provisioning.\nThe IPAM configuration options"]
-    pub fn ipam_config(&self) -> terrars::SetRef<DataNetworkIpamConfigElRef> {
+    pub fn ipam_config(&self) -> terrars::SetRef<DataNetwork_IpamConfigRef> {
         terrars::SetRef::new(self.shared().clone(), format!("{}.ipam_config", self.extract_ref()))
     }
 
@@ -148,7 +156,7 @@ impl BuildDataNetwork {
         let out = DataNetwork(std::rc::Rc::new(DataNetwork_ {
             shared: stack.shared.clone(),
             tf_id: self.tf_id,
-            data: std::cell::RefCell::new(DataNetworkData {
+            data: std::cell::RefCell::new(DataNetworkData_ {
                 depends_on: core::default::Default::default(),
                 provider: std::option::Option::None,
                 lifecycle: core::default::Default::default(),
@@ -185,6 +193,12 @@ impl DataNetworkRef {
     }
 
     #[doc =
+        "Get a reference to the value of field `containers` after provisioning.\nContainers attached to the network."]
+    pub fn containers(&self) -> terrars::ListRef<DataNetwork_ContainersRef> {
+        terrars::ListRef::new(self.shared().clone(), format!("{}.containers", self.extract_ref()))
+    }
+
+    #[doc =
         "Get a reference to the value of field `driver` after provisioning.\nThe driver of the Docker network. Possible values are `bridge`, `host`, `overlay`, `macvlan`. See [network docs](https://docs.docker.com/network/#network-drivers) for more details."]
     pub fn driver(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.driver", self.extract_ref()))
@@ -201,7 +215,7 @@ impl DataNetworkRef {
     }
 
     #[doc = "Get a reference to the value of field `ipam_config` after provisioning.\nThe IPAM configuration options"]
-    pub fn ipam_config(&self) -> terrars::SetRef<DataNetworkIpamConfigElRef> {
+    pub fn ipam_config(&self) -> terrars::SetRef<DataNetwork_IpamConfigRef> {
         terrars::SetRef::new(self.shared().clone(), format!("{}.ipam_config", self.extract_ref()))
     }
 
@@ -224,7 +238,140 @@ impl DataNetworkRef {
 }
 
 #[derive(Serialize)]
-pub struct DataNetworkIpamConfigEl {
+pub struct DataNetwork_Containers {
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    container_id: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    endpoint_id: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    ipv4_address: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    ipv6_address: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    mac_address: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    name: std::option::Option<terrars::PrimField<std::string::String>>,
+}
+
+impl DataNetwork_Containers {
+    #[doc = "Set the field `container_id`.\n"]
+    pub fn set_container_id(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.container_id = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `endpoint_id`.\n"]
+    pub fn set_endpoint_id(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.endpoint_id = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `ipv4_address`.\n"]
+    pub fn set_ipv4_address(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.ipv4_address = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `ipv6_address`.\n"]
+    pub fn set_ipv6_address(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.ipv6_address = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `mac_address`.\n"]
+    pub fn set_mac_address(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.mac_address = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc = "Set the field `name`.\n"]
+    pub fn set_name(mut self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.name = std::option::Option::Some(v.into());
+        self
+    }
+}
+
+impl terrars::ToListMappable for DataNetwork_Containers {
+    type O = terrars::BlockAssignable<DataNetwork_Containers>;
+
+    fn do_map(self, base: std::string::String) -> Self::O {
+        terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
+            for_each: format!("${{{}}}", base),
+            iterator: "each".into(),
+            content: self,
+        })
+    }
+}
+
+pub struct BuildDataNetwork_Containers {}
+
+impl BuildDataNetwork_Containers {
+    pub fn build(self) -> DataNetwork_Containers {
+        DataNetwork_Containers {
+            container_id: core::default::Default::default(),
+            endpoint_id: core::default::Default::default(),
+            ipv4_address: core::default::Default::default(),
+            ipv6_address: core::default::Default::default(),
+            mac_address: core::default::Default::default(),
+            name: core::default::Default::default(),
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub struct DataNetwork_ContainersRef {
+    shared: terrars::StackShared,
+    base: std::string::String,
+}
+
+impl terrars::Ref for DataNetwork_ContainersRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> DataNetwork_ContainersRef {
+        DataNetwork_ContainersRef {
+            shared: shared,
+            base: base.to_string(),
+        }
+    }
+}
+
+impl DataNetwork_ContainersRef {
+    #[allow(dead_code)]
+    fn shared(&self) -> &terrars::StackShared {
+        &self.shared
+    }
+
+    #[doc = "Get a reference to the value of field `container_id` after provisioning.\n"]
+    pub fn container_id(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.container_id", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `endpoint_id` after provisioning.\n"]
+    pub fn endpoint_id(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.endpoint_id", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `ipv4_address` after provisioning.\n"]
+    pub fn ipv4_address(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.ipv4_address", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `ipv6_address` after provisioning.\n"]
+    pub fn ipv6_address(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.ipv6_address", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `mac_address` after provisioning.\n"]
+    pub fn mac_address(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.mac_address", self.base))
+    }
+
+    #[doc = "Get a reference to the value of field `name` after provisioning.\n"]
+    pub fn name(&self) -> terrars::PrimExpr<std::string::String> {
+        terrars::PrimExpr::new(self.shared().clone(), format!("{}.name", self.base))
+    }
+}
+
+#[derive(Serialize)]
+pub struct DataNetwork_IpamConfig {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     aux_address: std::option::Option<terrars::RecField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -235,7 +382,7 @@ pub struct DataNetworkIpamConfigEl {
     subnet: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl DataNetworkIpamConfigEl {
+impl DataNetwork_IpamConfig {
     #[doc = "Set the field `aux_address`.\n"]
     pub fn set_aux_address(
         mut self,
@@ -264,8 +411,8 @@ impl DataNetworkIpamConfigEl {
     }
 }
 
-impl terrars::ToListMappable for DataNetworkIpamConfigEl {
-    type O = terrars::BlockAssignable<DataNetworkIpamConfigEl>;
+impl terrars::ToListMappable for DataNetwork_IpamConfig {
+    type O = terrars::BlockAssignable<DataNetwork_IpamConfig>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -276,11 +423,11 @@ impl terrars::ToListMappable for DataNetworkIpamConfigEl {
     }
 }
 
-pub struct BuildDataNetworkIpamConfigEl {}
+pub struct BuildDataNetwork_IpamConfig {}
 
-impl BuildDataNetworkIpamConfigEl {
-    pub fn build(self) -> DataNetworkIpamConfigEl {
-        DataNetworkIpamConfigEl {
+impl BuildDataNetwork_IpamConfig {
+    pub fn build(self) -> DataNetwork_IpamConfig {
+        DataNetwork_IpamConfig {
             aux_address: core::default::Default::default(),
             gateway: core::default::Default::default(),
             ip_range: core::default::Default::default(),
@@ -289,21 +436,23 @@ impl BuildDataNetworkIpamConfigEl {
     }
 }
 
-pub struct DataNetworkIpamConfigElRef {
+#[allow(dead_code)]
+pub struct DataNetwork_IpamConfigRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for DataNetworkIpamConfigElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> DataNetworkIpamConfigElRef {
-        DataNetworkIpamConfigElRef {
+impl terrars::Ref for DataNetwork_IpamConfigRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> DataNetwork_IpamConfigRef {
+        DataNetwork_IpamConfigRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl DataNetworkIpamConfigElRef {
+impl DataNetwork_IpamConfigRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }

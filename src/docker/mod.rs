@@ -1,6 +1,20 @@
+ 
+
 pub mod provider;
 
 pub use provider::*;
+
+#[cfg(feature = "buildx_builder")]
+pub mod buildx_builder;
+
+#[cfg(feature = "buildx_builder")]
+pub use buildx_builder::*;
+
+#[cfg(feature = "compose")]
+pub mod compose;
+
+#[cfg(feature = "compose")]
+pub use compose::*;
 
 #[cfg(feature = "config")]
 pub mod config;
@@ -62,6 +76,12 @@ pub mod volume;
 #[cfg(feature = "volume")]
 pub use volume::*;
 
+#[cfg(feature = "data_containers")]
+pub mod data_containers;
+
+#[cfg(feature = "data_containers")]
+pub use data_containers::*;
+
 #[cfg(feature = "data_image")]
 pub mod data_image;
 
@@ -91,3 +111,15 @@ pub mod data_registry_image;
 
 #[cfg(feature = "data_registry_image")]
 pub use data_registry_image::*;
+
+#[cfg(feature = "data_registry_image_manifests")]
+pub mod data_registry_image_manifests;
+
+#[cfg(feature = "data_registry_image_manifests")]
+pub use data_registry_image_manifests::*;
+
+#[cfg(feature = "data_registry_image_tags")]
+pub mod data_registry_image_tags;
+
+#[cfg(feature = "data_registry_image_tags")]
+pub use data_registry_image_tags::*;

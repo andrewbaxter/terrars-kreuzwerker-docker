@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 use terrars::{
     Referable as _,
@@ -7,7 +9,7 @@ use terrars::{
 use super::provider::ProviderDocker;
 
 #[derive(Serialize)]
-struct SecretData {
+struct SecretData_ {
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     depends_on: std::vec::Vec<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -23,14 +25,14 @@ struct SecretData {
     id: std::option::Option<terrars::PrimField<std::string::String>>,
     name: terrars::PrimField<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    labels: std::option::Option<std::vec::Vec<SecretLabelsEl>>,
+    labels: std::option::Option<std::vec::Vec<Secret_Labels>>,
     dynamic: SecretDynamic,
 }
 
 struct Secret_ {
     shared: terrars::StackShared,
     tf_id: std::string::String,
-    data: std::cell::RefCell<SecretData>,
+    data: std::cell::RefCell<SecretData_>,
 }
 
 #[derive(Clone)]
@@ -137,7 +139,7 @@ impl Secret {
     }
 
     #[doc = "Set the field `labels`.\n"]
-    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<SecretLabelsEl>>) -> Self {
+    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<Secret_Labels>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().labels = std::option::Option::Some(v);
@@ -209,7 +211,7 @@ impl BuildSecret {
         let out = Secret(std::rc::Rc::new(Secret_ {
             shared: stack.shared.clone(),
             tf_id: self.tf_id,
-            data: std::cell::RefCell::new(SecretData {
+            data: std::cell::RefCell::new(SecretData_ {
                 depends_on: core::default::Default::default(),
                 provider: std::option::Option::None,
                 lifecycle: core::default::Default::default(),
@@ -266,16 +268,21 @@ impl SecretRef {
     }
 }
 
+#[derive(Serialize, Default)]
+struct SecretDynamic {
+    labels: std::option::Option<terrars::DynamicBlock<Secret_Labels>>,
+}
+
 #[derive(Serialize)]
-pub struct SecretLabelsEl {
+pub struct Secret_Labels {
     label: terrars::PrimField<std::string::String>,
     value: terrars::PrimField<std::string::String>,
 }
 
-impl SecretLabelsEl { }
+impl Secret_Labels { }
 
-impl terrars::ToListMappable for SecretLabelsEl {
-    type O = terrars::BlockAssignable<SecretLabelsEl>;
+impl terrars::ToListMappable for Secret_Labels {
+    type O = terrars::BlockAssignable<Secret_Labels>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -286,37 +293,39 @@ impl terrars::ToListMappable for SecretLabelsEl {
     }
 }
 
-pub struct BuildSecretLabelsEl {
+pub struct BuildSecret_Labels {
     #[doc = "Name of the label"]
     pub label: terrars::PrimField<std::string::String>,
     #[doc = "Value of the label"]
     pub value: terrars::PrimField<std::string::String>,
 }
 
-impl BuildSecretLabelsEl {
-    pub fn build(self) -> SecretLabelsEl {
-        SecretLabelsEl {
+impl BuildSecret_Labels {
+    pub fn build(self) -> Secret_Labels {
+        Secret_Labels {
             label: self.label,
             value: self.value,
         }
     }
 }
 
-pub struct SecretLabelsElRef {
+#[allow(dead_code)]
+pub struct Secret_LabelsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for SecretLabelsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> SecretLabelsElRef {
-        SecretLabelsElRef {
+impl terrars::Ref for Secret_LabelsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Secret_LabelsRef {
+        Secret_LabelsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl SecretLabelsElRef {
+impl Secret_LabelsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -330,9 +339,4 @@ impl SecretLabelsElRef {
     pub fn value(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.value", self.base))
     }
-}
-
-#[derive(Serialize, Default)]
-struct SecretDynamic {
-    labels: std::option::Option<terrars::DynamicBlock<SecretLabelsEl>>,
 }

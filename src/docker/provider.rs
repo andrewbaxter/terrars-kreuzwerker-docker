@@ -1,7 +1,9 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 
 #[derive(Serialize)]
-struct ProviderDockerData {
+struct ProviderDockerData_ {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     alias: std::option::Option<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -11,6 +13,10 @@ struct ProviderDockerData {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     cert_path: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    context: std::option::Option<terrars::PrimField<std::string::String>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
+    disable_docker_daemon_check: std::option::Option<terrars::PrimField<bool>>,
+    #[serde(skip_serializing_if = "std::option::Option::is_none")]
     host: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     key_material: std::option::Option<terrars::PrimField<std::string::String>>,
@@ -19,7 +25,7 @@ struct ProviderDockerData {
 }
 
 struct ProviderDocker_ {
-    data: std::cell::RefCell<ProviderDockerData>,
+    data: std::cell::RefCell<ProviderDockerData_>,
 }
 
 pub struct ProviderDocker(std::rc::Rc<ProviderDocker_>);
@@ -57,6 +63,20 @@ impl ProviderDocker {
         self
     }
 
+    #[doc =
+        "Set the field `context`.\nThe name of the Docker context to use. Can also be set via `DOCKER_CONTEXT` environment variable. Overrides the `host` if set."]
+    pub fn set_context(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
+        self.0.data.borrow_mut().context = std::option::Option::Some(v.into());
+        self
+    }
+
+    #[doc =
+        "Set the field `disable_docker_daemon_check`.\nIf set to `true`, the provider will not check if the Docker daemon is running. This is useful for resources/data_sourcess that do not require a running Docker daemon, such as the data source `docker_registry_image`."]
+    pub fn set_disable_docker_daemon_check(self, v: impl std::convert::Into<terrars::PrimField<bool>>) -> Self {
+        self.0.data.borrow_mut().disable_docker_daemon_check = std::option::Option::Some(v.into());
+        self
+    }
+
     #[doc = "Set the field `host`.\nThe Docker daemon address"]
     pub fn set_host(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
         self.0.data.borrow_mut().host = std::option::Option::Some(v.into());
@@ -87,7 +107,7 @@ impl terrars::Provider for ProviderDocker_ {
     fn extract_provider_type(&self) -> serde_json::Value {
         serde_json::json!({
             "source": "kreuzwerker/docker",
-            "version": "3.0.2",
+            "version": "4.6.0",
         })
     }
 
@@ -100,15 +120,18 @@ pub struct BuildProviderDocker {}
 
 impl BuildProviderDocker {
     pub fn build(self, stack: &mut terrars::Stack) -> ProviderDocker {
-        let out = ProviderDocker(std::rc::Rc::new(ProviderDocker_ { data: std::cell::RefCell::new(ProviderDockerData {
-            alias: std::option::Option::None,
-            ca_material: core::default::Default::default(),
-            cert_material: core::default::Default::default(),
-            cert_path: core::default::Default::default(),
-            host: core::default::Default::default(),
-            key_material: core::default::Default::default(),
-            ssh_opts: core::default::Default::default(),
-        }) }));
+        let out =
+            ProviderDocker(std::rc::Rc::new(ProviderDocker_ { data: std::cell::RefCell::new(ProviderDockerData_ {
+                alias: std::option::Option::None,
+                ca_material: core::default::Default::default(),
+                cert_material: core::default::Default::default(),
+                cert_path: core::default::Default::default(),
+                context: core::default::Default::default(),
+                disable_docker_daemon_check: core::default::Default::default(),
+                host: core::default::Default::default(),
+                key_material: core::default::Default::default(),
+                ssh_opts: core::default::Default::default(),
+            }) }));
         stack.add_provider(out.0.clone());
         out
     }

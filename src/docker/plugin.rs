@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 use terrars::{
     Referable as _,
@@ -7,7 +9,7 @@ use terrars::{
 use super::provider::ProviderDocker;
 
 #[derive(Serialize)]
-struct PluginData {
+struct PluginData_ {
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     depends_on: std::vec::Vec<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -36,14 +38,14 @@ struct PluginData {
     id: std::option::Option<terrars::PrimField<std::string::String>>,
     name: terrars::PrimField<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    grant_permissions: std::option::Option<std::vec::Vec<PluginGrantPermissionsEl>>,
+    grant_permissions: std::option::Option<std::vec::Vec<Plugin_GrantPermissions>>,
     dynamic: PluginDynamic,
 }
 
 struct Plugin_ {
     shared: terrars::StackShared,
     tf_id: std::string::String,
-    data: std::cell::RefCell<PluginData>,
+    data: std::cell::RefCell<PluginData_>,
 }
 
 #[derive(Clone)]
@@ -197,7 +199,7 @@ impl Plugin {
     #[doc = "Set the field `grant_permissions`.\n"]
     pub fn set_grant_permissions(
         self,
-        v: impl std::convert::Into<terrars::BlockAssignable<PluginGrantPermissionsEl>>,
+        v: impl std::convert::Into<terrars::BlockAssignable<Plugin_GrantPermissions>>,
     ) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
@@ -309,7 +311,7 @@ impl BuildPlugin {
         let out = Plugin(std::rc::Rc::new(Plugin_ {
             shared: stack.shared.clone(),
             tf_id: self.tf_id,
-            data: std::cell::RefCell::new(PluginData {
+            data: std::cell::RefCell::new(PluginData_ {
                 depends_on: core::default::Default::default(),
                 provider: std::option::Option::None,
                 lifecycle: core::default::Default::default(),
@@ -413,16 +415,21 @@ impl PluginRef {
     }
 }
 
+#[derive(Serialize, Default)]
+struct PluginDynamic {
+    grant_permissions: std::option::Option<terrars::DynamicBlock<Plugin_GrantPermissions>>,
+}
+
 #[derive(Serialize)]
-pub struct PluginGrantPermissionsEl {
+pub struct Plugin_GrantPermissions {
     name: terrars::PrimField<std::string::String>,
     value: terrars::SetField<terrars::PrimField<std::string::String>>,
 }
 
-impl PluginGrantPermissionsEl { }
+impl Plugin_GrantPermissions { }
 
-impl terrars::ToListMappable for PluginGrantPermissionsEl {
-    type O = terrars::BlockAssignable<PluginGrantPermissionsEl>;
+impl terrars::ToListMappable for Plugin_GrantPermissions {
+    type O = terrars::BlockAssignable<Plugin_GrantPermissions>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -433,37 +440,39 @@ impl terrars::ToListMappable for PluginGrantPermissionsEl {
     }
 }
 
-pub struct BuildPluginGrantPermissionsEl {
+pub struct BuildPlugin_GrantPermissions {
     #[doc = "The name of the permission"]
     pub name: terrars::PrimField<std::string::String>,
     #[doc = "The value of the permission"]
     pub value: terrars::SetField<terrars::PrimField<std::string::String>>,
 }
 
-impl BuildPluginGrantPermissionsEl {
-    pub fn build(self) -> PluginGrantPermissionsEl {
-        PluginGrantPermissionsEl {
+impl BuildPlugin_GrantPermissions {
+    pub fn build(self) -> Plugin_GrantPermissions {
+        Plugin_GrantPermissions {
             name: self.name,
             value: self.value,
         }
     }
 }
 
-pub struct PluginGrantPermissionsElRef {
+#[allow(dead_code)]
+pub struct Plugin_GrantPermissionsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for PluginGrantPermissionsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> PluginGrantPermissionsElRef {
-        PluginGrantPermissionsElRef {
+impl terrars::Ref for Plugin_GrantPermissionsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Plugin_GrantPermissionsRef {
+        Plugin_GrantPermissionsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl PluginGrantPermissionsElRef {
+impl Plugin_GrantPermissionsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -477,9 +486,4 @@ impl PluginGrantPermissionsElRef {
     pub fn value(&self) -> terrars::SetRef<terrars::PrimExpr<std::string::String>> {
         terrars::SetRef::new(self.shared().clone(), format!("{}.value", self.base))
     }
-}
-
-#[derive(Serialize, Default)]
-struct PluginDynamic {
-    grant_permissions: std::option::Option<terrars::DynamicBlock<PluginGrantPermissionsEl>>,
 }

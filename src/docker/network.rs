@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use serde::Serialize;
 use terrars::{
     Referable as _,
@@ -7,7 +9,7 @@ use terrars::{
 use super::provider::ProviderDocker;
 
 #[derive(Serialize)]
-struct NetworkData {
+struct NetworkData_ {
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     depends_on: std::vec::Vec<std::string::String>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -20,8 +22,6 @@ struct NetworkData {
     provisioner: std::vec::Vec<terrars::Provisioner>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     attachable: std::option::Option<terrars::PrimField<bool>>,
-    #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    check_duplicate: std::option::Option<terrars::PrimField<bool>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     driver: std::option::Option<terrars::PrimField<std::string::String>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -40,16 +40,16 @@ struct NetworkData {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     options: std::option::Option<terrars::RecField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    ipam_config: std::option::Option<std::vec::Vec<NetworkIpamConfigEl>>,
+    ipam_config: std::option::Option<std::vec::Vec<Network_IpamConfig>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    labels: std::option::Option<std::vec::Vec<NetworkLabelsEl>>,
+    labels: std::option::Option<std::vec::Vec<Network_Labels>>,
     dynamic: NetworkDynamic,
 }
 
 struct Network_ {
     shared: terrars::StackShared,
     tf_id: std::string::String,
-    data: std::cell::RefCell<NetworkData>,
+    data: std::cell::RefCell<NetworkData_>,
 }
 
 #[derive(Clone)]
@@ -155,12 +155,6 @@ impl Network {
         self
     }
 
-    #[doc = "Set the field `check_duplicate`.\nRequests daemon to check for networks with same name."]
-    pub fn set_check_duplicate(self, v: impl std::convert::Into<terrars::PrimField<bool>>) -> Self {
-        self.0.data.borrow_mut().check_duplicate = std::option::Option::Some(v.into());
-        self
-    }
-
     #[doc =
         "Set the field `driver`.\nThe driver of the Docker network. Possible values are `bridge`, `host`, `overlay`, `macvlan`. See [network docs](https://docs.docker.com/network/#network-drivers) for more details."]
     pub fn set_driver(self, v: impl std::convert::Into<terrars::PrimField<std::string::String>>) -> Self {
@@ -219,7 +213,7 @@ impl Network {
     }
 
     #[doc = "Set the field `ipam_config`.\n"]
-    pub fn set_ipam_config(self, v: impl std::convert::Into<terrars::BlockAssignable<NetworkIpamConfigEl>>) -> Self {
+    pub fn set_ipam_config(self, v: impl std::convert::Into<terrars::BlockAssignable<Network_IpamConfig>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().ipam_config = std::option::Option::Some(v);
@@ -232,7 +226,7 @@ impl Network {
     }
 
     #[doc = "Set the field `labels`.\n"]
-    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<NetworkLabelsEl>>) -> Self {
+    pub fn set_labels(self, v: impl std::convert::Into<terrars::BlockAssignable<Network_Labels>>) -> Self {
         match v.into() {
             terrars::BlockAssignable::Literal(v) => {
                 self.0.data.borrow_mut().labels = std::option::Option::Some(v);
@@ -248,12 +242,6 @@ impl Network {
         "Get a reference to the value of field `attachable` after provisioning.\nEnable manual container attachment to the network."]
     pub fn attachable(&self) -> terrars::PrimExpr<bool> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.attachable", self.extract_ref()))
-    }
-
-    #[doc =
-        "Get a reference to the value of field `check_duplicate` after provisioning.\nRequests daemon to check for networks with same name."]
-    pub fn check_duplicate(&self) -> terrars::PrimExpr<bool> {
-        terrars::PrimExpr::new(self.shared().clone(), format!("{}.check_duplicate", self.extract_ref()))
     }
 
     #[doc =
@@ -356,14 +344,13 @@ impl BuildNetwork {
         let out = Network(std::rc::Rc::new(Network_ {
             shared: stack.shared.clone(),
             tf_id: self.tf_id,
-            data: std::cell::RefCell::new(NetworkData {
+            data: std::cell::RefCell::new(NetworkData_ {
                 depends_on: core::default::Default::default(),
                 provider: std::option::Option::None,
                 lifecycle: core::default::Default::default(),
                 for_each: std::option::Option::None,
                 provisioner: core::default::Default::default(),
                 attachable: core::default::Default::default(),
-                check_duplicate: core::default::Default::default(),
                 driver: core::default::Default::default(),
                 id: core::default::Default::default(),
                 ingress: core::default::Default::default(),
@@ -410,12 +397,6 @@ impl NetworkRef {
         "Get a reference to the value of field `attachable` after provisioning.\nEnable manual container attachment to the network."]
     pub fn attachable(&self) -> terrars::PrimExpr<bool> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.attachable", self.extract_ref()))
-    }
-
-    #[doc =
-        "Get a reference to the value of field `check_duplicate` after provisioning.\nRequests daemon to check for networks with same name."]
-    pub fn check_duplicate(&self) -> terrars::PrimExpr<bool> {
-        terrars::PrimExpr::new(self.shared().clone(), format!("{}.check_duplicate", self.extract_ref()))
     }
 
     #[doc =
@@ -476,8 +457,14 @@ impl NetworkRef {
     }
 }
 
+#[derive(Serialize, Default)]
+struct NetworkDynamic {
+    ipam_config: std::option::Option<terrars::DynamicBlock<Network_IpamConfig>>,
+    labels: std::option::Option<terrars::DynamicBlock<Network_Labels>>,
+}
+
 #[derive(Serialize)]
-pub struct NetworkIpamConfigEl {
+pub struct Network_IpamConfig {
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     aux_address: std::option::Option<terrars::RecField<terrars::PrimField<std::string::String>>>,
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -488,7 +475,7 @@ pub struct NetworkIpamConfigEl {
     subnet: std::option::Option<terrars::PrimField<std::string::String>>,
 }
 
-impl NetworkIpamConfigEl {
+impl Network_IpamConfig {
     #[doc = "Set the field `aux_address`.\nAuxiliary IPv4 or IPv6 addresses used by Network driver"]
     pub fn set_aux_address(
         mut self,
@@ -517,8 +504,8 @@ impl NetworkIpamConfigEl {
     }
 }
 
-impl terrars::ToListMappable for NetworkIpamConfigEl {
-    type O = terrars::BlockAssignable<NetworkIpamConfigEl>;
+impl terrars::ToListMappable for Network_IpamConfig {
+    type O = terrars::BlockAssignable<Network_IpamConfig>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -529,11 +516,11 @@ impl terrars::ToListMappable for NetworkIpamConfigEl {
     }
 }
 
-pub struct BuildNetworkIpamConfigEl {}
+pub struct BuildNetwork_IpamConfig {}
 
-impl BuildNetworkIpamConfigEl {
-    pub fn build(self) -> NetworkIpamConfigEl {
-        NetworkIpamConfigEl {
+impl BuildNetwork_IpamConfig {
+    pub fn build(self) -> Network_IpamConfig {
+        Network_IpamConfig {
             aux_address: core::default::Default::default(),
             gateway: core::default::Default::default(),
             ip_range: core::default::Default::default(),
@@ -542,21 +529,23 @@ impl BuildNetworkIpamConfigEl {
     }
 }
 
-pub struct NetworkIpamConfigElRef {
+#[allow(dead_code)]
+pub struct Network_IpamConfigRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for NetworkIpamConfigElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> NetworkIpamConfigElRef {
-        NetworkIpamConfigElRef {
+impl terrars::Ref for Network_IpamConfigRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Network_IpamConfigRef {
+        Network_IpamConfigRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl NetworkIpamConfigElRef {
+impl Network_IpamConfigRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -584,15 +573,15 @@ impl NetworkIpamConfigElRef {
 }
 
 #[derive(Serialize)]
-pub struct NetworkLabelsEl {
+pub struct Network_Labels {
     label: terrars::PrimField<std::string::String>,
     value: terrars::PrimField<std::string::String>,
 }
 
-impl NetworkLabelsEl { }
+impl Network_Labels { }
 
-impl terrars::ToListMappable for NetworkLabelsEl {
-    type O = terrars::BlockAssignable<NetworkLabelsEl>;
+impl terrars::ToListMappable for Network_Labels {
+    type O = terrars::BlockAssignable<Network_Labels>;
 
     fn do_map(self, base: std::string::String) -> Self::O {
         terrars::BlockAssignable::Dynamic(terrars::DynamicBlock {
@@ -603,37 +592,39 @@ impl terrars::ToListMappable for NetworkLabelsEl {
     }
 }
 
-pub struct BuildNetworkLabelsEl {
+pub struct BuildNetwork_Labels {
     #[doc = "Name of the label"]
     pub label: terrars::PrimField<std::string::String>,
     #[doc = "Value of the label"]
     pub value: terrars::PrimField<std::string::String>,
 }
 
-impl BuildNetworkLabelsEl {
-    pub fn build(self) -> NetworkLabelsEl {
-        NetworkLabelsEl {
+impl BuildNetwork_Labels {
+    pub fn build(self) -> Network_Labels {
+        Network_Labels {
             label: self.label,
             value: self.value,
         }
     }
 }
 
-pub struct NetworkLabelsElRef {
+#[allow(dead_code)]
+pub struct Network_LabelsRef {
     shared: terrars::StackShared,
     base: std::string::String,
 }
 
-impl terrars::Ref for NetworkLabelsElRef {
-    fn new(shared: terrars::StackShared, base: std::string::String) -> NetworkLabelsElRef {
-        NetworkLabelsElRef {
+impl terrars::Ref for Network_LabelsRef {
+    fn new(shared: terrars::StackShared, base: std::string::String) -> Network_LabelsRef {
+        Network_LabelsRef {
             shared: shared,
             base: base.to_string(),
         }
     }
 }
 
-impl NetworkLabelsElRef {
+impl Network_LabelsRef {
+    #[allow(dead_code)]
     fn shared(&self) -> &terrars::StackShared {
         &self.shared
     }
@@ -647,10 +638,4 @@ impl NetworkLabelsElRef {
     pub fn value(&self) -> terrars::PrimExpr<std::string::String> {
         terrars::PrimExpr::new(self.shared().clone(), format!("{}.value", self.base))
     }
-}
-
-#[derive(Serialize, Default)]
-struct NetworkDynamic {
-    ipam_config: std::option::Option<terrars::DynamicBlock<NetworkIpamConfigEl>>,
-    labels: std::option::Option<terrars::DynamicBlock<NetworkLabelsEl>>,
 }
